@@ -2,73 +2,54 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Tempo</title>
 
 <style>
 
-/* ========================================
-   TEMPO DESIGN SYSTEM
-======================================== */
-
 :root {
+    --primary: #6657e8;
+    --primary-dark: #5546d6;
+    --primary-light: #efedff;
 
-    --primary:#6657e8;
-    --primary-light:#efedff;
+    --background: #f7f8fc;
+    --surface: #ffffff;
+    --surface-hover: #f4f4f8;
 
-    --background:#f7f8fc;
-    --surface:#ffffff;
-    --surface-hover:#f4f4f8;
+    --text: #17191c;
+    --text-secondary: #737681;
+    --text-tertiary: #a2a4ad;
 
-    --text:#17191c;
-    --text-secondary:#737681;
-    --text-tertiary:#a2a4ad;
+    --border: #e8e8ee;
 
-    --border:#e8e8ee;
+    --danger: #e05252;
+    --danger-light: #fff0f0;
 
-    --success:#28a866;
-    --success-light:#e9f8ef;
+    --success: #28a866;
+    --success-light: #e9f8ef;
 
-    --warning:#e49b27;
-    --warning-light:#fff5df;
-
-    --danger:#e05252;
-    --danger-light:#fff0f0;
-
-    --sidebar-width:240px;
-    --topbar-height:72px;
-
-    --radius-sm:10px;
-    --radius-md:14px;
-    --radius-lg:20px;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
 
     --shadow-sm:
-        0 2px 8px rgba(20,20,40,.04);
+        0 2px 8px rgba(20,20,40,0.04);
 
     --shadow-md:
-        0 8px 30px rgba(20,20,40,.07);
-
+        0 12px 40px rgba(20,20,40,0.10);
 }
+
 
 * {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html {
-    scroll-behavior:smooth;
-}
 
 body {
-
     font-family:
         Inter,
         -apple-system,
@@ -78,20 +59,27 @@ body {
         Arial,
         sans-serif;
 
-    background:var(--background);
-    color:var(--text);
-    min-height:100vh;
+    background: var(--background);
+    color: var(--text);
 
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
 }
+
 
 button,
-input,
-select {
-    font:inherit;
+input {
+    font: inherit;
 }
 
+
 button {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 
@@ -99,1511 +87,616 @@ button {
    APP
 ======================================== */
 
-.app {
-    min-height:100vh;
+.auth-wrapper {
+
+    width: 100%;
+    max-width: 1050px;
+
+    min-height: 650px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 24px;
+
+    box-shadow: var(--shadow-md);
+
+    overflow: hidden;
 }
 
 
 /* ========================================
-   SIDEBAR
+   LEFT SIDE
 ======================================== */
 
-.sidebar {
+.hero {
 
-    position:fixed;
+    background:
+        linear-gradient(
+            145deg,
+            #6657e8,
+            #7567ed,
+            #8275f2
+        );
 
-    top:0;
-    left:0;
+    color: white;
 
-    width:var(--sidebar-width);
-    height:100vh;
+    padding: 52px;
 
-    background:var(--surface);
+    position: relative;
 
-    border-right:
-        1px solid var(--border);
+    overflow: hidden;
 
-    display:flex;
-    flex-direction:column;
+    display: flex;
 
-    padding:20px 14px;
+    flex-direction: column;
 
-    z-index:100;
-
+    justify-content: space-between;
 }
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    top: -170px;
+    right: -130px;
+}
+
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    bottom: -150px;
+    left: -120px;
+}
+
 
 .logo {
 
-    display:flex;
-    align-items:center;
+    display: flex;
 
-    gap:10px;
+    align-items: center;
 
-    padding:
-        8px 12px 26px;
+    gap: 10px;
 
+    position: relative;
+
+    z-index: 2;
 }
+
 
 .logo-mark {
 
-    width:34px;
-    height:34px;
+    width: 38px;
+    height: 38px;
 
-    border-radius:10px;
+    border-radius: 11px;
 
-    background:var(--primary);
+    background: white;
 
-    color:white;
+    color: var(--primary);
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display: flex;
 
-    font-size:18px;
-    font-weight:800;
+    align-items: center;
+    justify-content: center;
 
+    font-size: 20px;
+
+    font-weight: 800;
 }
+
 
 .logo-name {
 
-    font-size:22px;
-    font-weight:800;
+    font-size: 24px;
 
-    letter-spacing:-.7px;
+    font-weight: 800;
 
+    letter-spacing: -0.8px;
 }
 
-.nav-section {
-    margin-bottom:24px;
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 430px;
 }
 
-.nav-label {
 
-    padding:
-        0 12px 8px;
+.hero-eyebrow {
 
-    color:var(--text-tertiary);
+    font-size: 12px;
 
-    font-size:11px;
-    font-weight:700;
+    font-weight: 750;
 
-    text-transform:uppercase;
+    text-transform: uppercase;
 
-    letter-spacing:.08em;
+    letter-spacing: 0.1em;
 
+    color:
+        rgba(255,255,255,0.7);
+
+    margin-bottom: 12px;
 }
 
-.nav-item {
 
-    width:100%;
+.hero h1 {
 
-    border:none;
+    font-size: 42px;
 
-    background:transparent;
+    line-height: 1.08;
 
-    color:var(--text-secondary);
-
-    display:flex;
-    align-items:center;
-
-    gap:12px;
-
-    padding:11px 12px;
-
-    border-radius:var(--radius-sm);
-
-    margin-bottom:3px;
-
-    text-align:left;
-
-    transition:.18s ease;
-
+    letter-spacing: -1.7px;
 }
 
-.nav-item:hover {
 
-    background:var(--surface-hover);
-    color:var(--text);
+.hero p {
 
+    margin-top: 16px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255,255,255,0.78);
 }
 
-.nav-item.active {
 
-    background:var(--primary-light);
+.hero-footer {
 
-    color:var(--primary);
+    position: relative;
 
-    font-weight:650;
+    z-index: 2;
 
-}
+    font-size: 12px;
 
-.nav-icon {
-
-    width:22px;
-    height:22px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:17px;
-
-}
-
-.nav-text {
-    font-size:14px;
-}
-
-.sidebar-bottom {
-    margin-top:auto;
-}
-
-.user-card {
-
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-    padding:10px;
-
-    border-radius:var(--radius-md);
-
-}
-
-.user-card:hover {
-    background:var(--surface-hover);
-}
-
-.avatar {
-
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    background:var(--primary-light);
-
-    color:var(--primary);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:700;
-    font-size:13px;
-
-}
-
-.user-info {
-    min-width:0;
-}
-
-.user-name {
-
-    font-size:13px;
-    font-weight:700;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-
-}
-
-.user-grade {
-
-    font-size:11px;
-
-    color:var(--text-tertiary);
-
-    margin-top:2px;
-
+    color:
+        rgba(255,255,255,0.55);
 }
 
 
 /* ========================================
-   MAIN
+   RIGHT SIDE
 ======================================== */
 
-.main {
+.auth-panel {
 
-    margin-left:var(--sidebar-width);
+    padding: 52px;
 
-    min-height:100vh;
+    display: flex;
 
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.auth-header {
+
+    margin-bottom: 30px;
+}
+
+
+.auth-header h2 {
+
+    font-size: 28px;
+
+    letter-spacing: -0.9px;
+}
+
+
+.auth-header p {
+
+    margin-top: 7px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.5;
 }
 
 
 /* ========================================
-   TOPBAR
+   TABS
 ======================================== */
 
-.topbar {
+.tabs {
 
-    height:var(--topbar-height);
+    display: grid;
 
-    position:sticky;
-
-    top:0;
-
-    z-index:50;
+    grid-template-columns: 1fr 1fr;
 
     background:
-        rgba(255,255,255,.88);
+        var(--surface-hover);
 
-    backdrop-filter:blur(16px);
+    border-radius: 11px;
 
-    border-bottom:
-        1px solid var(--border);
+    padding: 4px;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 34px;
-
+    margin-bottom: 25px;
 }
 
-.topbar-left {
 
-    display:flex;
-    align-items:center;
+.tab {
 
+    border: none;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.18s ease;
 }
 
-.page-title {
 
-    font-size:16px;
-    font-weight:700;
+.tab.active {
 
-}
+    background: white;
 
-.topbar-actions {
+    color: var(--primary);
 
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-}
-
-.icon-button {
-
-    width:38px;
-    height:38px;
-
-    border:
-        1px solid var(--border);
-
-    background:var(--surface);
-
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--text-secondary);
-
-}
-
-.icon-button:hover {
-
-    background:var(--surface-hover);
-
-    color:var(--text);
-
-}
-
-.notification-wrapper {
-    position:relative;
-}
-
-.notification-dot {
-
-    position:absolute;
-
-    width:7px;
-    height:7px;
-
-    background:var(--danger);
-
-    border:2px solid white;
-
-    border-radius:50%;
-
-    top:7px;
-    right:7px;
-
+    box-shadow:
+        0 2px 7px
+        rgba(20,20,40,0.06);
 }
 
 
 /* ========================================
-   CONTENT
+   FORM
 ======================================== */
 
-.content {
+.form {
 
-    max-width:1400px;
-
-    margin:0 auto;
-
-    padding:38px 34px 80px;
-
+    display: none;
 }
 
-.page {
 
-    display:none;
+.form.active {
+
+    display: block;
 
     animation:
-        pageIn .22s ease;
-
+        fadeIn 0.2s ease;
 }
 
-.page.active {
-    display:block;
-}
 
-@keyframes pageIn {
+@keyframes fadeIn {
 
     from {
-
-        opacity:0;
-
-        transform:
-            translateY(5px);
-
+        opacity: 0;
+        transform: translateY(4px);
     }
 
     to {
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
+        opacity: 1;
+        transform: translateY(0);
     }
-
 }
 
 
-/* ========================================
-   PAGE HEADER
-======================================== */
+.field {
 
-.page-header {
-
-    display:flex;
-
-    align-items:flex-end;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    margin-bottom:30px;
-
-}
-
-.eyebrow {
-
-    color:var(--primary);
-
-    font-size:12px;
-
-    font-weight:750;
-
-    margin-bottom:7px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.08em;
-
-}
-
-.page-header h1 {
-
-    font-size:32px;
-
-    letter-spacing:-1.2px;
-
-    line-height:1.1;
-
-}
-
-.page-header p {
-
-    color:var(--text-secondary);
-
-    font-size:14px;
-
-    margin-top:8px;
-
+    margin-bottom: 17px;
 }
 
 
-/* ========================================
-   BUTTONS
-======================================== */
+.field label {
 
-.primary-button {
+    display: block;
 
-    border:none;
+    font-size: 12px;
 
-    background:var(--primary);
+    font-weight: 700;
 
-    color:white;
-
-    padding:11px 17px;
-
-    border-radius:10px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    transition:.18s ease;
-
+    margin-bottom: 7px;
 }
 
-.primary-button:hover {
 
-    box-shadow:
-        0 6px 18px
-        rgba(102,87,232,.25);
+.field input {
 
-    transform:translateY(-1px);
-
-}
-
-.secondary-button {
+    width: 100%;
 
     border:
         1px solid var(--border);
 
-    background:white;
+    background: white;
 
-    color:var(--text);
+    color: var(--text);
 
-    padding:11px 17px;
+    padding: 12px 13px;
 
-    border-radius:10px;
+    border-radius: 10px;
 
-    font-size:13px;
+    outline: none;
 
-    font-weight:650;
-
-}
-
-.secondary-button:hover {
-    background:var(--surface-hover);
-}
-
-
-/* ========================================
-   CARDS
-======================================== */
-
-.card {
-
-    background:var(--surface);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow-sm);
-
-}
-
-.card-header {
-
-    padding:20px 22px;
-
-    border-bottom:
-        1px solid var(--border);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-}
-
-.card-title {
-
-    font-size:15px;
-    font-weight:750;
-
-}
-
-.card-subtitle {
-
-    font-size:12px;
-
-    color:var(--text-tertiary);
-
-    margin-top:4px;
-
-}
-
-.card-body {
-    padding:22px;
-}
-
-
-/* ========================================
-   HOME
-======================================== */
-
-.next-task-card {
-
-    padding:26px;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.next-task-card::after {
-
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    border-radius:50%;
-
-    background:var(--primary-light);
-
-    right:-70px;
-    bottom:-90px;
-
-}
-
-.next-task-top {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.next-task-label {
-
-    font-size:11px;
-
-    font-weight:750;
-
-    text-transform:uppercase;
-
-    letter-spacing:.08em;
-
-    color:var(--primary);
-
-}
-
-.next-task-time {
-
-    font-size:12px;
-
-    color:var(--text-secondary);
-
-}
-
-.next-task-title {
-
-    font-size:25px;
-
-    font-weight:800;
-
-    letter-spacing:-.7px;
-
-    margin-top:10px;
-
-}
-
-.next-task-info {
-
-    color:var(--text-secondary);
-
-    font-size:13px;
-
-    margin-top:6px;
-
-}
-
-.next-task-reason {
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:9px;
-
-    margin-top:18px;
-
-    padding:12px 14px;
-
-    background:var(--surface-hover);
-
-    border-radius:11px;
-
-    color:var(--text-secondary);
-
-    font-size:12px;
-
-    line-height:1.5;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.next-task-reason-icon {
-
-    color:var(--primary);
-
-    font-weight:800;
-
-}
-
-.next-task-actions {
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:20px;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.home-grid {
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1.7fr)
-        minmax(300px,.9fr);
-
-    gap:20px;
-
-    margin-top:20px;
-
-}
-
-.home-left,
-.home-right {
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-
-/* ========================================
-   PROGRESS
-======================================== */
-
-.progress-card {
-    padding:22px;
-}
-
-.progress-header {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.progress-percentage {
-
-    color:var(--primary);
-
-    font-size:20px;
-
-    font-weight:800;
-
-}
-
-.progress-track {
-
-    height:10px;
-
-    background:#ededf3;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-top:18px;
-
-}
-
-.progress-fill {
-
-    height:100%;
-
-    width:0%;
-
-    background:var(--primary);
-
-    border-radius:inherit;
-
-    transition:width .5s ease;
-
-}
-
-.progress-meta {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:10px;
-
-    font-size:11px;
-
-    color:var(--text-tertiary);
-
-}
-
-
-/* ========================================
-   TIMELINE
-======================================== */
-
-.timeline-card {
-    overflow:hidden;
-}
-
-.timeline {
-
-    padding:
-        10px 22px 22px;
-
-}
-
-.timeline-item {
-
-    display:grid;
-
-    grid-template-columns:
-        65px 20px 1fr;
-
-    min-height:66px;
-
-}
-
-.timeline-time {
-
-    color:var(--text-tertiary);
-
-    font-size:12px;
-
-    padding-top:4px;
-
-}
-
-.timeline-line {
-    position:relative;
-}
-
-.timeline-line::before {
-
-    content:"";
-
-    position:absolute;
-
-    width:9px;
-    height:9px;
-
-    border-radius:50%;
-
-    background:var(--border);
-
-    top:6px;
-    left:1px;
-
-    z-index:2;
-
-}
-
-.timeline-line::after {
-
-    content:"";
-
-    position:absolute;
-
-    width:1px;
-
-    background:var(--border);
-
-    top:15px;
-    bottom:-4px;
-
-    left:5px;
-
-}
-
-.timeline-item:last-child
-.timeline-line::after {
-    display:none;
-}
-
-.timeline-item.current
-.timeline-line::before {
-
-    background:var(--primary);
-
-    box-shadow:
-        0 0 0 4px
-        var(--primary-light);
-
-}
-
-.timeline-item.current
-.timeline-title {
-    color:var(--primary);
-}
-
-.timeline-content {
-    padding-bottom:18px;
-}
-
-.timeline-title {
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-.timeline-description {
-
-    font-size:11px;
-
-    color:var(--text-tertiary);
-
-    margin-top:4px;
-
-}
-
-
-/* ========================================
-   UPCOMING
-======================================== */
-
-.upcoming-list {
-    padding:6px 22px 16px;
-}
-
-.upcoming-item {
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:13px 0;
-
-    border-bottom:
-        1px solid var(--border);
-
-}
-
-.upcoming-item:last-child {
-    border-bottom:none;
-}
-
-.subject-icon {
-
-    width:34px;
-    height:34px;
-
-    border-radius:10px;
-
-    background:var(--primary-light);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-}
-
-.upcoming-info {
-
-    flex:1;
-
-    min-width:0;
-
-}
-
-.upcoming-name {
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-.upcoming-date {
-
-    font-size:11px;
-
-    color:var(--text-tertiary);
-
-    margin-top:3px;
-
-}
-
-.deadline {
-
-    font-size:11px;
-
-    font-weight:700;
-
-    color:var(--danger);
-
-}
-
-
-/* ========================================
-   QUICK STATS
-======================================== */
-
-.quick-stats {
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:12px;
-
-}
-
-.quick-stat {
-    padding:18px;
-}
-
-.quick-stat-icon {
-    font-size:17px;
-}
-
-.quick-stat-value {
-
-    font-size:21px;
-
-    font-weight:800;
-
-    margin-top:9px;
-
-}
-
-.quick-stat-label {
-
-    color:var(--text-tertiary);
-
-    font-size:11px;
-
-    margin-top:3px;
-
-}
-
-
-/* ========================================
-   TASK LIST
-======================================== */
-
-.task-list {
-    padding:6px 22px 16px;
-}
-
-.task-item {
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:14px 0;
-
-    border-bottom:
-        1px solid var(--border);
-
-}
-
-.task-item:last-child {
-    border-bottom:none;
-}
-
-.task-check {
-
-    width:28px;
-    height:28px;
-
-    border-radius:9px;
-
-    border:
-        1px solid var(--border);
-
-    background:white;
-
-    color:transparent;
-
-}
-
-.task-check.completed {
-
-    background:var(--success);
-
-    border-color:var(--success);
-
-    color:white;
-
-}
-
-.task-info {
-    flex:1;
-}
-
-.task-title {
-
-    font-size:13px;
-
-    font-weight:700;
-
+    transition:
+        border 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-.task-meta {
 
-    font-size:11px;
+.field input::placeholder {
 
-    color:var(--text-tertiary);
-
-    margin-top:3px;
-
-}
-
-.task-empty {
-
-    text-align:center;
-
-    padding:35px 20px;
-
-    color:var(--text-tertiary);
-
-    font-size:13px;
-
-}
-
-
-/* ========================================
-   EMPTY
-======================================== */
-
-.empty-page {
-
-    min-height:420px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-}
-
-.empty-icon {
-
-    width:64px;
-    height:64px;
-
-    background:var(--primary-light);
-
-    border-radius:18px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:27px;
-
-    margin-bottom:18px;
-
-}
-
-.empty-page h2 {
-
-    font-size:21px;
-
-    letter-spacing:-.4px;
-
-}
-
-.empty-page p {
-
-    max-width:400px;
-
-    color:var(--text-secondary);
-
-    font-size:14px;
-
-    line-height:1.6;
-
-    margin-top:8px;
-
-}
-
-
-/* ========================================
-   SETTINGS MODAL
-======================================== */
-
-.modal-overlay {
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(15,15,25,.45);
-
-    backdrop-filter:blur(6px);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:1000;
-
-}
-
-.modal-overlay.show {
-    display:flex;
-}
-
-.modal {
-
-    width:min(560px,100%);
-
-    max-height:90vh;
-
-    overflow:auto;
-
-    background:white;
-
-    border-radius:22px;
-
-    box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.18);
-
-}
-
-.modal-header {
-
-    padding:24px;
-
-    border-bottom:
-        1px solid var(--border);
-
-}
-
-.modal-header h2 {
-
-    font-size:22px;
-
-    letter-spacing:-.5px;
-
-}
-
-.modal-header p {
-
-    color:var(--text-secondary);
-
-    font-size:13px;
-
-    margin-top:6px;
-
-}
-
-.modal-body {
-    padding:24px;
-}
-
-.form-grid {
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:16px;
-
-}
-
-.form-group {
-    display:flex;
-    flex-direction:column;
-}
-
-.form-group.full {
-    grid-column:1 / -1;
-}
-
-.form-group label {
-
-    font-size:12px;
-
-    font-weight:700;
-
-    margin-bottom:7px;
-
+    color: var(--text-tertiary);
 }
-
-.form-group input,
-.form-group select {
-
-    width:100%;
 
-    padding:12px 13px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:10px;
-
-    outline:none;
-
-    background:white;
-
-    color:var(--text);
-
-}
 
-.form-group input:focus,
-.form-group select:focus {
+.field input:focus {
 
-    border-color:var(--primary);
+    border-color:
+        var(--primary);
 
     box-shadow:
         0 0 0 3px
         var(--primary-light);
-
 }
 
-.modal-footer {
 
-    display:flex;
+.help-text {
 
-    justify-content:flex-end;
+    font-size: 11px;
 
-    gap:10px;
+    color: var(--text-tertiary);
 
-    padding:20px 24px;
+    margin-top: 6px;
 
-    border-top:
-        1px solid var(--border);
-
+    line-height: 1.4;
 }
 
-.save-status {
 
-    font-size:12px;
+/* ========================================
+   BUTTON
+======================================== */
 
-    color:var(--text-secondary);
+.submit-button {
 
-    margin-right:auto;
+    width: 100%;
 
-    align-self:center;
+    border: none;
+
+    background:
+        var(--primary);
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    margin-top: 4px;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+
+.submit-button:hover {
+
+    background:
+        var(--primary-dark);
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(102,87,232,0.23);
+}
+
+
+.submit-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.message {
+
+    display: none;
+
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+}
+
+
+.message.show {
+
+    display: block;
+}
+
+
+.message.error {
+
+    background:
+        var(--danger-light);
+
+    color:
+        var(--danger);
+}
+
+
+.message.success {
+
+    background:
+        var(--success-light);
+
+    color:
+        var(--success);
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.loading {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.spinner {
+
+    width: 14px;
+    height: 14px;
+
+    border:
+        2px solid
+        rgba(255,255,255,0.4);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.7s linear infinite;
+}
+
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
 
 }
 
 
 /* ========================================
-   TOAST
+   RESPONSIVE
 ======================================== */
 
-.toast {
+@media (max-width: 800px) {
 
-    position:fixed;
-
-    bottom:25px;
-    right:25px;
-
-    background:#17191c;
-
-    color:white;
-
-    padding:13px 17px;
-
-    border-radius:11px;
-
-    font-size:13px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transform:
-        translateY(10px);
-
-    transition:.25s ease;
-
-    z-index:2000;
-
-}
-
-.toast.show {
-
-    opacity:1;
-
-    transform:
-        translateY(0);
-
-}
+    body {
+        padding: 14px;
+    }
 
 
-/* ========================================
-   MOBILE
-======================================== */
+    .auth-wrapper {
 
-.mobile-menu {
+        grid-template-columns: 1fr;
 
-    display:none;
+        max-width: 520px;
 
-}
+        min-height: auto;
+    }
 
-@media(max-width:1000px) {
 
-    .home-grid {
-        grid-template-columns:1fr;
+    .hero {
+
+        min-height: 280px;
+
+        padding: 32px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 32px;
+    }
+
+
+    .hero-footer {
+
+        display: none;
+    }
+
+
+    .auth-panel {
+
+        padding: 34px 28px;
     }
 
 }
 
-@media(max-width:760px) {
 
-    .sidebar {
+@media (max-width: 420px) {
 
-        transform:
-            translateX(-100%);
+    .hero {
 
-        transition:
-            transform .25s ease;
-
-        box-shadow:var(--shadow-md);
-
+        padding: 26px;
     }
 
-    .sidebar.open {
-        transform:translateX(0);
+
+    .auth-panel {
+
+        padding: 28px 20px;
     }
 
-    .main {
-        margin-left:0;
-    }
 
-    .topbar {
-        padding:0 18px;
-    }
+    .hero h1 {
 
-    .mobile-menu {
-
-        display:flex;
-
-        width:38px;
-        height:38px;
-
-        border:
-            1px solid var(--border);
-
-        background:white;
-
-        border-radius:11px;
-
-        align-items:center;
-        justify-content:center;
-
-        margin-right:10px;
-
-    }
-
-    .content {
-        padding:28px 18px 70px;
-    }
-
-    .page-header {
-
-        align-items:flex-start;
-
-        flex-direction:column;
-
-    }
-
-}
-
-@media(max-width:500px) {
-
-    .next-task-actions {
-
-        flex-direction:column;
-
-    }
-
-    .next-task-actions button {
-        width:100%;
-    }
-
-    .quick-stats {
-        grid-template-columns:1fr;
-    }
-
-    .form-grid {
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full {
-        grid-column:auto;
+        font-size: 29px;
     }
 
 }
@@ -1616,3014 +709,879 @@ button {
 <body>
 
 
-<div class="app">
+<div class="auth-wrapper">
 
 
-<!-- ========================================
-     SIDEBAR
-======================================== -->
+    <!-- ====================================
+         HERO
+    ===================================== -->
 
-<aside
-    class="sidebar"
-    id="sidebar"
->
+    <section class="hero">
 
-    <div class="logo">
+        <div class="logo">
 
-        <div class="logo-mark">
-            T
-        </div>
-
-        <div class="logo-name">
-            Tempo
-        </div>
-
-    </div>
-
-
-    <div class="nav-section">
-
-        <div class="nav-label">
-            Workspace
-        </div>
-
-
-        <button
-            class="nav-item active"
-            data-page="home"
-            onclick="navigate('home')"
-        >
-
-            <span class="nav-icon">⌂</span>
-
-            <span class="nav-text">
-                Home
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            data-page="schedule"
-            onclick="navigate('schedule')"
-        >
-
-            <span class="nav-icon">▦</span>
-
-            <span class="nav-text">
-                Schedule
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            data-page="tasks"
-            onclick="navigate('tasks')"
-        >
-
-            <span class="nav-icon">✓</span>
-
-            <span class="nav-text">
-                Tasks
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            data-page="tests"
-            onclick="navigate('tests')"
-        >
-
-            <span class="nav-icon">□</span>
-
-            <span class="nav-text">
-                Tests
-            </span>
-
-        </button>
-
-    </div>
-
-
-    <div class="nav-section">
-
-        <div class="nav-label">
-            Productivity
-        </div>
-
-
-        <button
-            class="nav-item"
-            data-page="focus"
-            onclick="navigate('focus')"
-        >
-
-            <span class="nav-icon">◷</span>
-
-            <span class="nav-text">
-                Focus
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            data-page="progress"
-            onclick="navigate('progress')"
-        >
-
-            <span class="nav-icon">↗</span>
-
-            <span class="nav-text">
-                Progress
-            </span>
-
-        </button>
-
-    </div>
-
-
-    <div class="sidebar-bottom">
-
-        <button
-            class="nav-item"
-            data-page="settings"
-            onclick="openSettings(false)"
-        >
-
-            <span class="nav-icon">⚙</span>
-
-            <span class="nav-text">
-                Settings
-            </span>
-
-        </button>
-
-
-        <div class="user-card">
-
-            <div
-                class="avatar"
-                id="sidebarAvatar"
-            >
-                ?
+            <div class="logo-mark">
+                T
             </div>
 
-            <div class="user-info">
-
-                <div
-                    class="user-name"
-                    id="sidebarName"
-                >
-                    Loading...
-                </div>
-
-                <div
-                    class="user-grade"
-                    id="sidebarGrade"
-                >
-                    Student
-                </div>
-
+            <div class="logo-name">
+                Tempo
             </div>
 
         </div>
 
-    </div>
 
-</aside>
+        <div class="hero-content">
 
+            <div class="hero-eyebrow">
+                Student productivity
+            </div>
 
-<!-- ========================================
-     MAIN
-======================================== -->
+            <h1>
+                Give yourself
+                your time back.
+            </h1>
 
-<main class="main">
+            <p>
+                Tempo helps you understand what
+                needs to be done, when to do it,
+                and how much time you actually have.
+            </p>
 
-
-<header class="topbar">
-
-    <div class="topbar-left">
-
-        <button
-            class="mobile-menu"
-            onclick="toggleSidebar()"
-        >
-            ☰
-        </button>
-
-        <div
-            class="page-title"
-            id="pageTitle"
-        >
-            Home
         </div>
 
-    </div>
+
+        <div class="hero-footer">
+            Your time matters.
+        </div>
+
+    </section>
 
 
-    <div class="topbar-actions">
 
-        <div class="notification-wrapper">
+    <!-- ====================================
+         AUTH PANEL
+    ===================================== -->
+
+    <section class="auth-panel">
+
+
+        <div class="auth-header">
+
+            <h2 id="authTitle">
+                Welcome to Tempo
+            </h2>
+
+            <p id="authSubtitle">
+                Sign in to continue to your workspace.
+            </p>
+
+        </div>
+
+
+
+        <!-- TABS -->
+
+        <div class="tabs">
 
             <button
-                class="icon-button"
+                class="tab active"
+                id="loginTab"
+                onclick="showLogin()"
             >
-                ♧
+                Log in
             </button>
 
-            <div class="notification-dot"></div>
-
-        </div>
-
-
-        <button
-            class="icon-button"
-            onclick="openSettings(false)"
-        >
-            ⚙
-        </button>
-
-    </div>
-
-</header>
-
-
-<div class="content">
-
-
-<!-- ========================================
-     HOME
-======================================== -->
-
-<section
-    class="page active"
-    id="page-home"
->
-
-
-<div class="page-header">
-
-    <div>
-
-        <div
-            class="eyebrow"
-            id="homeDate"
-        >
-            Loading date...
-        </div>
-
-        <h1 id="greeting">
-            Welcome to Tempo.
-        </h1>
-
-        <p>
-            Here's what Tempo thinks
-            you should focus on today.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="card next-task-card">
-
-    <div class="next-task-top">
-
-        <div>
-
-            <div class="next-task-label">
-                Up next
-            </div>
-
-            <div
-                class="next-task-title"
-                id="nextTaskTitle"
+            <button
+                class="tab"
+                id="signupTab"
+                onclick="showSignup()"
             >
-                No tasks yet
-            </div>
-
-            <div
-                class="next-task-info"
-                id="nextTaskInfo"
-            >
-                Add your first task to get started.
-            </div>
+                Create account
+            </button>
 
         </div>
 
+
+
+        <!-- MESSAGE -->
 
         <div
-            class="next-task-time"
-            id="nextTaskTime"
-        >
-            —
-        </div>
-
-    </div>
-
-
-    <div class="next-task-reason">
-
-        <span class="next-task-reason-icon">
-            ✦
-        </span>
-
-        <span id="nextTaskReason">
-
-            Tempo will recommend your next task
-            based on your deadlines and workload.
-
-        </span>
-
-    </div>
-
-
-    <div class="next-task-actions">
-
-        <button
-            class="primary-button"
-            onclick="startNextTask()"
-        >
-            Start Focus →
-        </button>
-
-        <button
-            class="secondary-button"
-            onclick="navigate('tasks')"
-        >
-            View Tasks
-        </button>
-
-    </div>
-
-</div>
-
-
-<div class="home-grid">
-
-
-<div class="home-left">
-
-
-<div class="card progress-card">
-
-    <div class="progress-header">
-
-        <div>
-
-            <div class="card-title">
-                Today's Progress
-            </div>
-
-            <div class="card-subtitle">
-                Keep moving forward.
-            </div>
-
-        </div>
-
-
-        <div
-            class="progress-percentage"
-            id="progressPercentage"
-        >
-            0%
-        </div>
-
-    </div>
-
-
-    <div class="progress-track">
-
-        <div
-            class="progress-fill"
-            id="progressFill"
-        ></div>
-
-    </div>
-
-
-    <div class="progress-meta">
-
-        <span id="progressTasks">
-            0 tasks completed
-        </span>
-
-        <span id="progressTime">
-            0m studied
-        </span>
-
-    </div>
-
-</div>
-
-
-<div class="card timeline-card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                Today's Timeline
-            </div>
-
-            <div class="card-subtitle">
-                Your day at a glance
-            </div>
-
-        </div>
-
-        <button
-            class="secondary-button"
-            onclick="navigate('schedule')"
-        >
-            Full Schedule
-        </button>
-
-    </div>
-
-
-    <div
-        class="timeline"
-        id="timeline"
-    >
-
-        <div class="task-empty">
-            Your schedule will appear here.
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="quick-stats">
-
-
-<div class="card quick-stat">
-
-    <div class="quick-stat-icon">
-        ⏱️
-    </div>
-
-    <div
-        class="quick-stat-value"
-        id="studyTimeStat"
-    >
-        0h
-    </div>
-
-    <div class="quick-stat-label">
-        Study time
-    </div>
-
-</div>
-
-
-<div class="card quick-stat">
-
-    <div class="quick-stat-icon">
-        🔥
-    </div>
-
-    <div
-        class="quick-stat-value"
-        id="streakStat"
-    >
-        0 days
-    </div>
-
-    <div class="quick-stat-label">
-        Current streak
-    </div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-<div class="home-right">
-
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                Coming Up
-            </div>
-
-            <div class="card-subtitle">
-                Deadlines & tests
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div
-        class="upcoming-list"
-        id="upcomingList"
-    >
-
-        <div class="task-empty">
-            Nothing scheduled yet.
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                This Week
-            </div>
-
-            <div class="card-subtitle">
-                Your workload
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div
-            style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            "
-        >
-
-            <span
-                style="
-                font-size:13px;
-                color:var(--text-secondary);
-                "
-            >
-                Workload
-            </span>
-
-            <strong id="workloadLabel">
-                Light
-            </strong>
-
-        </div>
-
-
-        <div class="progress-track">
-
-            <div
-                class="progress-fill"
-                id="workloadFill"
-            ></div>
-
-        </div>
-
-
-        <div
-            id="workloadText"
-            style="
-            margin-top:12px;
-            font-size:11px;
-            color:var(--text-tertiary);
-            line-height:1.5;
-            "
-        >
-            Add some tasks and Tempo will
-            estimate your workload.
-        </div>
-
-    </div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     SCHEDULE
-======================================== -->
-
-<section
-    class="page"
-    id="page-schedule"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Planning
-        </div>
-
-        <h1>
-            Schedule
-        </h1>
-
-        <p>
-            See how your time is being used.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="card empty-page">
-
-    <div class="empty-icon">
-        ▦
-    </div>
-
-    <h2>
-        Smart scheduling is coming.
-    </h2>
-
-    <p>
-        Once Tempo knows your commitments,
-        tasks and available time, it can
-        build your study schedule.
-    </p>
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     TASKS
-======================================== -->
-
-<section
-    class="page"
-    id="page-tasks"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Schoolwork
-        </div>
-
-        <h1>
-            Tasks
-        </h1>
-
-        <p>
-            Keep track of what needs to get done.
-        </p>
-
-    </div>
-
-
-    <button
-        class="primary-button"
-        onclick="openTaskModal()"
-    >
-        + Add Task
-    </button>
-
-</div>
-
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                Your Tasks
-            </div>
-
-            <div class="card-subtitle">
-                Saved to your Tempo account.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div
-        class="task-list"
-        id="taskList"
-    >
-
-        <div class="task-empty">
-            Loading tasks...
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     TESTS
-======================================== -->
-
-<section
-    class="page"
-    id="page-tests"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Preparation
-        </div>
-
-        <h1>
-            Tests
-        </h1>
-
-        <p>
-            Know what's coming before it becomes
-            a crisis.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="card empty-page">
-
-    <div class="empty-icon">
-        □
-    </div>
-
-    <h2>
-        Tests are coming soon.
-    </h2>
-
-    <p>
-        Tempo will use upcoming tests to
-        intelligently prioritize your study time.
-    </p>
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     FOCUS
-======================================== -->
-
-<section
-    class="page"
-    id="page-focus"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Focus
-        </div>
-
-        <h1>
-            Focus
-        </h1>
-
-        <p>
-            One task. One session. No bullshit.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="card empty-page">
-
-    <div class="empty-icon">
-        ◷
-    </div>
-
-    <h2>
-        Ready when you are.
-    </h2>
-
-    <p>
-        Start a study session and Tempo will
-        track your focus time.
-    </p>
-
-
-    <button
-        class="primary-button"
-        style="margin-top:20px;"
-        onclick="startNextTask()"
-    >
-        Start Focus Session
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     PROGRESS
-======================================== -->
-
-<section
-    class="page"
-    id="page-progress"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Your Progress
-        </div>
-
-        <h1>
-            Progress
-        </h1>
-
-        <p>
-            See how you're improving over time.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="quick-stats">
-
-
-<div class="card quick-stat">
-
-    <div class="quick-stat-icon">
-        ⏱️
-    </div>
-
-    <div
-        class="quick-stat-value"
-        id="progressStudyTime"
-    >
-        0h
-    </div>
-
-    <div class="quick-stat-label">
-        Study time
-    </div>
-
-</div>
-
-
-<div class="card quick-stat">
-
-    <div
-        class="quick-stat-icon"
-    >
-        📈
-    </div>
-
-    <div
-        class="quick-stat-value"
-        id="progressConsistency"
-    >
-        0%
-    </div>
-
-    <div class="quick-stat-label">
-        Consistency
-    </div>
-
-</div>
-
-
-<div class="card quick-stat">
-
-    <div class="quick-stat-icon">
-        🔥
-    </div>
-
-    <div
-        class="quick-stat-value"
-        id="progressStreak"
-    >
-        0
-    </div>
-
-    <div class="quick-stat-label">
-        Day streak
-    </div>
-
-</div>
-
-
-<div class="card quick-stat">
-
-    <div class="quick-stat-icon">
-        ⌛
-    </div>
-
-    <div
-        class="quick-stat-value"
-    >
-        0h
-    </div>
-
-    <div class="quick-stat-label">
-        Time saved
-    </div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ========================================
-     SETTINGS
-======================================== -->
-
-<section
-    class="page"
-    id="page-settings"
->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            Personalization
-        </div>
-
-        <h1>
-            Settings
-        </h1>
-
-        <p>
-            Tell Tempo how your life works.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                Student Profile
-            </div>
-
-            <div class="card-subtitle">
-                Your Tempo profile
-            </div>
-
-        </div>
-
-
-        <button
-            class="secondary-button"
-            onclick="openSettings(false)"
-        >
-            Edit
-        </button>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div
-            id="profileSummary"
-            style="
-            font-size:14px;
-            line-height:1.8;
-            color:var(--text-secondary);
-            "
-        >
-            Loading profile...
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- ========================================
-     SETTINGS MODAL
-======================================== -->
-
-<div
-    class="modal-overlay"
-    id="settingsModal"
->
-
-<div class="modal">
-
-    <div class="modal-header">
-
-        <h2>
-            Welcome to Tempo 👋
-        </h2>
-
-        <p>
-            Tell Tempo a little about yourself
-            so it can build a useful schedule.
-        </p>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <div class="form-grid">
-
-
-            <div class="form-group">
-
-                <label>
-                    Name
-                </label>
-
-                <input
-                    id="profileName"
-                    type="text"
-                    placeholder="Your name"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Grade
-                </label>
-
-                <input
-                    id="profileGrade"
-                    type="text"
-                    placeholder="e.g. 8"
-                >
-
-            </div>
-
-
-            <div class="form-group full">
-
-                <label>
-                    School
-                </label>
-
-                <input
-                    id="profileSchool"
-                    type="text"
-                    placeholder="Your school"
-                >
-
-            </div>
-
-
-            <div class="form-group full">
-
-                <label>
-                    Club / Activity
-                </label>
-
-                <input
-                    id="profileClub"
-                    type="text"
-                    placeholder="e.g. Football"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Favorite Subject
-                </label>
-
-                <input
-                    id="profileFavorite"
-                    type="text"
-                    placeholder="e.g. Science"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Difficult Subject
-                </label>
-
-                <input
-                    id="profileDifficult"
-                    type="text"
-                    placeholder="e.g. Math"
-                >
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <div class="modal-footer">
-
-        <div
-            class="save-status"
-            id="saveStatus"
+            class="message"
+            id="message"
         ></div>
 
 
-        <button
-            class="secondary-button"
-            id="cancelSettingsButton"
-            onclick="closeSettings()"
+
+        <!-- ==================================
+             LOGIN
+        =================================== -->
+
+        <form
+            class="form active"
+            id="loginForm"
+            onsubmit="handleLogin(event)"
         >
-            Cancel
-        </button>
 
+            <div class="field">
 
-        <button
-            class="primary-button"
-            onclick="saveProfile()"
-        >
-            Save Profile
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- ========================================
-     TASK MODAL
-======================================== -->
-
-<div
-    class="modal-overlay"
-    id="taskModal"
->
-
-<div class="modal">
-
-    <div class="modal-header">
-
-        <h2>
-            Add a Task
-        </h2>
-
-        <p>
-            Tempo will use this information
-            when planning your study time.
-        </p>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <div class="form-grid">
-
-
-            <div class="form-group full">
-
-                <label>
-                    Task
+                <label for="loginUsername">
+                    Username
                 </label>
 
                 <input
-                    id="taskTitle"
+                    id="loginUsername"
                     type="text"
-                    placeholder="e.g. Math homework"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
                 >
 
             </div>
 
 
-            <div class="form-group">
+            <div class="field">
 
-                <label>
-                    Subject
+                <label for="loginPassword">
+                    Password
                 </label>
 
                 <input
-                    id="taskSubject"
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="submit-button"
+                id="loginButton"
+                type="submit"
+            >
+                Log in
+            </button>
+
+        </form>
+
+
+
+        <!-- ==================================
+             SIGNUP
+        =================================== -->
+
+        <form
+            class="form"
+            id="signupForm"
+            onsubmit="handleSignup(event)"
+        >
+
+            <div class="field">
+
+                <label for="signupUsername">
+                    Username
+                </label>
+
+                <input
+                    id="signupUsername"
                     type="text"
-                    placeholder="e.g. Mathematics"
+                    placeholder="Choose a username"
+                    autocomplete="username"
+                    minlength="3"
+                    maxlength="30"
+                    required
                 >
+
+                <div class="help-text">
+                    This is how other Tempo users will find you.
+                </div>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="field">
 
-                <label>
-                    Estimated Minutes
+                <label for="signupDisplayName">
+                    Display name
                 </label>
 
                 <input
-                    id="taskMinutes"
-                    type="number"
-                    min="5"
-                    value="30"
+                    id="signupDisplayName"
+                    type="text"
+                    placeholder="What should Tempo call you?"
+                    maxlength="40"
+                    required
                 >
 
             </div>
 
 
-            <div class="form-group">
+            <div class="field">
 
-                <label>
-                    Deadline
+                <label for="signupPassword">
+                    Password
                 </label>
 
                 <input
-                    id="taskDeadline"
-                    type="date"
+                    id="signupPassword"
+                    type="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+                <div class="help-text">
+                    Use at least 6 characters.
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="signupPasswordConfirm">
+                    Confirm password
+                </label>
+
+                <input
+                    id="signupPasswordConfirm"
+                    type="password"
+                    placeholder="Enter it again"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
                 >
 
             </div>
 
 
-            <div class="form-group">
+            <button
+                class="submit-button"
+                id="signupButton"
+                type="submit"
+            >
+                Create account
+            </button>
 
-                <label>
-                    Difficulty
-                </label>
-
-                <select id="taskDifficulty">
-
-                    <option>
-                        Easy
-                    </option>
-
-                    <option selected>
-                        Medium
-                    </option>
-
-                    <option>
-                        Hard
-                    </option>
-
-                </select>
-
-            </div>
+        </form>
 
 
-        </div>
-
-    </div>
-
-
-    <div class="modal-footer">
-
-        <button
-            class="secondary-button"
-            onclick="closeTaskModal()"
-        >
-            Cancel
-        </button>
-
-
-        <button
-            class="primary-button"
-            onclick="saveTask()"
-        >
-            Add Task
-        </button>
-
-    </div>
+    </section>
 
 </div>
 
-</div>
-
-
-<div
-    class="toast"
-    id="toast"
-></div>
 
 
 <script>
 
-/* ========================================
-   TEMPO BACKEND
-======================================== */
+/* =========================================
+   TEMPO API
+========================================= */
 
-const TEMPO_API =
-    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
-
-
-let currentUser = null;
-
-let tasks = [];
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
 
+/* =========================================
+   DOM
+========================================= */
 
-/* ========================================
-   USER ID
-======================================== */
+const loginForm =
+    document.getElementById("loginForm");
 
-function getUserId() {
+const signupForm =
+    document.getElementById("signupForm");
 
-    let userId =
-        localStorage.getItem(
-            "tempoUserId"
+const loginTab =
+    document.getElementById("loginTab");
+
+const signupTab =
+    document.getElementById("signupTab");
+
+const authTitle =
+    document.getElementById("authTitle");
+
+const authSubtitle =
+    document.getElementById("authSubtitle");
+
+const message =
+    document.getElementById("message");
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "message show " + type;
+
+}
+
+
+function hideMessage() {
+
+    message.textContent = "";
+
+    message.className = "message";
+
+}
+
+
+/* =========================================
+   TABS
+========================================= */
+
+function showLogin() {
+
+    hideMessage();
+
+    loginForm.classList.add("active");
+
+    signupForm.classList.remove("active");
+
+    loginTab.classList.add("active");
+
+    signupTab.classList.remove("active");
+
+    authTitle.textContent =
+        "Welcome back";
+
+    authSubtitle.textContent =
+        "Sign in to continue to your workspace.";
+
+}
+
+
+function showSignup() {
+
+    hideMessage();
+
+    signupForm.classList.add("active");
+
+    loginForm.classList.remove("active");
+
+    signupTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    authTitle.textContent =
+        "Create your Tempo";
+
+    authSubtitle.textContent =
+        "Set up your account and start organizing your time.";
+
+}
+
+
+/* =========================================
+   API REQUEST
+========================================= */
+
+async function apiRequest(payload) {
+
+    const response =
+        await fetch(
+            API_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(payload)
+            }
         );
 
 
-    if (!userId) {
+    if (!response.ok) {
 
-        if (
-            crypto &&
-            crypto.randomUUID
-        ) {
-
-            userId =
-                "tempo_" +
-                crypto.randomUUID();
-
-        }
-
-        else {
-
-            userId =
-                "tempo_" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(2);
-
-        }
-
-
-        localStorage.setItem(
-            "tempoUserId",
-            userId
+        throw new Error(
+            "The Tempo server returned an error."
         );
 
     }
 
 
-    return userId;
+    const result =
+        await response.json();
+
+
+    return result;
 
 }
 
 
+/* =========================================
+   LOGIN
+========================================= */
 
-/* ========================================
-   API
-======================================== */
+async function handleLogin(event) {
 
-async function tempoAPI(
-    action,
-    data = {}
-) {
+    event.preventDefault();
+
+    hideMessage();
+
+
+    const username =
+        document
+            .getElementById("loginUsername")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    const button =
+        document.getElementById(
+            "loginButton"
+        );
+
+
+    button.disabled = true;
+
+    button.innerHTML = `
+        <span class="loading">
+            <span class="spinner"></span>
+            Logging in...
+        </span>
+    `;
+
 
     try {
 
-        const response =
-            await fetch(
-
-                TEMPO_API,
-
-                {
-
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-                    },
-
-                    body:JSON.stringify({
-
-                        action:action,
-
-                        ...data
-
-                    })
-
-                }
-
-            );
-
-
         const result =
-            await response.json();
+            await apiRequest({
+
+                action: "login",
+
+                username: username,
+
+                password: password
+
+            });
 
 
         if (!result.success) {
 
-            console.error(
-                "Tempo API:",
-                result.error
-            );
-
-        }
-
-
-        return result;
-
-    }
-
-    catch(error) {
-
-        console.error(
-            "Tempo connection error:",
-            error
-        );
-
-
-        return {
-
-            success:false,
-
-            error:
-                "Could not connect to Tempo."
-
-        };
-
-    }
-
-}
-
-
-
-/* ========================================
-   NAVIGATION
-======================================== */
-
-const pageNames = {
-
-    home:"Home",
-
-    schedule:"Schedule",
-
-    tasks:"Tasks",
-
-    tests:"Tests",
-
-    focus:"Focus",
-
-    progress:"Progress",
-
-    settings:"Settings"
-
-};
-
-
-function navigate(page) {
-
-    document
-        .querySelectorAll(".page")
-        .forEach(
-            element =>
-                element.classList
-                    .remove("active")
-        );
-
-
-    const selected =
-        document.getElementById(
-            "page-" + page
-        );
-
-
-    if (selected) {
-
-        selected.classList
-            .add("active");
-
-    }
-
-
-    document
-        .querySelectorAll(".nav-item")
-        .forEach(
-            item =>
-                item.classList
-                    .remove("active")
-        );
-
-
-    const nav =
-        document.querySelector(
-            '.nav-item[data-page="' +
-            page +
-            '"]'
-        );
-
-
-    if (nav) {
-
-        nav.classList
-            .add("active");
-
-    }
-
-
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-        pageNames[page];
-
-
-    document
-        .getElementById("sidebar")
-        .classList
-        .remove("open");
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-
-    if (page === "tasks") {
-
-        loadTasks();
-
-    }
-
-
-    if (page === "progress") {
-
-        loadStudyStats();
-
-    }
-
-}
-
-
-
-/* ========================================
-   MOBILE SIDEBAR
-======================================== */
-
-function toggleSidebar() {
-
-    document
-        .getElementById("sidebar")
-        .classList
-        .toggle("open");
-
-}
-
-
-
-/* ========================================
-   DATE
-======================================== */
-
-function updateDate() {
-
-    const today =
-        new Date();
-
-
-    document.getElementById(
-        "homeDate"
-    ).textContent =
-
-        today.toLocaleDateString(
-            "en-US",
-            {
-
-                weekday:"long",
-
-                month:"long",
-
-                day:"numeric"
-
-            }
-
-        );
-
-}
-
-
-
-/* ========================================
-   GREETING
-======================================== */
-
-function updateGreeting() {
-
-    const hour =
-        new Date().getHours();
-
-
-    let greeting;
-
-
-    if (hour < 12) {
-
-        greeting =
-            "Good morning";
-
-    }
-
-    else if (hour < 18) {
-
-        greeting =
-            "Good afternoon";
-
-    }
-
-    else {
-
-        greeting =
-            "Good evening";
-
-    }
-
-
-    const name =
-        currentUser?.name ||
-        "there";
-
-
-    document.getElementById(
-        "greeting"
-    ).textContent =
-
-        greeting +
-        ", " +
-        name +
-        ".";
-
-}
-
-
-
-/* ========================================
-   LOAD USER
-======================================== */
-
-async function loadUser() {
-
-    const userId =
-        getUserId();
-
-
-    const result =
-        await tempoAPI(
-            "getUser",
-            {
-                userId:userId
-            }
-        );
-
-
-    if (
-        result.success &&
-        result.user
-    ) {
-
-        currentUser =
-            result.user;
-
-
-        applyUserProfile();
-
-
-        await loadTasks();
-
-        await loadStudyStats();
-
-    }
-
-    else {
-
-        openSettings(true);
-
-    }
-
-}
-
-
-
-/* ========================================
-   APPLY USER
-======================================== */
-
-function applyUserProfile() {
-
-    if (!currentUser) return;
-
-
-    const name =
-        currentUser.name ||
-        "Student";
-
-
-    document.getElementById(
-        "sidebarName"
-    ).textContent =
-        name;
-
-
-    document.getElementById(
-        "sidebarGrade"
-    ).textContent =
-
-        currentUser.grade
-            ? "Grade " +
-              currentUser.grade
-            : "Student";
-
-
-    document.getElementById(
-        "sidebarAvatar"
-    ).textContent =
-
-        name
-            .charAt(0)
-            .toUpperCase();
-
-
-    updateGreeting();
-
-
-    updateProfileSummary();
-
-}
-
-
-
-/* ========================================
-   SETTINGS
-======================================== */
-
-function openSettings(firstTime) {
-
-    const modal =
-        document.getElementById(
-            "settingsModal"
-        );
-
-
-    if (currentUser) {
-
-        document.getElementById(
-            "profileName"
-        ).value =
-            currentUser.name || "";
-
-
-        document.getElementById(
-            "profileGrade"
-        ).value =
-            currentUser.grade || "";
-
-
-        document.getElementById(
-            "profileSchool"
-        ).value =
-            currentUser.school || "";
-
-
-        document.getElementById(
-            "profileClub"
-        ).value =
-            currentUser.club || "";
-
-
-        document.getElementById(
-            "profileFavorite"
-        ).value =
-            currentUser.favoriteSubject || "";
-
-
-        document.getElementById(
-            "profileDifficult"
-        ).value =
-            currentUser.difficultSubject || "";
-
-    }
-
-
-    if (firstTime) {
-
-        document.getElementById(
-            "cancelSettingsButton"
-        ).style.display =
-            "none";
-
-    }
-
-    else {
-
-        document.getElementById(
-            "cancelSettingsButton"
-        ).style.display =
-            "block";
-
-    }
-
-
-    document.getElementById(
-        "saveStatus"
-    ).textContent =
-        "";
-
-
-    modal.classList.add("show");
-
-}
-
-
-
-function closeSettings() {
-
-    if (!currentUser) {
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "settingsModal"
-    )
-    .classList
-    .remove("show");
-
-}
-
-
-
-/* ========================================
-   SAVE PROFILE
-======================================== */
-
-async function saveProfile() {
-
-    const name =
-        document.getElementById(
-            "profileName"
-        ).value.trim();
-
-
-    if (!name) {
-
-        showToast(
-            "Please enter your name."
-        );
-
-        return;
-
-    }
-
-
-    const status =
-        document.getElementById(
-            "saveStatus"
-        );
-
-
-    status.textContent =
-        "Saving...";
-
-
-    const result =
-        await tempoAPI(
-            "saveUser",
-            {
-
-                userId:getUserId(),
-
-                name:name,
-
-                grade:
-                    document.getElementById(
-                        "profileGrade"
-                    ).value.trim(),
-
-                school:
-                    document.getElementById(
-                        "profileSchool"
-                    ).value.trim(),
-
-                club:
-                    document.getElementById(
-                        "profileClub"
-                    ).value.trim(),
-
-                favoriteSubject:
-                    document.getElementById(
-                        "profileFavorite"
-                    ).value.trim(),
-
-                difficultSubject:
-                    document.getElementById(
-                        "profileDifficult"
-                    ).value.trim()
-
-            }
-        );
-
-
-    if (
-        result.success &&
-        result.user
-    ) {
-
-        currentUser =
-            result.user;
-
-
-        applyUserProfile();
-
-
-        document.getElementById(
-            "settingsModal"
-        )
-        .classList
-        .remove("show");
-
-
-        showToast(
-            "Profile saved ✓"
-        );
-
-
-        await loadTasks();
-
-    }
-
-    else {
-
-        status.textContent =
-            "Could not save.";
-
-        showToast(
-            result.error ||
-            "Something went wrong."
-        );
-
-    }
-
-}
-
-
-
-/* ========================================
-   PROFILE SUMMARY
-======================================== */
-
-function updateProfileSummary() {
-
-    if (!currentUser) return;
-
-
-    document.getElementById(
-        "profileSummary"
-    ).innerHTML =
-
-        "<strong>" +
-        escapeHTML(
-            currentUser.name || "—"
-        ) +
-        "</strong><br>" +
-
-        "Grade: " +
-        escapeHTML(
-            currentUser.grade || "—"
-        ) +
-        "<br>" +
-
-        "School: " +
-        escapeHTML(
-            currentUser.school || "—"
-        ) +
-        "<br>" +
-
-        "Club / Activity: " +
-        escapeHTML(
-            currentUser.club || "—"
-        ) +
-        "<br>" +
-
-        "Favorite subject: " +
-        escapeHTML(
-            currentUser.favoriteSubject || "—"
-        ) +
-        "<br>" +
-
-        "Difficult subject: " +
-        escapeHTML(
-            currentUser.difficultSubject || "—"
-        );
-
-}
-
-
-
-/* ========================================
-   TASK MODAL
-======================================== */
-
-function openTaskModal() {
-
-    document.getElementById(
-        "taskModal"
-    )
-    .classList
-    .add("show");
-
-}
-
-
-function closeTaskModal() {
-
-    document.getElementById(
-        "taskModal"
-    )
-    .classList
-    .remove("show");
-
-}
-
-
-
-/* ========================================
-   SAVE TASK
-======================================== */
-
-async function saveTask() {
-
-    const title =
-        document.getElementById(
-            "taskTitle"
-        ).value.trim();
-
-
-    if (!title) {
-
-        showToast(
-            "Give the task a name."
-        );
-
-        return;
-
-    }
-
-
-    const result =
-        await tempoAPI(
-            "addTask",
-            {
-
-                userId:getUserId(),
-
-                title:title,
-
-                subject:
-                    document.getElementById(
-                        "taskSubject"
-                    ).value.trim(),
-
-                deadline:
-                    document.getElementById(
-                        "taskDeadline"
-                    ).value,
-
-                difficulty:
-                    document.getElementById(
-                        "taskDifficulty"
-                    ).value,
-
-                estimatedMinutes:
-                    Number(
-                        document.getElementById(
-                            "taskMinutes"
-                        ).value
-                    )
-
-            }
-        );
-
-
-    if (result.success) {
-
-        closeTaskModal();
-
-
-        document.getElementById(
-            "taskTitle"
-        ).value = "";
-
-
-        document.getElementById(
-            "taskSubject"
-        ).value = "";
-
-
-        showToast(
-            "Task added ✓"
-        );
-
-
-        await loadTasks();
-
-    }
-
-    else {
-
-        showToast(
-            result.error ||
-            "Could not add task."
-        );
-
-    }
-
-}
-
-
-
-/* ========================================
-   LOAD TASKS
-======================================== */
-
-async function loadTasks() {
-
-    const result =
-        await tempoAPI(
-            "getTasks",
-            {
-
-                userId:
-                    getUserId()
-
-            }
-        );
-
-
-    if (!result.success) {
-
-        return;
-
-    }
-
-
-    tasks =
-        result.tasks || [];
-
-
-    renderTasks();
-
-    updateDashboard();
-
-}
-
-
-
-/* ========================================
-   RENDER TASKS
-======================================== */
-
-function renderTasks() {
-
-    const container =
-        document.getElementById(
-            "taskList"
-        );
-
-
-    if (!tasks.length) {
-
-        container.innerHTML =
-
-            '<div class="task-empty">' +
-
-            'No tasks yet. Add your first one.' +
-
-            '</div>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        tasks
-            .map(function(task) {
-
-                const completed =
-                    task.status ===
-                    "completed";
-
-
-                return `
-
-                <div class="task-item">
-
-                    <button
-                        class="task-check ${
-                            completed
-                            ? "completed"
-                            : ""
-                        }"
-                        onclick="
-                            completeTask(
-                                '${escapeAttribute(
-                                    task.taskId
-                                )}'
-                            )
-                        "
-                    >
-                        ${completed ? "✓" : ""}
-                    </button>
-
-                    <div class="task-info">
-
-                        <div class="task-title">
-
-                            ${escapeHTML(
-                                task.title
-                            )}
-
-                        </div>
-
-                        <div class="task-meta">
-
-                            ${escapeHTML(
-                                task.subject ||
-                                "General"
-                            )}
-
-                            ·
-
-                            ${
-                                task.estimatedMinutes ||
-                                0
-                            } min
-
-                            ${
-                                task.deadline
-                                ? " · Due " +
-                                  formatDate(
-                                      task.deadline
-                                  )
-                                : ""
-                            }
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                `;
-
-            })
-            .join("");
-
-}
-
-
-
-/* ========================================
-   COMPLETE TASK
-======================================== */
-
-async function completeTask(taskId) {
-
-    const result =
-        await tempoAPI(
-            "completeTask",
-            {
-
-                taskId:taskId
-
-            }
-        );
-
-
-    if (result.success) {
-
-        showToast(
-            "Task completed ✓"
-        );
-
-
-        await loadTasks();
-
-    }
-
-}
-
-
-
-/* ========================================
-   DASHBOARD
-======================================== */
-
-function updateDashboard() {
-
-    const pending =
-        tasks.filter(
-            task =>
-                task.status !==
-                "completed"
-        );
-
-
-    const completed =
-        tasks.filter(
-            task =>
-                task.status ===
-                "completed"
-        );
-
-
-    const total =
-        tasks.length;
-
-
-    const percentage =
-        total
-        ? Math.round(
-            completed.length /
-            total *
-            100
-        )
-        : 0;
-
-
-    document.getElementById(
-        "progressPercentage"
-    ).textContent =
-        percentage + "%";
-
-
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        percentage + "%";
-
-
-    document.getElementById(
-        "progressTasks"
-    ).textContent =
-
-        completed.length +
-        " of " +
-        total +
-        " tasks completed";
-
-
-    const next =
-        pending[0];
-
-
-    if (next) {
-
-        document.getElementById(
-            "nextTaskTitle"
-        ).textContent =
-            next.title;
-
-
-        document.getElementById(
-            "nextTaskInfo"
-        ).textContent =
-
-            (
-                next.subject ||
-                "Schoolwork"
-            ) +
-
-            " · " +
-
-            (
-                next.estimatedMinutes ||
-                30
-            ) +
-
-            " minutes";
-
-
-        document.getElementById(
-            "nextTaskReason"
-        ).textContent =
-
-            next.deadline
-
-            ? "Tempo is prioritizing this task because it has a deadline."
-
-            : "Tempo recommends completing this task next to keep your workload moving.";
-
-    }
-
-    else {
-
-        document.getElementById(
-            "nextTaskTitle"
-        ).textContent =
-            "You're all caught up";
-
-
-        document.getElementById(
-            "nextTaskInfo"
-        ).textContent =
-            "No pending tasks";
-
-
-        document.getElementById(
-            "nextTaskReason"
-        ).textContent =
-            "Nice. Your task list is clear.";
-
-    }
-
-
-    renderUpcoming();
-
-    updateWorkload();
-
-}
-
-
-
-/* ========================================
-   UPCOMING
-======================================== */
-
-function renderUpcoming() {
-
-    const container =
-        document.getElementById(
-            "upcomingList"
-        );
-
-
-    const upcoming =
-        tasks
-            .filter(
-                task =>
-                    task.status !==
-                    "completed" &&
-                    task.deadline
-            )
-            .sort(
-                (a,b) =>
-                    new Date(a.deadline) -
-                    new Date(b.deadline)
-            )
-            .slice(0,4);
-
-
-    if (!upcoming.length) {
-
-        container.innerHTML =
-
-            '<div class="task-empty">' +
-            'No upcoming deadlines.' +
-            '</div>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-
-        upcoming
-            .map(task => `
-
-                <div class="upcoming-item">
-
-                    <div class="subject-icon">
-                        📚
-                    </div>
-
-                    <div class="upcoming-info">
-
-                        <div class="upcoming-name">
-
-                            ${escapeHTML(
-                                task.title
-                            )}
-
-                        </div>
-
-                        <div class="upcoming-date">
-
-                            ${formatDate(
-                                task.deadline
-                            )}
-
-                        </div>
-
-                    </div>
-
-                    <div class="deadline">
-
-                        ${daysUntil(
-                            task.deadline
-                        )}
-
-                    </div>
-
-                </div>
-
-            `)
-            .join("");
-
-}
-
-
-
-/* ========================================
-   WORKLOAD
-======================================== */
-
-function updateWorkload() {
-
-    const minutes =
-        tasks
-            .filter(
-                task =>
-                    task.status !==
-                    "completed"
-            )
-            .reduce(
-                (
-                    total,
-                    task
-                ) =>
-                    total +
-                    Number(
-                        task.estimatedMinutes ||
-                        0
-                    ),
-                0
-            );
-
-
-    let label =
-        "Light";
-
-
-    let percentage =
-        Math.min(
-            100,
-            Math.round(
-                minutes /
-                300 *
-                100
-            )
-        );
-
-
-    if (minutes > 300) {
-
-        label =
-            "Heavy";
-
-    }
-
-    else if (minutes > 150) {
-
-        label =
-            "Moderate";
-
-    }
-
-
-    document.getElementById(
-        "workloadLabel"
-    ).textContent =
-        label;
-
-
-    document.getElementById(
-        "workloadFill"
-    ).style.width =
-        percentage + "%";
-
-
-    document.getElementById(
-        "workloadText"
-    ).textContent =
-
-        minutes
-        ? "You have approximately " +
-          minutes +
-          " minutes of pending work."
-
-        : "Your workload is clear.";
-
-}
-
-
-
-/* ========================================
-   STUDY STATS
-======================================== */
-
-async function loadStudyStats() {
-
-    const result =
-        await tempoAPI(
-            "getStudyStats",
-            {
-
-                userId:
-                    getUserId()
-
-            }
-        );
-
-
-    if (!result.success) return;
-
-
-    const minutes =
-        Number(
-            result.totalMinutes ||
-            0
-        );
-
-
-    const hours =
-        Math.floor(
-            minutes / 60
-        );
-
-
-    const remaining =
-        minutes % 60;
-
-
-    let display;
-
-
-    if (hours > 0) {
-
-        display =
-            hours +
-            "h " +
-            remaining +
-            "m";
-
-    }
-
-    else {
-
-        display =
-            minutes +
-            "m";
-
-    }
-
-
-    document.getElementById(
-        "studyTimeStat"
-    ).textContent =
-        display;
-
-
-    document.getElementById(
-        "progressStudyTime"
-    ).textContent =
-        display;
-
-
-    document.getElementById(
-        "progressTime"
-    ).textContent =
-        display +
-        " studied";
-
-}
-
-
-
-/* ========================================
-   START STUDY
-======================================== */
-
-function startNextTask() {
-
-    const pending =
-        tasks.filter(
-            task =>
-                task.status !==
-                "completed"
-        );
-
-
-    if (!pending.length) {
-
-        showToast(
-            "You have no pending tasks."
-        );
-
-        return;
-
-    }
-
-
-    const task =
-        pending[0];
-
-
-    localStorage.setItem(
-        "tempoCurrentTask",
-        JSON.stringify(task)
-    );
-
-
-    window.location.href =
-        "study.html";
-
-}
-
-
-
-/* ========================================
-   UTILITIES
-======================================== */
-
-function formatDate(dateString) {
-
-    if (!dateString) return "—";
-
-
-    const date =
-        new Date(dateString);
-
-
-    if (isNaN(date)) {
-
-        return dateString;
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-
-            month:"short",
-
-            day:"numeric"
-
-        }
-    );
-
-}
-
-
-function daysUntil(dateString) {
-
-    const today =
-        new Date();
-
-
-    today.setHours(
-        0,0,0,0
-    );
-
-
-    const date =
-        new Date(dateString);
-
-
-    date.setHours(
-        0,0,0,0
-    );
-
-
-    const difference =
-        Math.ceil(
-            (
-                date -
-                today
-            ) /
-            86400000
-        );
-
-
-    if (difference < 0) {
-        return "Overdue";
-    }
-
-    if (difference === 0) {
-        return "Today";
-    }
-
-    if (difference === 1) {
-        return "1 day";
-    }
-
-    return difference +
-        " days";
-
-}
-
-
-function escapeHTML(value) {
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-function escapeAttribute(value) {
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /'/g,
-        "\\'"
-    );
-
-}
-
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    setTimeout(
-        () =>
-            toast.classList.remove(
-                "show"
-            ),
-        2500
-    );
-
-}
-
-
-
-/* ========================================
-   ESCAPE KEY
-======================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            document
-                .getElementById(
-                    "sidebar"
-                )
-                .classList
-                .remove("open");
-
-
             if (
-                currentUser
+                result.error ===
+                "INVALID_LOGIN"
             ) {
 
-                closeSettings();
+                showMessage(
+                    "Incorrect username or password.",
+                    "error"
+                );
 
             }
 
-            closeTaskModal();
+            else {
+
+                showMessage(
+                    "Login failed. Please try again.",
+                    "error"
+                );
+
+            }
+
+            return;
 
         }
 
+
+        /*
+         * Store the logged-in user.
+         *
+         * study.html will use this
+         * information later.
+         */
+
+        localStorage.setItem(
+            "tempoUser",
+            JSON.stringify({
+
+                username:
+                    result.username,
+
+                displayName:
+                    result.displayName
+
+            })
+        );
+
+
+        localStorage.setItem(
+            "tempoLoggedIn",
+            "true"
+        );
+
+
+        showMessage(
+            "Login successful. Opening Tempo...",
+            "success"
+        );
+
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "study.html";
+
+            },
+            500
+        );
+
+
     }
-);
 
+    catch (error) {
 
+        console.error(error);
 
-/* ========================================
-   START TEMPO
-======================================== */
+        showMessage(
+            "Could not connect to Tempo. Check your internet connection and try again.",
+            "error"
+        );
 
-async function initTempo() {
+    }
 
-    updateDate();
+    finally {
 
-    await loadUser();
+        button.disabled = false;
+
+        button.textContent =
+            "Log in";
+
+    }
 
 }
 
 
-initTempo();
+/* =========================================
+   SIGN UP
+========================================= */
+
+async function handleSignup(event) {
+
+    event.preventDefault();
+
+    hideMessage();
+
+
+    const username =
+        document
+            .getElementById("signupUsername")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const displayName =
+        document
+            .getElementById("signupDisplayName")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("signupPassword")
+            .value;
+
+
+    const confirmPassword =
+        document
+            .getElementById(
+                "signupPasswordConfirm"
+            )
+            .value;
+
+
+    /* -------------------------------------
+       VALIDATION
+    ------------------------------------- */
+
+    if (username.length < 3) {
+
+        showMessage(
+            "Username must be at least 3 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !/^[a-zA-Z0-9_.-]+$/.test(username)
+    ) {
+
+        showMessage(
+            "Username can only contain letters, numbers, dots, underscores, and hyphens.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (displayName.length < 1) {
+
+        showMessage(
+            "Please enter a display name.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (password.length < 6) {
+
+        showMessage(
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (password !== confirmPassword) {
+
+        showMessage(
+            "The passwords do not match.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "signupButton"
+        );
+
+
+    button.disabled = true;
+
+    button.innerHTML = `
+        <span class="loading">
+            <span class="spinner"></span>
+            Creating account...
+        </span>
+    `;
+
+
+    try {
+
+        const result =
+            await apiRequest({
+
+                action:
+                    "createUser",
+
+                username:
+                    username,
+
+                password:
+                    password,
+
+                displayName:
+                    displayName
+
+            });
+
+
+        if (!result.success) {
+
+            if (
+                result.error ===
+                "USERNAME_EXISTS"
+            ) {
+
+                showMessage(
+                    "That username already exists. Please choose another one.",
+                    "error"
+                );
+
+            }
+
+            else {
+
+                showMessage(
+                    "Could not create your account.",
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        /*
+         * Save the newly-created user.
+         */
+
+        localStorage.setItem(
+            "tempoUser",
+            JSON.stringify({
+
+                username:
+                    result.username,
+
+                displayName:
+                    result.displayName
+
+            })
+        );
+
+
+        localStorage.setItem(
+            "tempoLoggedIn",
+            "true"
+        );
+
+
+        showMessage(
+            "Account created! Opening your setup...",
+            "success"
+        );
+
+
+        /*
+         * New users go to study.html.
+         *
+         * study.html will detect that
+         * setup has not been completed
+         * and show Settings automatically.
+         */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "study.html?setup=true";
+
+            },
+            600
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "Could not connect to Tempo. Check your internet connection and try again.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Create account";
+
+    }
+
+}
+
+
+/* =========================================
+   CHECK EXISTING LOGIN
+========================================= */
+
+function checkExistingLogin() {
+
+    const loggedIn =
+        localStorage.getItem(
+            "tempoLoggedIn"
+        );
+
+
+    const storedUser =
+        localStorage.getItem(
+            "tempoUser"
+        );
+
+
+    /*
+     * If a valid session already exists,
+     * don't make the user log in again.
+     */
+
+    if (
+        loggedIn === "true" &&
+        storedUser
+    ) {
+
+        try {
+
+            JSON.parse(storedUser);
+
+            /*
+             * Uncomment this if you want
+             * index.html to automatically
+             * redirect logged-in users.
+             */
+
+            // window.location.href = "study.html";
+
+        }
+
+        catch {
+
+            localStorage.removeItem(
+                "tempoUser"
+            );
+
+            localStorage.removeItem(
+                "tempoLoggedIn"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+checkExistingLogin();
 
 </script>
 
