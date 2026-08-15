@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Tempo - Dashboard</title>
+
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f8fa;
+  color: #171717;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header {
+  height: 70px;
+
+  background: white;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+
+  color: #555;
+
+  padding: 9px 14px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+  background: #f0f1f3;
+  color: #111;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+  max-width: 1100px;
+
+  margin: 40px auto;
+
+  padding: 0 20px;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: 36px;
+
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #666;
+}
+
+
+/* ================================
+   GRID
+================================ */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  padding: 20px;
+}
+
+.stat-label {
+  font-size: 13px;
+
+  color: #777;
+
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 28px;
+
+  font-weight: 800;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.card {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 20px;
+
+  margin-bottom: 18px;
+}
+
+
+/* ================================
+   PROGRESS
+================================ */
+
+.progress-wrapper {
+  margin-bottom: 20px;
+}
+
+.progress-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  color: #555;
+}
+
+.progress-bar {
+  height: 10px;
+
+  background: #eceef1;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+
+  width: 0%;
+
+  background: #111;
+
+  border-radius: 20px;
+
+  transition:
+    width 0.4s ease;
+}
+
+
+/* ================================
+   TWO COLUMN
+================================ */
+
+.two-column {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 20px;
+}
+
+
+/* ================================
+   LIST
+================================ */
+
+.list {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.list-item {
+  padding: 14px 0;
+
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.item-main {
+  min-width: 0;
+}
+
+.item-title {
+  font-weight: 700;
+
+  margin-bottom: 4px;
+
+  word-break: break-word;
+}
+
+.item-subtitle {
+  font-size: 13px;
+
+  color: #777;
+}
+
+.item-right {
+  text-align: right;
+
+  font-size: 13px;
+
+  color: #666;
+
+  white-space: nowrap;
+}
+
+
+/* ================================
+   BADGES
+================================ */
+
+.badge {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: #f0f1f3;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.badge.completed {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+.badge.pending {
+  background: #fff7ed;
+
+  color: #9a3412;
+}
+
+
+/* ================================
+   QUICK ACTIONS
+================================ */
+
+.actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.action {
+  text-decoration: none;
+
+  color: #111;
+
+  background: #f5f5f6;
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  font-weight: 700;
+
+  text-align: center;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.action:hover {
+  background: #ececef;
+
+  transform: translateY(-2px);
+}
+
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty {
+  text-align: center;
+
+  padding: 30px 10px;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+/* ================================
+   LOADING
+================================ */
+
+.loading {
+  text-align: center;
+
+  padding: 30px;
+
+  color: #777;
+}
+
+
+/* ================================
+   ERROR
+================================ */
+
+.error {
+  background: #fee2e2;
+
+  color: #991b1b;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  margin-bottom: 20px;
+
+  display: none;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width: 800px) {
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media(max-width: 600px) {
+
+  header {
+    height: auto;
+
+    min-height: 70px;
+
+    padding: 14px 16px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  nav {
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .container {
+    margin-top: 25px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    Tempo
+  </div>
+
+
+  <nav>
+
+    <a
+      href="dashboard.html"
+      class="active"
+    >
+      Dashboard
+    </a>
+
+    <a href="tasks.html">
+      Tasks
+    </a>
+
+    <a href="tests.html">
+      Tests
+    </a>
+
+    <a href="schedule.html">
+      Schedule
+    </a>
+
+    <a href="share.html">
+      Share
+    </a>
+
+  </nav>
+
+</header>
+
+
+<main class="container">
+
+
+  <!-- ================================
+       HERO
+  ================================= -->
+
+  <section class="hero">
+
+    <h1 id="welcome">
+      Welcome back.
+    </h1>
+
+    <p>
+      Here's what your study life looks like.
+    </p>
+
+  </section>
+
+
+  <div
+    id="error"
+    class="error"
+  ></div>
+
+
+  <!-- ================================
+       STATS
+  ================================= -->
+
+  <section class="stats-grid">
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Total Tasks
+      </div>
+
+      <div
+        id="totalTasks"
+        class="stat-value"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Completed
+      </div>
+
+      <div
+        id="completedTasks"
+        class="stat-value"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Upcoming Tests
+      </div>
+
+      <div
+        id="upcomingTests"
+        class="stat-value"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Study Time
+      </div>
+
+      <div
+        id="studyTime"
+        class="stat-value"
+      >
+        —
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ================================
+       PROGRESS
+  ================================= -->
+
+  <section class="card">
+
+    <h2>
+      Task progress
+    </h2>
+
+
+    <div class="progress-wrapper">
+
+      <div class="progress-info">
+
+        <span>
+          Completion
+        </span>
+
+        <span id="progressText">
+          0%
+        </span>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div
+          id="progressFill"
+          class="progress-fill"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================
+       TWO COLUMN
+  ================================= -->
+
+  <section class="two-column">
+
+
+    <!-- UPCOMING TASKS -->
+
+    <div class="card">
+
+      <h2>
+        Upcoming tasks
+      </h2>
+
+
+      <div
+        id="tasksList"
+        class="list"
+      >
+
+        <div class="loading">
+          Loading tasks...
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TESTS -->
+
+    <div class="card">
+
+      <h2>
+        Upcoming tests
+      </h2>
+
+
+      <div
+        id="testsList"
+        class="list"
+      >
+
+        <div class="loading">
+          Loading tests...
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ================================
+       RECENT SESSIONS
+  ================================= -->
+
+  <section class="card">
+
+    <h2>
+      Recent study sessions
+    </h2>
+
+
+    <div
+      id="sessionsList"
+      class="list"
+    >
+
+      <div class="loading">
+        Loading sessions...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================
+       QUICK ACTIONS
+  ================================= -->
+
+  <section class="card">
+
+    <h2>
+      Quick actions
+    </h2>
+
+
+    <div class="actions">
+
+      <a
+        class="action"
+        href="tasks.html"
+      >
+        + Add Task
+      </a>
+
+
+      <a
+        class="action"
+        href="tests.html"
+      >
+        + Add Test
+      </a>
+
+
+      <a
+        class="action"
+        href="schedule.html"
+      >
+        ✦ AI Schedule
+      </a>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+
+
+/* =========================================================
+   TOKEN
+========================================================= */
+
+const token =
+  localStorage.getItem(
+    "tempoToken"
+  );
+
+
+if (!token) {
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function api(
+  action,
+  data = {}
+) {
+
+  const response =
+    await fetch(
+      API_URL,
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify({
+
+            action:
+              action,
+
+            ...data
+
+          })
+
+      }
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Server request failed."
+    );
+
+  }
+
+
+  return await response.json();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+  return String(
+    value ?? ""
+  )
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value) {
+
+  if (!value) {
+    return "No date";
+  }
+
+
+  const date =
+    new Date(value);
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return String(value);
+
+  }
+
+
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   FORMAT MINUTES
+========================================================= */
+
+function formatMinutes(
+  minutes
+) {
+
+  minutes =
+    Number(minutes || 0);
+
+
+  if (minutes < 60) {
+
+    return `${minutes} min`;
+
+  }
+
+
+  const hours =
+    Math.floor(
+      minutes / 60
+    );
+
+
+  const remaining =
+    minutes % 60;
+
+
+  if (!remaining) {
+
+    return `${hours} hr`;
+
+  }
+
+
+  return `${hours} hr ${remaining} min`;
+
+}
+
+
+/* =========================================================
+   HANDLE AUTH ERROR
+========================================================= */
+
+function checkAuth(result) {
+
+  if (
+    result &&
+    result.error ===
+    "UNAUTHORIZED"
+  ) {
+
+    localStorage.removeItem(
+      "tempoToken"
+    );
+
+    window.location.href =
+      "index.html";
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+function loadWelcome() {
+
+  const displayName =
+    localStorage.getItem(
+      "tempoDisplayName"
+    );
+
+
+  const username =
+    localStorage.getItem(
+      "tempoUsername"
+    );
+
+
+  const name =
+    displayName ||
+    username ||
+    "there";
+
+
+  document.getElementById(
+    "welcome"
+  ).textContent =
+    `Welcome back, ${name}.`;
+
+}
+
+
+/* =========================================================
+   LOAD TASKS
+========================================================= */
+
+async function loadTasks() {
+
+  const result =
+    await api(
+      "getTasks",
+      {
+        token: token
+      }
+    );
+
+
+  if (!checkAuth(result)) {
+    return [];
+  }
+
+
+  if (!result.success) {
+
+    throw new Error(
+      result.error ||
+      "Could not load tasks."
+    );
+
+  }
+
+
+  const tasks =
+    result.tasks || [];
+
+
+  const completed =
+    tasks.filter(
+      task =>
+        task.completed
+    );
+
+
+  const unfinished =
+    tasks.filter(
+      task =>
+        !task.completed
+    );
+
+
+  document.getElementById(
+    "totalTasks"
+  ).textContent =
+    tasks.length;
+
+
+  document.getElementById(
+    "completedTasks"
+  ).textContent =
+    completed.length;
+
+
+  const percentage =
+    tasks.length
+      ? Math.round(
+          (
+            completed.length /
+            tasks.length
+          ) * 100
+        )
+      : 0;
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    `${percentage}%`;
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    `${percentage}%`;
+
+
+  const list =
+    document.getElementById(
+      "tasksList"
+    );
+
+
+  if (!unfinished.length) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        No unfinished tasks 🎉
+
+      </div>
+
+    `;
+
+    return tasks;
+
+  }
+
+
+  unfinished.sort(
+    (a, b) =>
+      new Date(a.deadline) -
+      new Date(b.deadline)
+  );
+
+
+  list.innerHTML =
+    unfinished
+      .slice(0, 6)
+      .map(task => {
+
+        return `
+
+          <div class="list-item">
+
+            <div class="item-main">
+
+              <div class="item-title">
+
+                ${escapeHTML(
+                  task.title
+                )}
+
+              </div>
+
+              <div class="item-subtitle">
+
+                ${escapeHTML(
+                  task.subject
+                )}
+
+                ·
+
+                ${escapeHTML(
+                  task.difficulty
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div class="item-right">
+
+              ${formatDate(
+                task.deadline
+              )}
+
+              <br>
+
+              ${Number(
+                task.minutes || 0
+              )} min
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+
+  return tasks;
+
+}
+
+
+/* =========================================================
+   LOAD TESTS
+========================================================= */
+
+async function loadTests() {
+
+  const result =
+    await api(
+      "getTests",
+      {
+        token: token
+      }
+    );
+
+
+  if (!checkAuth(result)) {
+    return [];
+  }
+
+
+  if (!result.success) {
+
+    throw new Error(
+      result.error ||
+      "Could not load tests."
+    );
+
+  }
+
+
+  const tests =
+    result.tests || [];
+
+
+  const now =
+    new Date();
+
+
+  const upcoming =
+    tests
+      .filter(test => {
+
+        if (!test.date) {
+          return true;
+        }
+
+
+        const date =
+          new Date(test.date);
+
+
+        return (
+          Number.isNaN(
+            date.getTime()
+          ) ||
+          date >= now
+        );
+
+      })
+      .sort(
+        (a, b) =>
+          new Date(a.date) -
+          new Date(b.date)
+      );
+
+
+  document.getElementById(
+    "upcomingTests"
+  ).textContent =
+    upcoming.length;
+
+
+  const list =
+    document.getElementById(
+      "testsList"
+    );
+
+
+  if (!upcoming.length) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        No upcoming tests.
+
+      </div>
+
+    `;
+
+    return tests;
+
+  }
+
+
+  list.innerHTML =
+    upcoming
+      .slice(0, 6)
+      .map(test => {
+
+        return `
+
+          <div class="list-item">
+
+            <div class="item-main">
+
+              <div class="item-title">
+
+                ${escapeHTML(
+                  test.title
+                )}
+
+              </div>
+
+              <div class="item-subtitle">
+
+                ${escapeHTML(
+                  test.subject
+                )}
+
+                ·
+
+                ${escapeHTML(
+                  test.difficulty
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div class="item-right">
+
+              ${formatDate(
+                test.date
+              )}
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+
+  return tests;
+
+}
+
+
+/* =========================================================
+   LOAD SESSIONS
+========================================================= */
+
+async function loadSessions() {
+
+  const result =
+    await api(
+      "getSessions",
+      {
+        token: token
+      }
+    );
+
+
+  if (!checkAuth(result)) {
+    return [];
+  }
+
+
+  if (!result.success) {
+
+    throw new Error(
+      result.error ||
+      "Could not load study sessions."
+    );
+
+  }
+
+
+  const sessions =
+    result.sessions || [];
+
+
+  const totalMinutes =
+    sessions.reduce(
+      (
+        total,
+        session
+      ) => {
+
+        return (
+          total +
+          Number(
+            session.minutes || 0
+          )
+        );
+
+      },
+      0
+    );
+
+
+  document.getElementById(
+    "studyTime"
+  ).textContent =
+    formatMinutes(
+      totalMinutes
+    );
+
+
+  const list =
+    document.getElementById(
+      "sessionsList"
+    );
+
+
+  if (!sessions.length) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        No study sessions yet.
+
+      </div>
+
+    `;
+
+    return sessions;
+
+  }
+
+
+  const recent =
+    sessions
+      .slice()
+      .reverse()
+      .slice(0, 6);
+
+
+  list.innerHTML =
+    recent
+      .map(session => {
+
+        return `
+
+          <div class="list-item">
+
+            <div class="item-main">
+
+              <div class="item-title">
+
+                Study session
+
+              </div>
+
+              <div class="item-subtitle">
+
+                ${
+                  session.taskID
+                    ? `Task: ${escapeHTML(
+                        session.taskID
+                      )}`
+                    : "Independent study"
+                }
+
+              </div>
+
+            </div>
+
+
+            <div class="item-right">
+
+              ${formatMinutes(
+                session.minutes
+              )}
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+
+  return sessions;
+
+}
+
+
+/* =========================================================
+   LOAD DASHBOARD
+========================================================= */
+
+async function loadDashboard() {
+
+  try {
+
+    loadWelcome();
+
+
+    await Promise.all([
+      loadTasks(),
+      loadTests(),
+      loadSessions()
+    ]);
+
+  }
+
+  catch(error) {
+
+    const errorBox =
+      document.getElementById(
+        "error"
+      );
+
+
+    errorBox.textContent =
+      error.message ||
+      "Something went wrong while loading Tempo.";
+
+
+    errorBox.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadDashboard();
+
+</script>
+
+
+</body>
+
+</html>

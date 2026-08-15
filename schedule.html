@@ -1,2155 +1,1287 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Tempo · Schedule</title>
+<title>Tempo - Schedule</title>
 
 <style>
 
-:root {
-
-    --primary: #6657e8;
-    --primary-light: #efedff;
-
-    --background: #f7f8fc;
-    --surface: #ffffff;
-
-    --text: #17191c;
-    --text-secondary: #737681;
-    --text-tertiary: #a2a4ad;
-
-    --border: #e8e8ee;
-
-    --success: #28a866;
-    --success-light: #e9f8ef;
-
-    --warning: #e49b27;
-    --warning-light: #fff5df;
-
-    --danger: #e05252;
-    --danger-light: #fff0f0;
-
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-
-    --shadow-sm:
-        0 2px 8px rgba(20,20,40,0.04);
-
-    --shadow-md:
-        0 10px 30px rgba(20,20,40,0.08);
-
-}
-
 * {
-
-    box-sizing: border-box;
-
-    margin: 0;
-
-    padding: 0;
-
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: var(--background);
-
-    color: var(--text);
-
-    min-height: 100vh;
-
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f8fa;
+  color: #171717;
 }
 
-button,
-input,
-select {
+header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
 
-    font: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-}
-
-button {
-
-    cursor: pointer;
-
-}
-
-
-/* =========================================
-   TOPBAR
-========================================= */
-
-.topbar {
-
-    height: 72px;
-
-    background:
-        rgba(255,255,255,0.92);
-
-    border-bottom:
-        1px solid var(--border);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 34px;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 20;
-
+  padding: 0 32px;
 }
 
 .logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    font-weight: 800;
-
-    font-size: 21px;
-
+  font-size: 24px;
+  font-weight: 800;
 }
 
-.logo-mark {
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 10px;
-
-    background: var(--primary);
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.top-actions {
+nav a {
+  text-decoration: none;
+  color: #555;
 
-    display: flex;
+  padding: 9px 14px;
+  border-radius: 9px;
 
-    gap: 10px;
-
+  font-size: 14px;
 }
 
-.icon-button {
-
-    width: 38px;
-    height: 38px;
-
-    border:
-        1px solid var(--border);
-
-    background: white;
-
-    border-radius: 10px;
-
+nav a:hover,
+nav a.active {
+  background: #f0f1f3;
+  color: #111;
 }
 
-
-/* =========================================
-   CONTENT
-========================================= */
-
-.content {
-
-    max-width: 1250px;
-
-    margin: auto;
-
-    padding:
-        38px 30px 80px;
-
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
-
-.page-header {
-
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 28px;
-
+.hero {
+  margin-bottom: 28px;
 }
 
-.eyebrow {
-
-    color: var(--primary);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.08em;
-
-    margin-bottom: 7px;
-
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
 }
 
-h1 {
-
-    font-size: 32px;
-
-    letter-spacing: -1px;
-
+.hero p {
+  color: #666;
 }
 
-.subtitle {
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
 
-    margin-top: 8px;
-
-    color: var(--text-secondary);
-
-    font-size: 14px;
-
+  padding: 24px;
+  margin-bottom: 20px;
 }
 
-.header-buttons {
-
-    display: flex;
-
-    gap: 10px;
-
+.card h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
-.primary-button {
-
-    border: none;
-
-    background: var(--primary);
-
-    color: white;
-
-    padding:
-        11px 17px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    font-weight: 750;
-
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.primary-button:hover {
-
-    box-shadow:
-        0 7px 18px
-        rgba(102,87,232,0.25);
-
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
-.secondary-button {
-
-    border:
-        1px solid var(--border);
-
-    background: white;
-
-    color: var(--text);
-
-    padding:
-        11px 17px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    font-weight: 650;
-
+.field.full {
+  grid-column: 1 / -1;
 }
 
-
-/* =========================================
-   DATE NAVIGATION
-========================================= */
-
-.date-bar {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-
+label {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.date-navigation {
+input {
+  width: 100%;
 
-    display: flex;
+  padding: 12px;
 
-    align-items: center;
+  border: 1px solid #d6d9de;
+  border-radius: 9px;
 
-    gap: 8px;
-
+  font-size: 15px;
+  background: white;
 }
 
-.date-button {
-
-    width: 38px;
-    height: 38px;
-
-    border:
-        1px solid var(--border);
-
-    background: white;
-
-    border-radius: 10px;
-
+input:focus {
+  outline: none;
+  border-color: #111;
 }
 
-.current-date {
+button {
+  border: none;
+  border-radius: 10px;
 
-    padding:
-        10px 15px;
+  padding: 12px 18px;
 
-    border:
-        1px solid var(--border);
+  font-size: 15px;
+  font-weight: 700;
 
-    background: white;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
+  cursor: pointer;
 }
 
-.today-button {
-
-    border: none;
-
-    background: var(--primary-light);
-
-    color: var(--primary);
-
-    padding:
-        9px 13px;
-
-    border-radius: 9px;
-
-    font-size: 12px;
-
-    font-weight: 750;
-
+.primary {
+  background: #111;
+  color: white;
 }
 
-
-/* =========================================
-   SUMMARY
-========================================= */
-
-.summary-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 14px;
-
-    margin-bottom: 20px;
-
+.primary:hover {
+  opacity: 0.85;
 }
 
-.summary-card {
-
-    background: white;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: var(--radius-md);
-
-    padding: 18px;
-
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.summary-label {
-
-    color: var(--text-tertiary);
-
-    font-size: 11px;
-
+.generate {
+  margin-top: 20px;
+  width: 100%;
 }
 
-.summary-value {
+.status {
+  margin-top: 15px;
 
-    font-size: 23px;
+  padding: 12px;
 
-    font-weight: 800;
+  border-radius: 9px;
 
-    margin-top: 7px;
-
+  display: none;
 }
 
-.summary-small {
-
-    color: var(--text-secondary);
-
-    font-size: 11px;
-
-    margin-top: 3px;
-
+.status.success {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
 }
 
-
-/* =========================================
-   SCHEDULE
-========================================= */
-
-.schedule-card {
-
-    background: white;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: var(--radius-lg);
-
-    overflow: hidden;
-
-    box-shadow: var(--shadow-sm);
-
+.status.error {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
 }
 
-.schedule-header {
-
-    padding:
-        20px 22px;
-
-    border-bottom:
-        1px solid var(--border);
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
+.status.loading {
+  display: block;
+  background: #f0f1f3;
+  color: #444;
 }
 
-.schedule-title {
-
-    font-size: 15px;
-
-    font-weight: 800;
-
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.schedule-description {
+.schedule-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
 
-    color: var(--text-tertiary);
+  padding: 16px;
 
-    font-size: 11px;
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
 
-    margin-top: 4px;
-
+  gap: 16px;
+  align-items: center;
 }
 
-.timeline {
-
-    padding:
-        10px 22px 25px;
-
+.time {
+  font-weight: 700;
+  font-size: 14px;
 }
 
-.timeline-item {
-
-    display: grid;
-
-    grid-template-columns:
-        72px 22px 1fr;
-
-    min-height: 90px;
-
+.schedule-main {
+  min-width: 0;
 }
 
-.timeline-time {
-
-    color: var(--text-tertiary);
-
-    font-size: 12px;
-
-    padding-top: 18px;
-
+.schedule-subject {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
 }
 
-.timeline-line {
-
-    position: relative;
-
+.schedule-task {
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.timeline-line::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 10px;
-    height: 10px;
-
-    border-radius: 50%;
-
-    background: var(--border);
-
-    top: 20px;
-
-    left: 1px;
-
-    z-index: 2;
-
-}
-
-.timeline-line::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 1px;
-
-    background: var(--border);
-
-    top: 30px;
-
-    bottom: -5px;
-
-    left: 5px;
-
-}
-
-.timeline-item:last-child
-.timeline-line::after {
-
-    display: none;
-
-}
-
-.timeline-item.study
-.timeline-line::before {
-
-    background: var(--primary);
-
-    box-shadow:
-        0 0 0 4px var(--primary-light);
-
-}
-
-.timeline-item.study
-.timeline-title {
-
-    color: var(--primary);
-
-}
-
-.timeline-item.deadline
-.timeline-line::before {
-
-    background: var(--danger);
-
-}
-
-.timeline-content {
-
-    padding:
-        14px 0 20px;
-
-}
-
-.timeline-title {
-
-    font-size: 14px;
-
-    font-weight: 750;
-
-}
-
-.timeline-description {
-
-    color: var(--text-secondary);
-
-    font-size: 12px;
-
-    margin-top: 5px;
-
-}
-
-.timeline-meta {
-
-    display: flex;
-
-    gap: 7px;
-
-    margin-top: 8px;
-
-    flex-wrap: wrap;
-
-}
-
-.tag {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    padding:
-        4px 8px;
-
-    border-radius: 7px;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    background: var(--background);
-
-    color: var(--text-secondary);
-
-}
-
-.tag.primary {
-
-    background: var(--primary-light);
-
-    color: var(--primary);
-
-}
-
-.tag.danger {
-
-    background: var(--danger-light);
-
-    color: var(--danger);
-
+.schedule-minutes {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
 }
 
 .empty {
-
-    padding: 70px 25px;
-
-    text-align: center;
-
+  text-align: center;
+  padding: 40px;
+  color: #777;
 }
-
-.empty-icon {
-
-    width: 60px;
-    height: 60px;
-
-    border-radius: 17px;
-
-    background: var(--primary-light);
-
-    color: var(--primary);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin:
-        0 auto 16px;
-
-    font-size: 25px;
-
-}
-
-.empty h2 {
-
-    font-size: 19px;
-
-}
-
-.empty p {
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-
-    max-width: 400px;
-
-    margin:
-        8px auto 0;
-
-    line-height: 1.6;
-
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
 
 .loading {
-
-    padding: 70px;
-
-    text-align: center;
-
-    color: var(--text-secondary);
-
-    font-size: 13px;
-
+  text-align: center;
+  padding: 30px;
+  color: #777;
 }
 
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media(max-width:700px) {
-
-    .topbar {
-
-        padding:
-            0 18px;
-
-    }
-
-    .content {
-
-        padding:
-            28px 18px 60px;
-
-    }
-
-    .page-header {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-    }
-
-    .summary-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    .date-bar {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 10px;
-
-    }
-
-    .timeline-item {
-
-        grid-template-columns:
-            55px 18px 1fr;
-
-    }
-
+.summary {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
 }
 
-
-/* =========================================
-   TOAST
-========================================= */
-
-.toast {
-
-    position: fixed;
-
-    bottom: 25px;
-
-    right: 25px;
-
-    background: #17191c;
-
-    color: white;
-
-    padding:
-        12px 16px;
-
-    border-radius: 10px;
-
-    font-size: 12px;
-
-    opacity: 0;
-
-    transform:
-        translateY(10px);
-
-    pointer-events: none;
-
-    transition: 0.2s ease;
-
-    z-index: 100;
-
+.summary-item {
+  background: #f0f1f3;
+  border-radius: 10px;
+  padding: 9px 13px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.toast.show {
+.task-preview {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
 
-    opacity: 1;
+.task-preview h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
 
-    transform:
-        translateY(0);
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #f0f0f0;
+
+  font-size: 14px;
+}
+
+.preview-item:last-child {
+  border-bottom: none;
+}
+
+.completed {
+  color: #888;
+  text-decoration: line-through;
+}
+
+@media (max-width: 700px) {
+
+  header {
+    height: auto;
+    min-height: 70px;
+    padding: 14px 16px;
+
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .container {
+    margin-top: 25px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .schedule-item {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<header>
 
-<header class="topbar">
+  <div class="logo">
+    Tempo
+  </div>
 
-    <div class="logo">
+  <nav>
 
-        <div class="logo-mark">
-            T
-        </div>
+    <a href="dashboard.html">
+      Dashboard
+    </a>
 
-        Tempo
+    <a href="tasks.html">
+      Tasks
+    </a>
 
-    </div>
+    <a href="tests.html">
+      Tests
+    </a>
 
+    <a href="schedule.html" class="active">
+      Schedule
+    </a>
 
-    <div class="top-actions">
+    <a href="share.html">
+      Share
+    </a>
 
-        <button
-            class="icon-button"
-            onclick="goHome()"
-        >
-            ←
-        </button>
-
-    </div>
+  </nav>
 
 </header>
 
 
+<main class="container">
 
-<main class="content">
+  <section class="hero">
 
+    <h1>AI Schedule</h1>
 
-    <div class="page-header">
+    <p>
+      Let Tempo build a realistic study schedule from your tasks and upcoming tests.
+    </p>
 
-        <div>
-
-            <div class="eyebrow">
-                Planning
-            </div>
-
-            <h1>
-                Schedule
-            </h1>
-
-            <p class="subtitle">
-                Tempo organizes your workload around
-                what matters most.
-            </p>
-
-        </div>
+  </section>
 
 
-        <div class="header-buttons">
+  <!-- SETTINGS -->
 
-            <button
-                class="secondary-button"
-                onclick="goToday()"
-            >
-                Today
-            </button>
+  <section class="card">
 
-            <button
-                class="primary-button"
-                onclick="generateSchedule()"
-            >
-                ✦ Rebuild Schedule
-            </button>
+    <h2>Build your schedule</h2>
 
-        </div>
+    <div class="form-grid">
 
-    </div>
+      <div class="field">
 
+        <label for="date">
+          Date
+        </label>
 
-
-    <div class="date-bar">
-
-        <div class="date-navigation">
-
-            <button
-                class="date-button"
-                onclick="changeDay(-1)"
-            >
-                ←
-            </button>
-
-            <div
-                class="current-date"
-                id="currentDate"
-            >
-                Loading...
-            </div>
-
-            <button
-                class="date-button"
-                onclick="changeDay(1)"
-            >
-                →
-            </button>
-
-        </div>
-
-
-        <button
-            class="today-button"
-            onclick="goToday()"
+        <input
+          id="date"
+          type="date"
         >
-            Jump to today
-        </button>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="breakMinutes">
+          Break length
+        </label>
+
+        <input
+          id="breakMinutes"
+          type="number"
+          min="0"
+          max="60"
+          value="10"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="availableStart">
+          Available from
+        </label>
+
+        <input
+          id="availableStart"
+          type="time"
+          value="17:00"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="availableEnd">
+          Available until
+        </label>
+
+        <input
+          id="availableEnd"
+          type="time"
+          value="21:00"
+        >
+
+      </div>
 
     </div>
 
 
+    <button
+      id="generateButton"
+      class="primary generate"
+      onclick="generateSchedule()"
+    >
+      Generate AI Schedule
+    </button>
 
-    <div class="summary-grid">
 
-        <div class="summary-card">
+    <div
+      id="status"
+      class="status"
+    ></div>
 
-            <div class="summary-label">
-                Study time
-            </div>
 
-            <div
-                class="summary-value"
-                id="studyTime"
-            >
-                0m
-            </div>
+    <div class="task-preview">
 
-            <div class="summary-small">
-                scheduled today
-            </div>
+      <h3>
+        Your unfinished tasks
+      </h3>
 
+      <div id="taskPreview">
+
+        <div class="loading">
+          Loading tasks...
         </div>
 
-
-        <div class="summary-card">
-
-            <div class="summary-label">
-                Tasks
-            </div>
-
-            <div
-                class="summary-value"
-                id="taskCount"
-            >
-                0
-            </div>
-
-            <div class="summary-small">
-                planned today
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-label">
-                Urgency
-            </div>
-
-            <div
-                class="summary-value"
-                id="urgency"
-            >
-                —
-            </div>
-
-            <div class="summary-small">
-                based on upcoming deadlines
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
+  </section>
 
 
-    <div class="schedule-card">
+  <!-- SCHEDULE -->
 
+  <section class="card">
 
-        <div class="schedule-header">
+    <h2>Your schedule</h2>
 
-            <div>
+    <div id="schedule">
 
-                <div class="schedule-title">
-                    Today's Plan
-                </div>
-
-                <div class="schedule-description">
-                    Generated from your tasks and deadlines
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div id="scheduleContainer">
-
-            <div class="loading">
-                Loading your schedule...
-            </div>
-
-        </div>
-
+      <div class="empty">
+        Your AI-generated schedule will appear here.
+      </div>
 
     </div>
 
+  </section>
 
 </main>
-
-
-
-<div
-    class="toast"
-    id="toast"
-></div>
 
 
 <script>
 
 /* =========================================================
-   TEMPO CONFIG
+   TEMPO API
 ========================================================= */
 
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoa3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let selectedDate = new Date();
-
-let tasks = [];
-
-let tests = [];
-
-let generatedSchedule = [];
+"https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
 
 /* =========================================================
    AUTH
 ========================================================= */
 
-function getToken() {
-
-    return (
-        localStorage.getItem("tempoToken") ||
-        localStorage.getItem("token") ||
-        localStorage.getItem("tempo_token") ||
-        ""
-    );
-
-}
+const token =
+  localStorage.getItem("tempoToken");
 
 
-function requireLogin() {
+if (!token) {
 
-    const token = getToken();
-
-    if (!token) {
-
-        window.location.href = "index.html";
-
-        return false;
-
-    }
-
-    return true;
+  window.location.href =
+    "index.html";
 
 }
 
 
 /* =========================================================
-   API
+   API FUNCTION
 ========================================================= */
 
-async function api(action, extra = {}) {
-
-    const token = getToken();
-
-    const response = await fetch(
-        API_URL,
-        {
-            method: "POST",
-
-            headers: {
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
-
-            body: JSON.stringify({
-                action: action,
-                token: token,
-                ...extra
-            })
-        }
-    );
-
-
-    const data = await response.json();
-
-
-    if (data.error === "UNAUTHORIZED") {
-
-        localStorage.removeItem("tempoToken");
-
-        localStorage.removeItem("token");
-
-        localStorage.removeItem("tempo_token");
-
-        window.location.href = "index.html";
-
-        return null;
-
-    }
-
-
-    return data;
-
-}
-
-
-/* =========================================================
-   LOAD USER DATA
-========================================================= */
-
-async function loadData() {
-
-    if (!requireLogin()) {
-        return;
-    }
-
-
-    try {
-
-        const taskResult =
-            await api("getTasks");
-
-
-        const testResult =
-            await api("getTests");
-
-
-        if (
-            taskResult &&
-            taskResult.success
-        ) {
-
-            tasks =
-                taskResult.tasks || [];
-
-        }
-
-
-        if (
-            testResult &&
-            testResult.success
-        ) {
-
-            tests =
-                testResult.tests || [];
-
-        }
-
-
-        /*
-           Automatically generate the schedule
-           when the page opens.
-        */
-
-        await generateSchedule();
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        showToast(
-            "Couldn't load your Tempo data."
-        );
-
-        renderEmpty(
-            "Something went wrong.",
-            "Tempo couldn't retrieve your tasks and tests."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
-
-function dateOnly(date) {
-
-    return new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-    );
-
-}
-
-
-function formatDate(date) {
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            weekday: "long",
-            month: "long",
-            day: "numeric"
-        }
-    );
-
-}
-
-
-function dateKey(date) {
-
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-
-}
-
-
-function changeDay(amount) {
-
-    selectedDate.setDate(
-        selectedDate.getDate() + amount
-    );
-
-    renderDate();
-
-    generateSchedule();
-
-}
-
-
-function goToday() {
-
-    selectedDate =
-        new Date();
-
-    renderDate();
-
-    generateSchedule();
-
-}
-
-
-function renderDate() {
-
-    document
-        .getElementById("currentDate")
-        .textContent =
-        formatDate(selectedDate);
-
-}
-
-
-/* =========================================================
-   DEADLINE HELPERS
-========================================================= */
-
-function parseDeadline(value) {
-
-    if (!value) {
-        return null;
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return null;
-
-    }
-
-
-    return date;
-
-}
-
-
-/* =========================================================
-   GET UPCOMING TESTS
-========================================================= */
-
-function getUpcomingTests() {
-
-    const today =
-        dateOnly(selectedDate);
-
-
-    return tests
-        .filter(function(test) {
-
-            const date =
-                parseDeadline(test.date);
-
-
-            if (!date) {
-                return false;
-            }
-
-
-            return (
-                dateOnly(date) >= today
-            );
-
-        })
-        .sort(function(a, b) {
-
-            return (
-                parseDeadline(a.date) -
-                parseDeadline(b.date)
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   AI SCHEDULER
-========================================================= */
-
-async function generateSchedule() {
-
-    const container =
-        document.getElementById(
-            "scheduleContainer"
-        );
-
-
-    /*
-       Show loading message.
-    */
-
-    container.innerHTML = `
-
-        <div class="loading">
-
-            ✦ Tempo AI is building
-            your schedule...
-
-        </div>
-
-    `;
-
-
-    try {
-
-        /*
-           Only send unfinished tasks.
-        */
-
-        const unfinishedTasks =
-            tasks.filter(function(task) {
-
-                return !task.completed;
-
-            });
-
-
-        /*
-           Build information for Gemini.
-        */
-
-        const scheduleData = {
-
-            date:
-                dateKey(selectedDate),
-
-            weekday:
-                selectedDate.toLocaleDateString(
-                    "en-US",
-                    {
-                        weekday: "long"
-                    }
-                ),
-
-            tasks:
-                unfinishedTasks,
-
-            tests:
-                getUpcomingTests(),
-
-            availableStart:
-                "17:00",
-
-            availableEnd:
-                "22:00",
-
-            breakMinutes:
-                10
-
-        };
-
-
-        /*
-           Ask the Apps Script backend
-           to use Gemini.
-        */
-
-        const result =
-            await api(
-                "generateSchedule",
-                {
-                    tasks: scheduleData
-                }
-            );
-
-
-        if (
-            !result ||
-            !result.success
-        ) {
-
-            console.error(
-                "AI scheduler error:",
-                result
-            );
-
-
-            renderEmpty(
-                "Tempo AI couldn't build the schedule.",
-                "The AI service may be temporarily unavailable. Try rebuilding the schedule again."
-            );
-
-
-            showToast(
-                "Tempo AI couldn't build the schedule."
-            );
-
-
-            return;
-
-        }
-
-
-        /*
-           The backend returns:
-
-           {
-               schedule: [...]
-           }
-        */
-
-        const aiData =
-            result.data;
-
-
-        if (
-            !aiData ||
-            !Array.isArray(
-                aiData.schedule
-            )
-        ) {
-
-            console.error(
-                "Invalid AI response:",
-                result
-            );
-
-
-            renderEmpty(
-                "Tempo AI returned an invalid schedule.",
-                "Try rebuilding the schedule."
-            );
-
-
-            return;
-
-        }
-
-
-        generatedSchedule =
-            aiData.schedule;
-
-
-        renderSchedule(
-            generatedSchedule,
-            getUpcomingTests()
-        );
-
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-
-        renderEmpty(
-            "Something went wrong.",
-            "Tempo couldn't connect to the AI scheduler."
-        );
-
-
-        showToast(
-            "AI scheduler connection failed."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   RENDER AI SCHEDULE
-========================================================= */
-
-function renderSchedule(
-    schedule,
-    upcomingTests
+async function api(
+  action,
+  data = {}
 ) {
 
-    const container =
-        document.getElementById(
-            "scheduleContainer"
-        );
+  const response =
+    await fetch(
+      API_URL,
+      {
 
+        method: "POST",
 
-    /*
-       Calculate total study time.
-    */
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
 
-    const studyMinutes =
-        schedule.reduce(
-            function(total, item) {
+        body:
+          JSON.stringify({
 
-                return (
-                    total +
-                    Number(
-                        item.minutes || 0
-                    )
-                );
+            action:
+              action,
 
-            },
-            0
-        );
+            ...data
 
+          })
 
-    document
-        .getElementById("studyTime")
-        .textContent =
-        formatMinutes(
-            studyMinutes
-        );
-
-
-    /*
-       Count actual study tasks.
-    */
-
-    document
-        .getElementById("taskCount")
-        .textContent =
-        schedule.length;
-
-
-    /*
-       Calculate urgency.
-    */
-
-    document
-        .getElementById("urgency")
-        .textContent =
-        getUrgency(
-            upcomingTests
-        );
-
-
-    /*
-       Nothing scheduled.
-    */
-
-    if (
-        schedule.length === 0
-    ) {
-
-        renderEmpty(
-            "Your schedule is clear.",
-            "Tempo doesn't have any unfinished work to schedule for this day."
-        );
-
-        return;
-
-    }
-
-
-    let html =
-        '<div class="timeline">';
-
-
-    /*
-       Render each AI-generated block.
-    */
-
-    schedule.forEach(
-        function(item) {
-
-            const subject =
-                item.subject ||
-                "Study";
-
-
-            const task =
-                item.task ||
-                "Study session";
-
-
-            const minutes =
-                Number(
-                    item.minutes || 0
-                );
-
-
-            const start =
-                item.start ||
-                "";
-
-
-            const end =
-                item.end ||
-                "";
-
-
-            const difficulty =
-                item.difficulty ||
-                "";
-
-
-            html += `
-
-                <div class="timeline-item study">
-
-                    <div class="timeline-time">
-
-                        ${escapeHTML(start)}
-
-                    </div>
-
-
-                    <div class="timeline-line"></div>
-
-
-                    <div class="timeline-content">
-
-                        <div class="timeline-title">
-
-                            ${escapeHTML(subject)}
-                            ·
-                            ${escapeHTML(task)}
-
-                        </div>
-
-
-                        <div class="timeline-description">
-
-                            ${escapeHTML(
-                                start +
-                                " – " +
-                                end
-                            )}
-
-                            ·
-
-                            ${minutes} minutes
-
-                        </div>
-
-
-                        <div class="timeline-meta">
-
-                            <span class="tag primary">
-
-                                AI planned
-
-                            </span>
-
-
-                            ${
-                                difficulty
-                                ?
-                                `
-                                <span class="tag">
-
-                                    ${escapeHTML(
-                                        difficulty
-                                    )}
-
-                                </span>
-                                `
-                                :
-                                ""
-                            }
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
+      }
     );
 
 
-    /*
-       Upcoming tests.
-    */
+  if (!response.ok) {
 
-    if (
-        upcomingTests.length > 0
-    ) {
-
-        html += `
-
-            <div
-                style="
-                    margin-top:20px;
-                    padding-top:20px;
-                    border-top:1px solid var(--border);
-                "
-            >
-
-                <div
-                    style="
-                        font-size:12px;
-                        font-weight:800;
-                        margin-bottom:12px;
-                    "
-                >
-
-                    Upcoming tests
-
-                </div>
-
-        `;
-
-
-        upcomingTests
-            .slice(0, 3)
-            .forEach(
-                function(test) {
-
-                    const date =
-                        parseDeadline(
-                            test.date
-                        );
-
-
-                    html += `
-
-                        <div
-                            style="
-                                display:flex;
-                                justify-content:space-between;
-                                padding:10px 0;
-                                border-bottom:1px solid var(--border);
-                                font-size:12px;
-                            "
-                        >
-
-                            <span>
-
-                                📝
-
-                                ${escapeHTML(
-                                    test.subject ||
-                                    ""
-                                )}
-
-                                ·
-
-                                ${escapeHTML(
-                                    test.title ||
-                                    ""
-                                )}
-
-                            </span>
-
-
-                            <span
-                                style="
-                                    color:var(--danger);
-                                    font-weight:700;
-                                "
-                            >
-
-                                ${
-                                    date
-                                    ?
-                                    date.toLocaleDateString(
-                                        "en-US",
-                                        {
-                                            month:"short",
-                                            day:"numeric"
-                                        }
-                                    )
-                                    :
-                                    ""
-                                }
-
-                            </span>
-
-                        </div>
-
-                    `;
-
-                }
-            );
-
-
-        html += "</div>";
-
-    }
-
-
-    html += "</div>";
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-function renderEmpty(
-    title,
-    description
-) {
-
-    document
-        .getElementById(
-            "scheduleContainer"
-        )
-        .innerHTML = `
-
-            <div class="empty">
-
-                <div class="empty-icon">
-
-                    ✦
-
-                </div>
-
-
-                <h2>
-
-                    ${escapeHTML(title)}
-
-                </h2>
-
-
-                <p>
-
-                    ${escapeHTML(description)}
-
-                </p>
-
-            </div>
-
-        `;
-
-}
-
-
-/* =========================================================
-   FORMAT MINUTES
-========================================================= */
-
-function formatMinutes(minutes) {
-
-    minutes =
-        Number(minutes || 0);
-
-
-    if (
-        minutes < 60
-    ) {
-
-        return minutes + "m";
-
-    }
-
-
-    const hours =
-        Math.floor(
-            minutes / 60
-        );
-
-
-    const remaining =
-        minutes % 60;
-
-
-    if (
-        remaining === 0
-    ) {
-
-        return hours + "h";
-
-    }
-
-
-    return (
-        hours +
-        "h " +
-        remaining +
-        "m"
+    throw new Error(
+      "Server request failed."
     );
 
-}
+  }
 
 
-/* =========================================================
-   URGENCY
-========================================================= */
-
-function getUrgency(
-    upcomingTests
-) {
-
-    if (
-        upcomingTests.length === 0
-    ) {
-
-        return "Low";
-
-    }
-
-
-    const nearest =
-        parseDeadline(
-            upcomingTests[0].date
-        );
-
-
-    if (!nearest) {
-
-        return "Normal";
-
-    }
-
-
-    const days =
-        Math.ceil(
-            (
-                dateOnly(nearest) -
-                dateOnly(selectedDate)
-            ) /
-            86400000
-        );
-
-
-    if (
-        days <= 1
-    ) {
-
-        return "High";
-
-    }
-
-
-    if (
-        days <= 3
-    ) {
-
-        return "Medium";
-
-    }
-
-
-    return "Low";
+  return await response.json();
 
 }
 
 
 /* =========================================================
-   SECURITY
+   HTML ESCAPE
 ========================================================= */
 
 function escapeHTML(value) {
 
-    return String(value || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+  return String(value ?? "")
+
+    .replaceAll("&", "&amp;")
+
+    .replaceAll("<", "&lt;")
+
+    .replaceAll(">", "&gt;")
+
+    .replaceAll('"', "&quot;")
+
+    .replaceAll("'", "&#039;");
 
 }
 
 
 /* =========================================================
-   NAVIGATION
+   TODAY
 ========================================================= */
 
-function goHome() {
+function setDefaultDate() {
 
-    window.location.href =
+  const input =
+    document.getElementById("date");
+
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+
+  input.value =
+    `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================================
+   WEEKDAY
+========================================================= */
+
+function getWeekday(dateString) {
+
+  const date =
+    new Date(
+      dateString + "T12:00:00"
+    );
+
+
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      weekday: "long"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOAD TASKS
+========================================================= */
+
+async function loadTasks() {
+
+  const container =
+    document.getElementById(
+      "taskPreview"
+    );
+
+
+  try {
+
+    const result =
+      await api(
+        "getTasks",
+        {
+          token: token
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        localStorage.removeItem(
+          "tempoToken"
+        );
+
+        window.location.href =
+          "index.html";
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not load tasks."
+      );
+
+    }
+
+
+    const tasks =
+      result.tasks || [];
+
+
+    const unfinished =
+      tasks.filter(
+        task =>
+          !task.completed
+      );
+
+
+    if (!unfinished.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          You have no unfinished tasks.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      unfinished
+        .map(task => {
+
+          return `
+
+            <div class="preview-item">
+
+              <span>
+
+                <strong>
+                  ${escapeHTML(
+                    task.subject
+                  )}
+                </strong>
+
+                ·
+
+                ${escapeHTML(
+                  task.title
+                )}
+
+              </span>
+
+              <span>
+
+                ${Number(
+                  task.minutes || 0
+                )} min
+
+              </span>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+  }
+
+  catch(error) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        ${escapeHTML(
+          error.message
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD TESTS
+========================================================= */
+
+async function loadTests() {
+
+  const result =
+    await api(
+      "getTests",
+      {
+        token: token
+      }
+    );
+
+
+  if (!result.success) {
+
+    if (
+      result.error ===
+      "UNAUTHORIZED"
+    ) {
+
+      localStorage.removeItem(
+        "tempoToken"
+      );
+
+      window.location.href =
         "index.html";
 
-}
+      return [];
+
+    }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
+    throw new Error(
+      result.error ||
+      "Could not load tests."
     );
 
+  }
 
-    setTimeout(
-        function() {
 
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2500
-    );
+  return result.tests || [];
 
 }
 
 
 /* =========================================================
-   START TEMPO
+   GENERATE SCHEDULE
 ========================================================= */
 
-renderDate();
+async function generateSchedule() {
 
-loadData();
+  const button =
+    document.getElementById(
+      "generateButton"
+    );
+
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  const scheduleContainer =
+    document.getElementById(
+      "schedule"
+    );
+
+
+  const date =
+    document.getElementById(
+      "date"
+    ).value;
+
+
+  const availableStart =
+    document.getElementById(
+      "availableStart"
+    ).value;
+
+
+  const availableEnd =
+    document.getElementById(
+      "availableEnd"
+    ).value;
+
+
+  const breakMinutes =
+    Number(
+      document.getElementById(
+        "breakMinutes"
+      ).value || 0
+    );
+
+
+  if (!date) {
+
+    showStatus(
+      "Choose a date first.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !availableStart ||
+    !availableEnd
+  ) {
+
+    showStatus(
+      "Choose your available study time.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (
+    availableStart >=
+    availableEnd
+  ) {
+
+    showStatus(
+      "Your end time must be later than your start time.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "Generating...";
+
+
+  showStatus(
+    "Tempo is building your schedule..."
+  );
+
+
+  scheduleContainer.innerHTML = `
+
+    <div class="loading">
+      Thinking...
+    </div>
+
+  `;
+
+
+  try {
+
+    /* -----------------------------------------
+       GET TASKS
+    ----------------------------------------- */
+
+    const taskResult =
+      await api(
+        "getTasks",
+        {
+          token: token
+        }
+      );
+
+
+    if (!taskResult.success) {
+
+      throw new Error(
+        taskResult.error ||
+        "Could not load tasks."
+      );
+
+    }
+
+
+    const allTasks =
+      taskResult.tasks || [];
+
+
+    const unfinishedTasks =
+      allTasks.filter(
+        task =>
+          !task.completed
+      );
+
+
+    /* -----------------------------------------
+       GET TESTS
+    ----------------------------------------- */
+
+    const tests =
+      await loadTests();
+
+
+    /* -----------------------------------------
+       SEND TO AI
+    ----------------------------------------- */
+
+    const result =
+      await api(
+        "generateSchedule",
+        {
+
+          tasks: {
+
+            date:
+              date,
+
+            weekday:
+              getWeekday(date),
+
+            availableStart:
+              availableStart,
+
+            availableEnd:
+              availableEnd,
+
+            breakMinutes:
+              breakMinutes,
+
+            tasks:
+              unfinishedTasks,
+
+            tests:
+              tests
+
+          }
+
+        }
+      );
+
+
+    if (!result.success) {
+
+      throw new Error(
+        result.error ||
+        "The AI could not generate a schedule."
+      );
+
+    }
+
+
+    const scheduleData =
+      result.data;
+
+
+    const schedule =
+      scheduleData.schedule ||
+      [];
+
+
+    displaySchedule(
+      schedule
+    );
+
+
+    showStatus(
+      "Your schedule is ready."
+    );
+
+  }
+
+
+  catch(error) {
+
+    scheduleContainer.innerHTML = `
+
+      <div class="empty">
+
+        Could not generate the schedule.
+
+      </div>
+
+    `;
+
+
+    showStatus(
+      error.message ||
+      "Something went wrong.",
+      true
+    );
+
+  }
+
+
+  finally {
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Generate AI Schedule";
+
+  }
+
+}
+
+
+/* =========================================================
+   DISPLAY SCHEDULE
+========================================================= */
+
+function displaySchedule(
+  schedule
+) {
+
+  const container =
+    document.getElementById(
+      "schedule"
+    );
+
+
+  if (
+    !Array.isArray(schedule) ||
+    schedule.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        Tempo couldn't find any study sessions
+        for this time period.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const totalMinutes =
+    schedule.reduce(
+      (
+        total,
+        item
+      ) =>
+        total +
+        Number(
+          item.minutes || 0
+        ),
+      0
+    );
+
+
+  container.innerHTML = `
+
+    <div class="summary">
+
+      <div class="summary-item">
+
+        ${schedule.length}
+        session${schedule.length === 1 ? "" : "s"}
+
+      </div>
+
+      <div class="summary-item">
+
+        ${totalMinutes}
+        minutes of study
+
+      </div>
+
+    </div>
+
+
+    <div class="schedule">
+
+      ${
+        schedule
+          .map(item => {
+
+            return `
+
+              <div class="schedule-item">
+
+                <div class="time">
+
+                  ${escapeHTML(
+                    item.start || ""
+                  )}
+
+                  <br>
+
+                  ${escapeHTML(
+                    item.end || ""
+                  )}
+
+                </div>
+
+
+                <div class="schedule-main">
+
+                  <div class="schedule-subject">
+
+                    ${escapeHTML(
+                      item.subject || "Study"
+                    )}
+
+                  </div>
+
+                  <div class="schedule-task">
+
+                    ${escapeHTML(
+                      item.task || "Study"
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                <div class="schedule-minutes">
+
+                  ${Number(
+                    item.minutes || 0
+                  )} min
+
+                </div>
+
+              </div>
+
+            `;
+
+          })
+          .join("")
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function showStatus(
+  message,
+  error = false
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "status " +
+    (
+      error
+        ? "error"
+        : "success"
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+setDefaultDate();
+
+loadTasks();
 
 </script>
 
-
 </body>
-
 </html>

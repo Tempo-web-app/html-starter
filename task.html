@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tempo - Tasks</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f8fa;
+  color: #171717;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: #555;
+
+  padding: 9px 14px;
+
+  border-radius: 9px;
+}
+
+nav a:hover,
+nav a.active {
+  background: #f0f1f3;
+  color: #111;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #666;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  padding: 24px;
+
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin-bottom: 18px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+
+  padding: 12px;
+
+  border: 1px solid #d6d9de;
+
+  border-radius: 9px;
+
+  font-size: 15px;
+
+  background: white;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 12px 18px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: #111;
+  color: white;
+}
+
+.primary:hover {
+  opacity: 0.85;
+}
+
+.secondary {
+  background: #f0f1f3;
+  color: #222;
+}
+
+.complete-button {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+  margin-top: 15px;
+
+  padding: 12px;
+
+  border-radius: 9px;
+
+  display: none;
+}
+
+.status.success {
+  display: block;
+
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.error {
+  display: block;
+
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =========================
+   TASK LIST
+========================= */
+
+.task-item {
+  padding: 18px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.task-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.task-subject {
+  margin-top: 5px;
+
+  font-size: 14px;
+
+  color: #666;
+}
+
+.task-info {
+  margin-top: 10px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.badge {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #f0f1f3;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.badge.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge.medium {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.badge.low {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.task-actions {
+  margin-top: 12px;
+
+  display: flex;
+
+  gap: 8px;
+}
+
+/* =========================
+   EMPTY / LOADING
+========================= */
+
+.empty {
+  text-align: center;
+
+  padding: 40px;
+
+  color: #777;
+}
+
+.loading {
+  text-align: center;
+
+  padding: 30px;
+
+  color: #777;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+  header {
+    height: auto;
+
+    padding: 16px;
+
+    gap: 12px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .task-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    Tempo
+  </div>
+
+  <nav>
+
+    <a href="dashboard.html">
+      Dashboard
+    </a>
+
+    <a
+      href="tasks.html"
+      class="active"
+    >
+      Tasks
+    </a>
+
+    <a href="tests.html">
+      Tests
+    </a>
+
+    <a href="schedule.html">
+      Schedule
+    </a>
+
+    <a href="share.html">
+      Share
+    </a>
+
+  </nav>
+
+</header>
+
+
+<main class="container">
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <h1>
+      Tasks
+    </h1>
+
+    <p>
+      Keep track of what you need to get done.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       CREATE TASK
+  ========================== -->
+
+  <section class="card">
+
+    <h2>
+      Add a task
+    </h2>
+
+
+    <div class="form">
+
+
+      <div class="field">
+
+        <label for="subject">
+          Subject
+        </label>
+
+        <input
+          id="subject"
+          type="text"
+          placeholder="Math"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="title">
+          Task
+        </label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="Algebra worksheet"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="deadline">
+          Deadline
+        </label>
+
+        <input
+          id="deadline"
+          type="datetime-local"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="difficulty">
+          Difficulty
+        </label>
+
+        <select id="difficulty">
+
+          <option value="Easy">
+            Easy
+          </option>
+
+          <option
+            value="Medium"
+            selected
+          >
+            Medium
+          </option>
+
+          <option value="Hard">
+            Hard
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="minutes">
+          Estimated minutes
+        </label>
+
+        <input
+          id="minutes"
+          type="number"
+          min="1"
+          max="600"
+          placeholder="30"
+        >
+
+      </div>
+
+
+      <div
+        class="field"
+        style="justify-content:end;"
+      >
+
+        <button
+          id="createButton"
+          class="primary"
+          onclick="createTask()"
+        >
+          Add Task
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================
+       TASK LIST
+  ========================== -->
+
+  <section class="card">
+
+    <h2>
+      Your tasks
+    </h2>
+
+    <div id="tasks">
+
+      <div class="loading">
+        Loading tasks...
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+const token =
+  localStorage.getItem(
+    "tempoToken"
+  );
+
+
+if (!token) {
+
+  showFatalError(
+    "You are not logged in. Please return to Tempo."
+  );
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function api(
+  action,
+  data = {}
+) {
+
+  const response =
+    await fetch(
+      API_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify({
+            action: action,
+            ...data
+          })
+      }
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Tempo server returned HTTP " +
+      response.status
+    );
+
+  }
+
+
+  return await response.json();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   CREATE TASK
+========================================================= */
+
+async function createTask() {
+
+  const subject =
+    document
+      .getElementById("subject")
+      .value
+      .trim();
+
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+
+  const deadline =
+    document
+      .getElementById("deadline")
+      .value;
+
+
+  const difficulty =
+    document
+      .getElementById("difficulty")
+      .value;
+
+
+  const minutes =
+    Number(
+      document
+        .getElementById("minutes")
+        .value
+    );
+
+
+  if (!subject) {
+
+    showStatus(
+      "Enter a subject.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!title) {
+
+    showStatus(
+      "Enter a task name.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!deadline) {
+
+    showStatus(
+      "Choose a deadline.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!minutes || minutes <= 0) {
+
+    showStatus(
+      "Enter an estimated study time.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "createButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Adding...";
+
+
+  try {
+
+    const result =
+      await api(
+        "createTask",
+        {
+
+          token:
+            token,
+
+          subject:
+            subject,
+
+          title:
+            title,
+
+          deadline:
+            new Date(deadline)
+              .toISOString(),
+
+          difficulty:
+            difficulty,
+
+          minutes:
+            minutes
+
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not create task."
+      );
+
+    }
+
+
+    showStatus(
+      "Task added successfully!"
+    );
+
+
+    document
+      .getElementById("subject")
+      .value = "";
+
+
+    document
+      .getElementById("title")
+      .value = "";
+
+
+    document
+      .getElementById("deadline")
+      .value = "";
+
+
+    document
+      .getElementById("minutes")
+      .value = "";
+
+
+    await loadTasks();
+
+  }
+
+
+  catch(error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+
+  }
+
+
+  finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Add Task";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD TASKS
+========================================================= */
+
+async function loadTasks() {
+
+  const container =
+    document.getElementById(
+      "tasks"
+    );
+
+
+  container.innerHTML =
+    `<div class="loading">
+      Loading tasks...
+    </div>`;
+
+
+  try {
+
+    const result =
+      await api(
+        "getTasks",
+        {
+          token:
+            token
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not load tasks."
+      );
+
+    }
+
+
+    const tasks =
+      Array.isArray(result.tasks)
+        ? result.tasks
+        : [];
+
+
+    if (tasks.length === 0) {
+
+      container.innerHTML =
+        `<div class="empty">
+          No tasks yet. Add your first task above.
+        </div>`;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      tasks
+        .slice()
+        .reverse()
+        .map(function(task) {
+
+          return renderTask(task);
+
+        })
+        .join("");
+
+  }
+
+
+  catch(error) {
+
+    container.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER TASK
+========================================================= */
+
+function renderTask(task) {
+
+  const difficulty =
+    String(
+      task.difficulty ||
+      "Medium"
+    );
+
+
+  const difficultyClass =
+    difficulty
+      .toLowerCase();
+
+
+  const completed =
+    Boolean(
+      task.completed
+    );
+
+
+  let deadlineText =
+    "No deadline";
+
+
+  if (task.deadline) {
+
+    const date =
+      new Date(
+        task.deadline
+      );
+
+
+    if (!isNaN(date)) {
+
+      deadlineText =
+        date.toLocaleString();
+
+    }
+
+  }
+
+
+  return `
+
+    <div class="task-item">
+
+      <div class="task-top">
+
+        <div>
+
+          <div class="task-title">
+
+            ${escapeHTML(
+              task.title ||
+              "Untitled task"
+            )}
+
+          </div>
+
+
+          <div class="task-subject">
+
+            ${escapeHTML(
+              task.subject ||
+              "No subject"
+            )}
+
+          </div>
+
+        </div>
+
+
+        ${
+          completed
+
+          ? `
+            <div class="badge completed">
+              Completed
+            </div>
+          `
+
+          : `
+            <div class="badge">
+              In progress
+            </div>
+          `
+        }
+
+      </div>
+
+
+      <div class="task-info">
+
+        <div class="badge">
+          Deadline:
+          ${escapeHTML(
+            deadlineText
+          )}
+        </div>
+
+
+        <div class="badge">
+          ${escapeHTML(
+            task.minutes
+          )} min
+        </div>
+
+
+        <div
+          class="badge ${escapeHTML(
+            difficultyClass
+          )}"
+        >
+          ${escapeHTML(
+            difficulty
+          )}
+        </div>
+
+      </div>
+
+
+      ${
+        !completed
+
+        ? `
+
+          <div class="task-actions">
+
+            <button
+              class="primary complete-button"
+              onclick="completeTask('${escapeHTML(task.taskID)}')"
+            >
+              Mark Complete
+            </button>
+
+          </div>
+
+        `
+
+        : `
+
+          <div class="task-actions">
+
+            <button
+              class="secondary complete-button"
+              onclick="completeTask('${escapeHTML(task.taskID)}', false)"
+            >
+              Mark Incomplete
+            </button>
+
+          </div>
+
+        `
+
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   COMPLETE / UNCOMPLETE TASK
+========================================================= */
+
+async function completeTask(
+  taskID,
+  completed = true
+) {
+
+  try {
+
+    const result =
+      await api(
+        "completeTask",
+        {
+
+          token:
+            token,
+
+          taskID:
+            taskID,
+
+          completed:
+            completed
+
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not update task."
+      );
+
+    }
+
+
+    await loadTasks();
+
+  }
+
+
+  catch(error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function showStatus(
+  message,
+  error = false
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "status " +
+    (
+      error
+        ? "error"
+        : "success"
+    );
+
+}
+
+
+/* =========================================================
+   UNAUTHORIZED
+========================================================= */
+
+function handleUnauthorized() {
+
+  localStorage.removeItem(
+    "tempoToken"
+  );
+
+
+  showFatalError(
+    "Your Tempo session expired. Please log in again."
+  );
+
+}
+
+
+/* =========================================================
+   FATAL ERROR
+========================================================= */
+
+function showFatalError(message) {
+
+  const container =
+    document.getElementById(
+      "tasks"
+    );
+
+
+  if (container) {
+
+    container.innerHTML = `
+      <div class="empty">
+        ${escapeHTML(message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if (token) {
+
+  loadTasks();
+
+}
+
+</script>
+
+</body>
+</html>

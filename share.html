@@ -1,546 +1,1050 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Tempo Profile</title>
+<title>Tempo - Share</title>
 
 <style>
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    background: #f7f8fc;
-
-    color: #17191c;
-
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 25px;
-
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f8fa;
+  color: #171717;
 }
 
-.card {
-
-    width: 100%;
-
-    max-width: 520px;
-
-    background: white;
-
-    border:
-        1px solid #e8e8ee;
-
-    border-radius: 24px;
-
-    padding: 35px;
-
-    box-shadow:
-        0 15px 50px
-        rgba(20,20,40,.08);
-
+header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
 }
 
 .logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    font-size: 21px;
-
-    font-weight: 800;
-
+  font-size: 24px;
+  font-weight: 800;
 }
 
-.logo-mark {
-
-    width: 34px;
-
-    height: 34px;
-
-    border-radius: 10px;
-
-    background: #6657e8;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.profile {
-
-    text-align: center;
-
-    margin-top: 35px;
-
+nav a {
+  text-decoration: none;
+  color: #555;
+  padding: 9px 14px;
+  border-radius: 9px;
 }
 
-.avatar {
-
-    width: 75px;
-
-    height: 75px;
-
-    border-radius: 50%;
-
-    background: #efedff;
-
-    color: #6657e8;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 28px;
-
-    font-weight: 800;
-
-    margin: auto;
-
+nav a:hover,
+nav a.active {
+  background: #f0f1f3;
+  color: #111;
 }
 
-h1 {
-
-    margin-top: 15px;
-
-    font-size: 27px;
-
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.username {
+.hero {
+  margin-bottom: 28px;
+}
 
-    color: #737681;
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
 
-    margin-top: 4px;
+.hero p {
+  color: #666;
+}
 
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin-bottom: 18px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d6d9de;
+  border-radius: 9px;
+  font-size: 15px;
+  background: white;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary {
+  background: #111;
+  color: white;
+}
+
+.primary:hover {
+  opacity: 0.85;
+}
+
+.secondary {
+  background: #f0f1f3;
+  color: #222;
+}
+
+.status {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 9px;
+  display: none;
+}
+
+.status.success {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.error {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.share-item {
+  padding: 18px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.share-item:last-child {
+  border-bottom: none;
+}
+
+.share-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.user {
+  font-weight: 700;
+}
+
+.task {
+  margin-top: 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f0f1f3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge.pending {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.badge.accepted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  padding: 35px;
+  color: #777;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px;
+}
+
+@media(max-width:700px) {
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    height: auto;
+    padding: 16px;
+    gap: 12px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  nav a {
     font-size: 13px;
+  }
 
-}
-
-.stats {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 10px;
-
-    margin-top: 28px;
-
-}
-
-.stat {
-
-    background: #f7f8fc;
-
-    padding: 17px 10px;
-
-    border-radius: 13px;
-
-    text-align: center;
-
-}
-
-.value {
-
-    font-size: 21px;
-
-    font-weight: 800;
-
-}
-
-.label {
-
-    margin-top: 4px;
-
-    color: #737681;
-
-    font-size: 10px;
-
-}
-
-.footer {
-
-    text-align: center;
-
-    color: #a2a4ad;
-
-    font-size: 11px;
-
-    margin-top: 30px;
-
-}
-
-.error {
-
-    text-align: center;
-
-    color: #e05252;
-
-    padding: 40px 10px;
-
-}
-
-@media(max-width:450px) {
-
-    .stats {
-
-        grid-template-columns: 1fr;
-    }
+  .share-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<header>
 
-<div class="card">
+  <div class="logo">
+    Tempo
+  </div>
 
-    <div class="logo">
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="tests.html">Tests</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="share.html" class="active">Share</a>
+  </nav>
 
-        <div class="logo-mark">
-            T
-        </div>
-
-        Tempo
-
-    </div>
-
-
-    <div id="loading">
-        Loading profile...
-    </div>
+</header>
 
 
-    <div
-        id="profile"
-        style="display:none;"
-    >
+<main class="container">
 
-        <div class="profile">
+  <section class="hero">
 
-            <div
-                class="avatar"
-                id="avatar"
-            >
-                ?
-            </div>
+    <h1>Share Tasks</h1>
 
-            <h1 id="displayName">
-                User
-            </h1>
+    <p>
+      Send tasks to other Tempo users and manage shared assignments.
+    </p>
 
-            <div
-                class="username"
-                id="username"
-            >
-                @user
-            </div>
-
-        </div>
+  </section>
 
 
-        <div class="stats">
+  <section class="card">
 
-            <div class="stat">
+    <h2>Share a task</h2>
 
-                <div
-                    class="value"
-                    id="taskCount"
-                >
-                    0
-                </div>
+    <div class="form">
 
-                <div class="label">
-                    Tasks
-                </div>
+      <div class="field">
 
-            </div>
+        <label for="username">
+          Tempo username
+        </label>
 
+        <input
+          id="username"
+          type="text"
+          placeholder="username"
+          autocomplete="off"
+        >
 
-            <div class="stat">
-
-                <div
-                    class="value"
-                    id="completedCount"
-                >
-                    0
-                </div>
-
-                <div class="label">
-                    Completed
-                </div>
-
-            </div>
+      </div>
 
 
-            <div class="stat">
+      <div class="field">
 
-                <div
-                    class="value"
-                    id="studyMinutes"
-                >
-                    0
-                </div>
+        <label for="task">
+          Task
+        </label>
 
-                <div class="label">
-                    Study Minutes
-                </div>
+        <select id="task">
 
-            </div>
+          <option value="">
+            Loading tasks...
+          </option>
 
-        </div>
+        </select>
+
+      </div>
 
 
-        <div class="footer">
-            Powered by Tempo · Giving People Their Time Back
-        </div>
+      <button
+        id="shareButton"
+        class="primary"
+        onclick="shareTask()"
+      >
+        Share
+      </button>
 
     </div>
 
 
     <div
-        id="error"
-        class="error"
-        style="display:none;"
-    >
-        Profile not found.
+      id="status"
+      class="status"
+    ></div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Your shared tasks</h2>
+
+    <div id="shares">
+
+      <div class="loading">
+        Loading shares...
+      </div>
+
     </div>
 
-</div>
+  </section>
 
+</main>
 
 
 <script>
 
+/* =========================================================
+   TEMPO API
+========================================================= */
+
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+  "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
 
-const params =
-new URLSearchParams(
-    window.location.search
-);
+/* =========================================================
+   SESSION
+========================================================= */
+
+const token =
+  localStorage.getItem("tempoToken");
 
 
-const username =
-params.get("user");
+if (!token) {
 
-
-async function api(
-    action,
-    data = {}
-) {
-
-    const response =
-        await fetch(
-            API_URL,
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-
-                },
-
-                body:
-                    JSON.stringify({
-
-                        action,
-
-                        username,
-
-                        ...data
-
-                    })
-
-            }
-        );
-
-
-    return await response.json();
+  showFatalError(
+    "You are not logged in. Please return to the Tempo login page."
+  );
 
 }
 
 
-async function loadProfile() {
+/* =========================================================
+   API REQUEST
+========================================================= */
 
-    if (!username) {
+async function api(action, data = {}) {
 
-        showError();
+  const response =
+    await fetch(
+      API_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify({
+          action: action,
+          ...data
+        })
+      }
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Tempo server returned HTTP " +
+      response.status
+    );
+
+  }
+
+
+  const result =
+    await response.json();
+
+
+  return result;
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   LOAD TASKS
+========================================================= */
+
+async function loadTasks() {
+
+  const select =
+    document.getElementById("task");
+
+
+  try {
+
+    const result =
+      await api(
+        "getTasks",
+        {
+          token: token
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
 
         return;
 
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not load tasks."
+      );
+
     }
 
 
-    try {
-
-        const tasks =
-            await api(
-                "getTasks"
-            );
+    const tasks =
+      Array.isArray(result.tasks)
+        ? result.tasks
+        : [];
 
 
-        const sessions =
-            await api(
-                "getSessions"
-            );
+    if (tasks.length === 0) {
+
+      select.innerHTML =
+        `<option value="">
+          No tasks available
+        </option>`;
+
+      return;
+
+    }
 
 
-        if (
-            !tasks.success ||
-            !sessions.success
-        ) {
+    select.innerHTML =
+      tasks
+        .map(function(task) {
 
-            showError();
+          const title =
+            task.title ||
+            "Untitled task";
 
-            return;
 
+          const completed =
+            task.completed
+              ? " ✓"
+              : "";
+
+
+          return `
+            <option value="${escapeHTML(task.taskID)}">
+              ${escapeHTML(title)}${completed}
+            </option>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  catch(error) {
+
+    select.innerHTML =
+      `<option value="">
+        Failed to load tasks
+      </option>`;
+
+
+    showStatus(
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SHARE TASK
+========================================================= */
+
+async function shareTask() {
+
+  const username =
+    document
+      .getElementById("username")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const taskID =
+    document
+      .getElementById("task")
+      .value;
+
+
+  if (!username) {
+
+    showStatus(
+      "Enter the username of the person you want to share with.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!taskID) {
+
+    showStatus(
+      "Choose a task first.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "shareButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Sharing...";
+
+
+  try {
+
+    const result =
+      await api(
+        "shareTask",
+        {
+          token: token,
+          targetUsername: username,
+          taskID: taskID
         }
+      );
 
 
-        const taskList =
-            tasks.tasks;
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
 
 
-        const completed =
-            taskList.filter(
-                task => task.completed === true
-            ).length;
+      const errors = {
+
+        USER_NOT_FOUND:
+          "That Tempo user does not exist.",
+
+        CANNOT_SHARE_WITH_SELF:
+          "You cannot share a task with yourself.",
+
+        TASK_NOT_FOUND:
+          "That task could not be found."
+
+      };
 
 
-        const totalMinutes =
-            sessions.sessions.reduce(
-                (
-                    total,
-                    session
-                ) =>
-                    total +
-                    Number(session.minutes || 0),
-                0
-            );
-
-
-        document.getElementById(
-            "displayName"
-        ).textContent =
-            username;
-
-
-        document.getElementById(
-            "username"
-        ).textContent =
-            "@" + username;
-
-
-        document.getElementById(
-            "avatar"
-        ).textContent =
-            username
-                .charAt(0)
-                .toUpperCase();
-
-
-        document.getElementById(
-            "taskCount"
-        ).textContent =
-            taskList.length;
-
-
-        document.getElementById(
-            "completedCount"
-        ).textContent =
-            completed;
-
-
-        document.getElementById(
-            "studyMinutes"
-        ).textContent =
-            totalMinutes;
-
-
-        document.getElementById(
-            "loading"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "profile"
-        ).style.display =
-            "block";
-
-
-    } catch (error) {
-
-        showError();
+      throw new Error(
+        errors[result.error] ||
+        result.error ||
+        "Could not share the task."
+      );
 
     }
 
+
+    showStatus(
+      "Task shared successfully!"
+    );
+
+
+    document
+      .getElementById("username")
+      .value = "";
+
+
+    await loadShares();
+
+  }
+
+
+  catch(error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+
+  }
+
+
+  finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Share";
+
+  }
+
 }
 
 
-function showError() {
+/* =========================================================
+   LOAD SHARES
+========================================================= */
 
+async function loadShares() {
+
+  const container =
     document.getElementById(
-        "loading"
-    ).style.display =
-        "none";
+      "shares"
+    );
 
 
-    document.getElementById(
-        "error"
-    ).style.display =
-        "block";
+  container.innerHTML =
+    `<div class="loading">
+      Loading shares...
+    </div>`;
+
+
+  try {
+
+    const result =
+      await api(
+        "getShares",
+        {
+          token: token
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not load shares."
+      );
+
+    }
+
+
+    const shares =
+      Array.isArray(result.shares)
+        ? result.shares
+        : [];
+
+
+    if (shares.length === 0) {
+
+      container.innerHTML =
+        `<div class="empty">
+          No shared tasks yet.
+        </div>`;
+
+      return;
+
+    }
+
+
+    const currentUsername =
+      getCurrentUsername();
+
+
+    container.innerHTML =
+      shares
+        .slice()
+        .reverse()
+        .map(function(share) {
+
+          const incoming =
+            String(share.toUser)
+              .toLowerCase() ===
+            currentUsername;
+
+
+          const status =
+            String(
+              share.status || ""
+            ).toLowerCase();
+
+
+          return `
+
+            <div class="share-item">
+
+              <div class="share-top">
+
+                <div>
+
+                  <div class="user">
+
+                    ${
+                      incoming
+                        ? "From: " +
+                          escapeHTML(
+                            share.fromUser
+                          )
+                        : "To: " +
+                          escapeHTML(
+                            share.toUser
+                          )
+                    }
+
+                  </div>
+
+
+                  <div class="task">
+
+                    Task ID:
+                    ${escapeHTML(
+                      share.taskID
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="badge ${escapeHTML(status)}"
+                >
+
+                  ${escapeHTML(status)}
+
+                </div>
+
+              </div>
+
+
+              ${
+                incoming &&
+                status === "pending"
+
+                ? `
+
+                  <div class="actions">
+
+                    <button
+                      class="primary"
+                      onclick="acceptShare('${escapeHTML(share.shareID)}')"
+                    >
+                      Accept
+                    </button>
+
+                  </div>
+
+                `
+
+                : ""
+
+              }
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  catch(error) {
+
+    container.innerHTML =
+      `<div class="empty">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+  }
 
 }
 
 
-loadProfile();
+/* =========================================================
+   CURRENT USER
+========================================================= */
+
+function getCurrentUsername() {
+
+  return (
+    localStorage.getItem(
+      "tempoUsername"
+    ) ||
+
+    localStorage.getItem(
+      "username"
+    ) ||
+
+    ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   ACCEPT SHARE
+========================================================= */
+
+async function acceptShare(shareID) {
+
+  try {
+
+    showStatus(
+      "Accepting shared task..."
+    );
+
+
+    const result =
+      await api(
+        "acceptShare",
+        {
+          token: token,
+          shareID: shareID
+        }
+      );
+
+
+    if (!result.success) {
+
+      if (
+        result.error ===
+        "UNAUTHORIZED"
+      ) {
+
+        handleUnauthorized();
+
+        return;
+
+      }
+
+
+      throw new Error(
+        result.error ||
+        "Could not accept the share."
+      );
+
+    }
+
+
+    showStatus(
+      "Shared task accepted!"
+    );
+
+
+    await loadShares();
+
+  }
+
+
+  catch(error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function showStatus(
+  message,
+  error = false
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "status " +
+    (
+      error
+        ? "error"
+        : "success"
+    );
+
+}
+
+
+/* =========================================================
+   UNAUTHORIZED
+========================================================= */
+
+function handleUnauthorized() {
+
+  localStorage.removeItem(
+    "tempoToken"
+  );
+
+
+  showFatalError(
+    "Your Tempo session expired. Please log in again."
+  );
+
+}
+
+
+/* =========================================================
+   FATAL ERROR
+========================================================= */
+
+function showFatalError(message) {
+
+  const container =
+    document.getElementById(
+      "shares"
+    );
+
+
+  if (container) {
+
+    container.innerHTML = `
+      <div class="empty">
+        ${escapeHTML(message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if (token) {
+
+  loadTasks();
+
+  loadShares();
+
+}
 
 </script>
 
