@@ -1068,7 +1068,6 @@ h1 {
 ></div>
 
 
-
 <script>
 
 /* =========================================================
@@ -1076,15 +1075,14 @@ h1 {
 ========================================================= */
 
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoa3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let selectedDate =
-    new Date();
+let selectedDate = new Date();
 
 let tasks = [];
 
@@ -1099,11 +1097,6 @@ let generatedSchedule = [];
 
 function getToken() {
 
-    /*
-       This checks several common keys so the page
-       can work with the login page you've already made.
-    */
-
     return (
         localStorage.getItem("tempoToken") ||
         localStorage.getItem("token") ||
@@ -1116,13 +1109,11 @@ function getToken() {
 
 function requireLogin() {
 
-    const token =
-        getToken();
+    const token = getToken();
 
     if (!token) {
 
-        window.location.href =
-            "index.html";
+        window.location.href = "index.html";
 
         return false;
 
@@ -1139,49 +1130,39 @@ function requireLogin() {
 
 async function api(action, extra = {}) {
 
-    const token =
-        getToken();
+    const token = getToken();
+
+    const response = await fetch(
+        API_URL,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify({
+                action: action,
+                token: token,
+                ...extra
+            })
+        }
+    );
 
 
-    const response =
-        await fetch(
-            API_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify({
-                        action: action,
-                        token: token,
-                        ...extra
-                    })
-            }
-        );
+    const data = await response.json();
 
 
-    const data =
-        await response.json();
+    if (data.error === "UNAUTHORIZED") {
 
+        localStorage.removeItem("tempoToken");
 
-    if (
-        data.error === "UNAUTHORIZED"
-    ) {
+        localStorage.removeItem("token");
 
-        localStorage.removeItem(
-            "tempoToken"
-        );
+        localStorage.removeItem("tempo_token");
 
-        localStorage.removeItem(
-            "token"
-        );
-
-        window.location.href =
-            "index.html";
+        window.location.href = "index.html";
 
         return null;
 
@@ -1194,7 +1175,7 @@ async function api(action, extra = {}) {
 
 
 /* =========================================================
-   LOAD DATA
+   LOAD USER DATA
 ========================================================= */
 
 async function loadData() {
@@ -1206,16 +1187,12 @@ async function loadData() {
 
     try {
 
-        const [
-            taskResult,
-            testResult
-        ] = await Promise.all([
+        const taskResult =
+            await api("getTasks");
 
-            api("getTasks"),
 
-            api("getTests")
-
-        ]);
+        const testResult =
+            await api("getTests");
 
 
         if (
@@ -1240,11 +1217,16 @@ async function loadData() {
         }
 
 
-        generateSchedule();
+        /*
+           Automatically generate the schedule
+           when the page opens.
+        */
+
+        await generateSchedule();
 
     }
 
-    catch(error) {
+    catch (error) {
 
         console.error(error);
 
@@ -1347,7 +1329,7 @@ function renderDate() {
 
 
 /* =========================================================
-   DEADLINE PARSING
+   DEADLINE HELPERS
 ========================================================= */
 
 function parseDeadline(value) {
@@ -1378,164 +1360,37 @@ function parseDeadline(value) {
 
 
 /* =========================================================
-   PRIORITY
+   GET UPCOMING TESTS
 ========================================================= */
 
-function calculatePriority(task) {
+function getUpcomingTests() {
 
-    const deadline =
-        parseDeadline(
-            task.deadline
-        );
+    const today =
+        dateOnly(selectedDate);
 
 
-    let score = 0;
+    return tests
+        .filter(function(test) {
+
+            const date =
+                parseDeadline(test.date);
 
 
-    if (deadline) {
-
-        const today =
-            dateOnly(
-                selectedDate
-            );
-
-        const deadlineDay =
-            dateOnly(
-                deadline
-            );
-
-
-        const days =
-            Math.ceil(
-                (
-                    deadlineDay -
-                    today
-                ) /
-                86400000
-            );
-
-
-        if (days <= 0) {
-
-            score += 100;
-
-        }
-
-        else if (days === 1) {
-
-            score += 80;
-
-        }
-
-        else if (days === 2) {
-
-            score += 65;
-
-        }
-
-        else if (days <= 4) {
-
-            score += 50;
-
-        }
-
-        else if (days <= 7) {
-
-            score += 30;
-
-        }
-
-        else {
-
-            score += 10;
-
-        }
-
-    }
-
-
-    const difficulty =
-        String(
-            task.difficulty || ""
-        ).toLowerCase();
-
-
-    if (
-        difficulty === "hard" ||
-        difficulty === "difficult"
-    ) {
-
-        score += 25;
-
-    }
-
-    else if (
-        difficulty === "medium"
-    ) {
-
-        score += 12;
-
-    }
-
-
-    return score;
-
-}
-
-
-/* =========================================================
-   TASK ELIGIBILITY
-========================================================= */
-
-function getTasksForDate() {
-
-    const day =
-        dateOnly(
-            selectedDate
-        );
-
-
-    return tasks
-        .filter(function(task) {
-
-            if (task.completed) {
+            if (!date) {
                 return false;
             }
 
 
-            const deadline =
-                parseDeadline(
-                    task.deadline
-                );
-
-
-            if (!deadline) {
-
-                return true;
-
-            }
-
-
-            /*
-               Do not schedule work after its deadline.
-            */
-
-            const deadlineDay =
-                dateOnly(
-                    deadline
-                );
-
-
             return (
-                day <= deadlineDay
+                dateOnly(date) >= today
             );
 
         })
-        .sort(function(a,b) {
+        .sort(function(a, b) {
 
             return (
-                calculatePriority(b) -
-                calculatePriority(a)
+                parseDeadline(a.date) -
+                parseDeadline(b.date)
             );
 
         });
@@ -1544,256 +1399,193 @@ function getTasksForDate() {
 
 
 /* =========================================================
-   SCHEDULING ENGINE
+   AI SCHEDULER
 ========================================================= */
 
-function generateSchedule() {
+async function generateSchedule() {
 
-    generatedSchedule = [];
-
-
-    const availableTasks =
-        getTasksForDate();
-
-
-    /*
-       Tempo's default study window.
-
-       This is intentionally kept simple for now.
-       Later, Settings will provide the user's
-       actual available hours.
-    */
-
-    const startHour = 17;
-
-    const endHour = 22;
-
-
-    let currentMinutes =
-        startHour * 60;
-
-
-    const endMinutes =
-        endHour * 60;
+    const container =
+        document.getElementById(
+            "scheduleContainer"
+        );
 
 
     /*
-       First add upcoming tests as urgency context.
+       Show loading message.
     */
 
-    const upcomingTests =
-        tests
-            .filter(function(test) {
+    container.innerHTML = `
 
-                const date =
-                    parseDeadline(
-                        test.date
-                    );
+        <div class="loading">
+
+            ✦ Tempo AI is building
+            your schedule...
+
+        </div>
+
+    `;
 
 
-                if (!date) {
-                    return false;
+    try {
+
+        /*
+           Only send unfinished tasks.
+        */
+
+        const unfinishedTasks =
+            tasks.filter(function(task) {
+
+                return !task.completed;
+
+            });
+
+
+        /*
+           Build information for Gemini.
+        */
+
+        const scheduleData = {
+
+            date:
+                dateKey(selectedDate),
+
+            weekday:
+                selectedDate.toLocaleDateString(
+                    "en-US",
+                    {
+                        weekday: "long"
+                    }
+                ),
+
+            tasks:
+                unfinishedTasks,
+
+            tests:
+                getUpcomingTests(),
+
+            availableStart:
+                "17:00",
+
+            availableEnd:
+                "22:00",
+
+            breakMinutes:
+                10
+
+        };
+
+
+        /*
+           Ask the Apps Script backend
+           to use Gemini.
+        */
+
+        const result =
+            await api(
+                "generateSchedule",
+                {
+                    tasks: scheduleData
                 }
-
-
-                return (
-                    dateOnly(date) >=
-                    dateOnly(selectedDate)
-                );
-
-            })
-            .sort(function(a,b) {
-
-                return (
-                    parseDeadline(a.date) -
-                    parseDeadline(b.date)
-                );
-
-            });
-
-
-    /*
-       Generate study blocks.
-    */
-
-    for (
-        let i = 0;
-        i < availableTasks.length;
-        i++
-    ) {
-
-        const task =
-            availableTasks[i];
-
-
-        let duration =
-            Number(
-                task.minutes
             );
 
 
         if (
-            !duration ||
-            duration < 5
+            !result ||
+            !result.success
         ) {
 
-            duration = 30;
-
-        }
-
-
-        /*
-           Don't create a block beyond the
-           available study window.
-        */
-
-        if (
-            currentMinutes >=
-            endMinutes
-        ) {
-
-            break;
-
-        }
-
-
-        const remaining =
-            endMinutes -
-            currentMinutes;
-
-
-        duration =
-            Math.min(
-                duration,
-                remaining
+            console.error(
+                "AI scheduler error:",
+                result
             );
 
 
+            renderEmpty(
+                "Tempo AI couldn't build the schedule.",
+                "The AI service may be temporarily unavailable. Try rebuilding the schedule again."
+            );
+
+
+            showToast(
+                "Tempo AI couldn't build the schedule."
+            );
+
+
+            return;
+
+        }
+
+
         /*
-           Avoid tiny useless blocks.
+           The backend returns:
+
+           {
+               schedule: [...]
+           }
         */
 
+        const aiData =
+            result.data;
+
+
         if (
-            duration < 15
+            !aiData ||
+            !Array.isArray(
+                aiData.schedule
+            )
         ) {
 
-            break;
+            console.error(
+                "Invalid AI response:",
+                result
+            );
+
+
+            renderEmpty(
+                "Tempo AI returned an invalid schedule.",
+                "Try rebuilding the schedule."
+            );
+
+
+            return;
 
         }
 
 
-        generatedSchedule.push({
-
-            type: "study",
-
-            task: task,
-
-            start:
-                minutesToTime(
-                    currentMinutes
-                ),
-
-            end:
-                minutesToTime(
-                    currentMinutes +
-                    duration
-                ),
-
-            minutes: duration
-
-        });
+        generatedSchedule =
+            aiData.schedule;
 
 
-        currentMinutes += duration;
+        renderSchedule(
+            generatedSchedule,
+            getUpcomingTests()
+        );
 
-
-        /*
-           Add a 10-minute break after
-           each substantial study block.
-        */
-
-        if (
-            currentMinutes <
-            endMinutes
-        ) {
-
-            generatedSchedule.push({
-
-                type: "break",
-
-                start:
-                    minutesToTime(
-                        currentMinutes
-                    ),
-
-                end:
-                    minutesToTime(
-                        currentMinutes +
-                        10
-                    ),
-
-                minutes: 10
-
-            });
-
-
-            currentMinutes += 10;
-
-        }
 
     }
 
+    catch (error) {
 
-    /*
-       If nothing exists, don't invent work.
-    */
-
-    renderSchedule(
-        generatedSchedule,
-        upcomingTests
-    );
-
-}
+        console.error(error);
 
 
-/* =========================================================
-   TIME
-========================================================= */
-
-function minutesToTime(total) {
-
-    const hour =
-        Math.floor(
-            total / 60
+        renderEmpty(
+            "Something went wrong.",
+            "Tempo couldn't connect to the AI scheduler."
         );
 
-    const minute =
-        total % 60;
 
+        showToast(
+            "AI scheduler connection failed."
+        );
 
-    const suffix =
-        hour >= 12
-            ? "PM"
-            : "AM";
-
-
-    const displayHour =
-        hour % 12 || 12;
-
-
-    return (
-        String(displayHour) +
-        ":" +
-        String(minute).padStart(2,"0") +
-        " " +
-        suffix
-    );
+    }
 
 }
 
 
 /* =========================================================
-   RENDER
+   RENDER AI SCHEDULE
 ========================================================= */
 
 function renderSchedule(
@@ -1807,19 +1599,20 @@ function renderSchedule(
         );
 
 
-    const studyBlocks =
-        schedule.filter(function(item) {
-
-            return item.type === "study";
-
-        });
-
+    /*
+       Calculate total study time.
+    */
 
     const studyMinutes =
-        studyBlocks.reduce(
-            function(total,item) {
+        schedule.reduce(
+            function(total, item) {
 
-                return total + item.minutes;
+                return (
+                    total +
+                    Number(
+                        item.minutes || 0
+                    )
+                );
 
             },
             0
@@ -1834,11 +1627,19 @@ function renderSchedule(
         );
 
 
+    /*
+       Count actual study tasks.
+    */
+
     document
         .getElementById("taskCount")
         .textContent =
-        studyBlocks.length;
+        schedule.length;
 
+
+    /*
+       Calculate urgency.
+    */
 
     document
         .getElementById("urgency")
@@ -1847,6 +1648,10 @@ function renderSchedule(
             upcomingTests
         );
 
+
+    /*
+       Nothing scheduled.
+    */
 
     if (
         schedule.length === 0
@@ -1866,99 +1671,42 @@ function renderSchedule(
         '<div class="timeline">';
 
 
+    /*
+       Render each AI-generated block.
+    */
+
     schedule.forEach(
         function(item) {
 
-            if (
-                item.type === "break"
-            ) {
-
-                html += `
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-time">
-                            ${item.start}
-                        </div>
-
-                        <div class="timeline-line"></div>
-
-                        <div class="timeline-content">
-
-                            <div class="timeline-title">
-                                ☕ Break
-                            </div>
-
-                            <div class="timeline-description">
-                                ${item.minutes} minutes
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
+            const subject =
+                item.subject ||
+                "Study";
 
 
             const task =
-                item.task;
+                item.task ||
+                "Study session";
 
 
-            const deadline =
-                parseDeadline(
-                    task.deadline
+            const minutes =
+                Number(
+                    item.minutes || 0
                 );
 
 
-            let deadlineText = "";
-
-
-            if (deadline) {
-
-                deadlineText =
-                    "Due " +
-                    deadline.toLocaleDateString(
-                        "en-US",
-                        {
-                            month: "short",
-                            day: "numeric"
-                        }
-                    );
-
-            }
-
-
-            const priority =
-                calculatePriority(
-                    task
-                );
-
-
-            let priorityTag =
+            const start =
+                item.start ||
                 "";
 
 
-            if (
-                priority >= 80
-            ) {
+            const end =
+                item.end ||
+                "";
 
-                priorityTag =
-                    '<span class="tag danger">High priority</span>';
 
-            }
-
-            else if (
-                priority >= 50
-            ) {
-
-                priorityTag =
-                    '<span class="tag primary">Priority</span>';
-
-            }
+            const difficulty =
+                item.difficulty ||
+                "";
 
 
             html += `
@@ -1966,52 +1714,65 @@ function renderSchedule(
                 <div class="timeline-item study">
 
                     <div class="timeline-time">
-                        ${item.start}
+
+                        ${escapeHTML(start)}
+
                     </div>
 
+
                     <div class="timeline-line"></div>
+
 
                     <div class="timeline-content">
 
                         <div class="timeline-title">
-                            ${escapeHTML(task.subject || "Study")}
+
+                            ${escapeHTML(subject)}
                             ·
-                            ${escapeHTML(task.title)}
+                            ${escapeHTML(task)}
+
                         </div>
+
 
                         <div class="timeline-description">
 
-                            ${item.minutes} minutes
+                            ${escapeHTML(
+                                start +
+                                " – " +
+                                end
+                            )}
+
+                            ·
+
+                            ${minutes} minutes
 
                         </div>
+
 
                         <div class="timeline-meta">
 
                             <span class="tag primary">
-                                Study
+
+                                AI planned
+
                             </span>
 
+
                             ${
-                                task.difficulty
+                                difficulty
                                 ?
-                                `<span class="tag">
-                                    ${escapeHTML(task.difficulty)}
-                                </span>`
+                                `
+                                <span class="tag">
+
+                                    ${escapeHTML(
+                                        difficulty
+                                    )}
+
+                                </span>
+                                `
                                 :
                                 ""
                             }
-
-                            ${
-                                deadlineText
-                                ?
-                                `<span class="tag">
-                                    ${deadlineText}
-                                </span>`
-                                :
-                                ""
-                            }
-
-                            ${priorityTag}
 
                         </div>
 
@@ -2026,8 +1787,7 @@ function renderSchedule(
 
 
     /*
-       Show upcoming tests below today's
-       actual study schedule.
+       Upcoming tests.
     */
 
     if (
@@ -2051,14 +1811,16 @@ function renderSchedule(
                         margin-bottom:12px;
                     "
                 >
+
                     Upcoming tests
+
                 </div>
 
         `;
 
 
         upcomingTests
-            .slice(0,3)
+            .slice(0, 3)
             .forEach(
                 function(test) {
 
@@ -2083,6 +1845,7 @@ function renderSchedule(
                             <span>
 
                                 📝
+
                                 ${escapeHTML(
                                     test.subject ||
                                     ""
@@ -2096,6 +1859,7 @@ function renderSchedule(
                                 )}
 
                             </span>
+
 
                             <span
                                 style="
@@ -2143,7 +1907,7 @@ function renderSchedule(
 
 
 /* =========================================================
-   EMPTY
+   EMPTY STATE
 ========================================================= */
 
 function renderEmpty(
@@ -2160,15 +1924,23 @@ function renderEmpty(
             <div class="empty">
 
                 <div class="empty-icon">
+
                     ✦
+
                 </div>
 
+
                 <h2>
+
                     ${escapeHTML(title)}
+
                 </h2>
 
+
                 <p>
+
                     ${escapeHTML(description)}
+
                 </p>
 
             </div>
@@ -2183,6 +1955,10 @@ function renderEmpty(
 ========================================================= */
 
 function formatMinutes(minutes) {
+
+    minutes =
+        Number(minutes || 0);
+
 
     if (
         minutes < 60
@@ -2364,7 +2140,7 @@ function showToast(message) {
 
 
 /* =========================================================
-   START
+   START TEMPO
 ========================================================= */
 
 renderDate();
@@ -2372,6 +2148,7 @@ renderDate();
 loadData();
 
 </script>
+
 
 </body>
 

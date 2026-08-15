@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,1112 +8,1558 @@
 
 <style>
 
-:root {
-    --primary: #6657e8;
-    --primary-dark: #5546d6;
-    --primary-light: #efedff;
-
-    --background: #f7f8fc;
-    --surface: #ffffff;
-    --surface-hover: #f4f4f8;
-
-    --text: #17191c;
-    --text-secondary: #737681;
-    --text-tertiary: #a2a4ad;
-
-    --border: #e8e8ee;
-
-    --danger: #e05252;
-    --danger-light: #fff0f0;
-
-    --success: #28a866;
-    --success-light: #e9f8ef;
-
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-
-    --shadow-sm:
-        0 2px 8px rgba(20,20,40,0.04);
-
-    --shadow-md:
-        0 12px 40px rgba(20,20,40,0.10);
-}
-
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-
 body {
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: var(--background);
-    color: var(--text);
-
+    font-family: Inter, Arial, sans-serif;
+    background: #f5f6f8;
+    color: #17181a;
     min-height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 24px;
 }
-
 
 button,
-input {
+input,
+select {
     font: inherit;
 }
-
 
 button {
     cursor: pointer;
 }
 
-
-/* ========================================
+/* =====================================================
    APP
-======================================== */
+===================================================== */
 
-.auth-wrapper {
-
-    width: 100%;
-    max-width: 1050px;
-
-    min-height: 650px;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    background: var(--surface);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 24px;
-
-    box-shadow: var(--shadow-md);
-
-    overflow: hidden;
+#app {
+    display: none;
+    min-height: 100vh;
 }
 
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
-/* ========================================
-   LEFT SIDE
-======================================== */
-
-.hero {
-
-    background:
-        linear-gradient(
-            145deg,
-            #6657e8,
-            #7567ed,
-            #8275f2
-        );
-
-    color: white;
-
-    padding: 52px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 230px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    padding: 28px 16px;
+    z-index: 10;
 }
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 380px;
-    height: 380px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,0.07);
-
-    top: -170px;
-    right: -130px;
-}
-
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,0.05);
-
-    bottom: -150px;
-    left: -120px;
-}
-
 
 .logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    position: relative;
-
-    z-index: 2;
-}
-
-
-.logo-mark {
-
-    width: 38px;
-    height: 38px;
-
-    border-radius: 11px;
-
-    background: white;
-
-    color: var(--primary);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
-
+    font-size: 26px;
     font-weight: 800;
+    padding: 0 12px;
+    margin-bottom: 35px;
 }
 
-
-.logo-name {
-
-    font-size: 24px;
-
-    font-weight: 800;
-
-    letter-spacing: -0.8px;
+.logo span {
+    color: #6366f1;
 }
 
-
-.hero-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    max-width: 430px;
-}
-
-
-.hero-eyebrow {
-
-    font-size: 12px;
-
-    font-weight: 750;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.1em;
-
-    color:
-        rgba(255,255,255,0.7);
-
-    margin-bottom: 12px;
-}
-
-
-.hero h1 {
-
-    font-size: 42px;
-
-    line-height: 1.08;
-
-    letter-spacing: -1.7px;
-}
-
-
-.hero p {
-
-    margin-top: 16px;
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    color:
-        rgba(255,255,255,0.78);
-}
-
-
-.hero-footer {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-size: 12px;
-
-    color:
-        rgba(255,255,255,0.55);
-}
-
-
-/* ========================================
-   RIGHT SIDE
-======================================== */
-
-.auth-panel {
-
-    padding: 52px;
-
+.nav {
     display: flex;
-
     flex-direction: column;
-
-    justify-content: center;
+    gap: 7px;
 }
 
+.nav button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #6b7280;
+    transition: 0.2s;
+}
 
-.auth-header {
+.nav button:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
 
+.nav button.active {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+    margin-left: 230px;
+    min-height: 100vh;
+    padding: 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
 }
 
-
-.auth-header h2 {
-
-    font-size: 28px;
-
-    letter-spacing: -0.9px;
+.topbar h1 {
+    font-size: 30px;
 }
 
-
-.auth-header p {
-
-    margin-top: 7px;
-
-    color: var(--text-secondary);
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-
-/* ========================================
-   TABS
-======================================== */
-
-.tabs {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    background:
-        var(--surface-hover);
-
-    border-radius: 11px;
-
-    padding: 4px;
-
-    margin-bottom: 25px;
-}
-
-
-.tab {
-
-    border: none;
-
-    background: transparent;
-
-    color: var(--text-secondary);
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    transition: 0.18s ease;
-}
-
-
-.tab.active {
-
-    background: white;
-
-    color: var(--primary);
-
-    box-shadow:
-        0 2px 7px
-        rgba(20,20,40,0.06);
-}
-
-
-/* ========================================
-   FORM
-======================================== */
-
-.form {
-
-    display: none;
-}
-
-
-.form.active {
-
-    display: block;
-
-    animation:
-        fadeIn 0.2s ease;
-}
-
-
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-.field {
-
-    margin-bottom: 17px;
-}
-
-
-.field label {
-
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    margin-bottom: 7px;
-}
-
-
-.field input {
-
-    width: 100%;
-
-    border:
-        1px solid var(--border);
-
-    background: white;
-
-    color: var(--text);
-
-    padding: 12px 13px;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    transition:
-        border 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-
-.field input::placeholder {
-
-    color: var(--text-tertiary);
-}
-
-
-.field input:focus {
-
-    border-color:
-        var(--primary);
-
-    box-shadow:
-        0 0 0 3px
-        var(--primary-light);
-}
-
-
-.help-text {
-
-    font-size: 11px;
-
-    color: var(--text-tertiary);
-
-    margin-top: 6px;
-
-    line-height: 1.4;
-}
-
-
-/* ========================================
-   BUTTON
-======================================== */
-
-.submit-button {
-
-    width: 100%;
-
-    border: none;
-
-    background:
-        var(--primary);
-
-    color: white;
-
-    padding: 13px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    font-weight: 750;
-
-    margin-top: 4px;
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease;
-}
-
-
-.submit-button:hover {
-
-    background:
-        var(--primary-dark);
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 7px 18px
-        rgba(102,87,232,0.23);
-}
-
-
-.submit-button:disabled {
-
-    opacity: 0.6;
-
-    cursor: wait;
-
-    transform: none;
-
-    box-shadow: none;
-}
-
-
-/* ========================================
-   MESSAGE
-======================================== */
-
-.message {
-
-    display: none;
-
-    padding: 11px 13px;
-
-    border-radius: 10px;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    margin-bottom: 16px;
-}
-
-
-.message.show {
-
-    display: block;
-}
-
-
-.message.error {
-
-    background:
-        var(--danger-light);
-
-    color:
-        var(--danger);
-}
-
-
-.message.success {
-
-    background:
-        var(--success-light);
-
-    color:
-        var(--success);
-}
-
-
-/* ========================================
-   LOADING
-======================================== */
-
-.loading {
-
-    display: inline-flex;
-
+.user-area {
+    display: flex;
     align-items: center;
-
-    gap: 8px;
+    gap: 12px;
 }
 
-
-.spinner {
-
-    width: 14px;
-    height: 14px;
-
-    border:
-        2px solid
-        rgba(255,255,255,0.4);
-
-    border-top-color: white;
-
+.avatar {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-
-    animation:
-        spin 0.7s linear infinite;
+    background: #6366f1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
 }
 
+/* =====================================================
+   PAGES
+===================================================== */
 
-@keyframes spin {
-
-    to {
-        transform: rotate(360deg);
-    }
-
+.page {
+    display: none;
 }
 
+.page.active {
+    display: block;
+}
 
-/* ========================================
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* =====================================================
+   DASHBOARD GRID
+===================================================== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 750;
+}
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.task-checkbox {
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.task-info {
+    flex: 1;
+}
+
+.task-title {
+    font-weight: 650;
+    margin-bottom: 4px;
+}
+
+.task-meta {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.task-time {
+    font-size: 13px;
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: #6366f1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4f46e5;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.btn-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.btn-small {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+input,
+select {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    padding: 11px;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #6366f1;
+}
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+#auth {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #f5f6f8;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 35px;
+}
+
+.auth-logo {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.auth-logo span {
+    color: #6366f1;
+}
+
+.auth-subtitle {
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    background: #f3f4f6;
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.auth-tabs button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 9px;
+    border-radius: 7px;
+}
+
+.auth-tabs button.active {
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    font-weight: 600;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-message {
+    font-size: 13px;
+    min-height: 18px;
+}
+
+.error {
+    color: #dc2626;
+}
+
+.success {
+    color: #16a34a;
+}
+
+/* =====================================================
+   AI
+===================================================== */
+
+.ai-box {
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.ai-result {
+    margin-top: 18px;
+}
+
+.schedule-item {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    padding: 13px;
+    margin-bottom: 9px;
+}
+
+.schedule-time {
+    font-size: 13px;
+    color: #6366f1;
+    font-weight: 700;
+}
+
+.schedule-task {
+    font-weight: 650;
+    margin-top: 4px;
+}
+
+/* =====================================================
+   SHARING
+===================================================== */
+
+.share-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+    color: #9ca3af;
+    text-align: center;
+    padding: 25px;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+#toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #111827;
+    color: white;
+    padding: 13px 17px;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s;
+    z-index: 100;
+}
+
+#toast.show {
+    opacity: 1;
+}
+
+/* =====================================================
    RESPONSIVE
-======================================== */
+===================================================== */
 
-@media (max-width: 800px) {
+@media(max-width: 900px) {
 
-    body {
-        padding: 14px;
+    .sidebar {
+        width: 190px;
     }
 
-
-    .auth-wrapper {
-
-        grid-template-columns: 1fr;
-
-        max-width: 520px;
-
-        min-height: auto;
+    .main {
+        margin-left: 190px;
     }
 
-
-    .hero {
-
-        min-height: 280px;
-
-        padding: 32px;
-    }
-
-
-    .hero h1 {
-
-        font-size: 32px;
-    }
-
-
-    .hero-footer {
-
-        display: none;
-    }
-
-
-    .auth-panel {
-
-        padding: 34px 28px;
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
 
+@media(max-width: 650px) {
 
-@media (max-width: 420px) {
-
-    .hero {
-
-        padding: 26px;
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
     }
 
-
-    .auth-panel {
-
-        padding: 28px 20px;
+    .main {
+        margin-left: 0;
+        padding: 20px;
     }
 
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
 
-    .hero h1 {
+    .nav button {
+        white-space: nowrap;
+    }
 
-        font-size: 29px;
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
     }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     AUTH
+===================================================== -->
 
-<div class="auth-wrapper">
+<div id="auth">
 
+    <div class="auth-card">
 
-    <!-- ====================================
-         HERO
-    ===================================== -->
-
-    <section class="hero">
-
-        <div class="logo">
-
-            <div class="logo-mark">
-                T
-            </div>
-
-            <div class="logo-name">
-                Tempo
-            </div>
-
+        <div class="auth-logo">
+            temp<span>o</span>
         </div>
 
-
-        <div class="hero-content">
-
-            <div class="hero-eyebrow">
-                Student productivity
-            </div>
-
-            <h1>
-                Give yourself
-                your time back.
-            </h1>
-
-            <p>
-                Tempo helps you understand what
-                needs to be done, when to do it,
-                and how much time you actually have.
-            </p>
-
+        <div class="auth-subtitle">
+            Giving you your time back.
         </div>
 
-
-        <div class="hero-footer">
-            Your time matters.
-        </div>
-
-    </section>
-
-
-
-    <!-- ====================================
-         AUTH PANEL
-    ===================================== -->
-
-    <section class="auth-panel">
-
-
-        <div class="auth-header">
-
-            <h2 id="authTitle">
-                Welcome to Tempo
-            </h2>
-
-            <p id="authSubtitle">
-                Sign in to continue to your workspace.
-            </p>
-
-        </div>
-
-
-
-        <!-- TABS -->
-
-        <div class="tabs">
+        <div class="auth-tabs">
 
             <button
-                class="tab active"
                 id="loginTab"
-                onclick="showLogin()"
+                class="active"
+                onclick="showAuth('login')"
             >
-                Log in
+                Login
             </button>
 
             <button
-                class="tab"
                 id="signupTab"
-                onclick="showSignup()"
+                onclick="showAuth('signup')"
             >
-                Create account
+                Sign up
             </button>
 
         </div>
 
 
-
-        <!-- MESSAGE -->
-
-        <div
-            class="message"
-            id="message"
-        ></div>
-
-
-
-        <!-- ==================================
-             LOGIN
-        =================================== -->
+        <!-- LOGIN -->
 
         <form
-            class="form active"
             id="loginForm"
-            onsubmit="handleLogin(event)"
+            class="auth-form"
+            onsubmit="login(event)"
         >
 
-            <div class="field">
+            <div class="form-group">
 
-                <label for="loginUsername">
-                    Username
-                </label>
+                <label>Username</label>
 
                 <input
                     id="loginUsername"
-                    type="text"
-                    placeholder="Enter your username"
-                    autocomplete="username"
                     required
+                    autocomplete="username"
                 >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
-                <label for="loginPassword">
-                    Password
-                </label>
+                <label>Password</label>
 
                 <input
                     id="loginPassword"
                     type="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
                     required
+                    autocomplete="current-password"
                 >
 
             </div>
 
 
-            <button
-                class="submit-button"
-                id="loginButton"
-                type="submit"
-            >
-                Log in
+            <button class="btn btn-primary">
+                Login
             </button>
+
+            <div
+                id="loginMessage"
+                class="auth-message"
+            ></div>
 
         </form>
 
 
-
-        <!-- ==================================
-             SIGNUP
-        =================================== -->
+        <!-- SIGNUP -->
 
         <form
-            class="form"
             id="signupForm"
-            onsubmit="handleSignup(event)"
+            class="auth-form"
+            style="display:none"
+            onsubmit="signup(event)"
         >
 
-            <div class="field">
+            <div class="form-group">
 
-                <label for="signupUsername">
-                    Username
-                </label>
+                <label>Username</label>
 
                 <input
                     id="signupUsername"
-                    type="text"
-                    placeholder="Choose a username"
-                    autocomplete="username"
-                    minlength="3"
-                    maxlength="30"
                     required
+                    minlength="3"
+                    maxlength="20"
                 >
-
-                <div class="help-text">
-                    This is how other Tempo users will find you.
-                </div>
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
-                <label for="signupDisplayName">
-                    Display name
-                </label>
+                <label>Display name</label>
 
                 <input
                     id="signupDisplayName"
-                    type="text"
-                    placeholder="What should Tempo call you?"
-                    maxlength="40"
-                    required
+                    placeholder="Your name"
                 >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
-                <label for="signupPassword">
-                    Password
-                </label>
+                <label>Password</label>
 
                 <input
                     id="signupPassword"
                     type="password"
-                    placeholder="Create a password"
-                    autocomplete="new-password"
-                    minlength="6"
                     required
+                    minlength="6"
                 >
 
-                <div class="help-text">
-                    Use at least 6 characters.
+            </div>
+
+
+            <button class="btn btn-primary">
+                Create account
+            </button>
+
+            <div
+                id="signupMessage"
+                class="auth-message"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div id="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            temp<span>o</span>
+        </div>
+
+        <nav class="nav">
+
+            <button
+                class="active"
+                onclick="showPage('dashboard', this)"
+            >
+                Dashboard
+            </button>
+
+            <button
+                onclick="showPage('tasks', this)"
+            >
+                Tasks
+            </button>
+
+            <button
+                onclick="showPage('tests', this)"
+            >
+                Tests
+            </button>
+
+            <button
+                onclick="showPage('sessions', this)"
+            >
+                Study Sessions
+            </button>
+
+            <button
+                onclick="showPage('ai', this)"
+            >
+                AI Planner
+            </button>
+
+            <button
+                onclick="showPage('sharing', this)"
+            >
+                Sharing
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <span id="displayName">
+                    Student
+                </span>
+
+                <div
+                    class="avatar"
+                    id="avatar"
+                >
+                    S
+                </div>
+
+                <button
+                    class="btn btn-secondary btn-small"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================= -->
+
+        <section
+            id="dashboard"
+            class="page active"
+        >
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Total Tasks
+                    </div>
+
+                    <div
+                        id="statTasks"
+                        class="stat-value"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Completed
+                    </div>
+
+                    <div
+                        id="statCompleted"
+                        class="stat-value"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Upcoming Tests
+                    </div>
+
+                    <div
+                        id="statTests"
+                        class="stat-value"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Study Minutes
+                    </div>
+
+                    <div
+                        id="statMinutes"
+                        class="stat-value"
+                    >
+                        0
+                    </div>
+
                 </div>
 
             </div>
 
 
-            <div class="field">
+            <div class="card">
 
-                <label for="signupPasswordConfirm">
-                    Confirm password
-                </label>
+                <h2>
+                    Today's Tasks
+                </h2>
 
-                <input
-                    id="signupPasswordConfirm"
-                    type="password"
-                    placeholder="Enter it again"
-                    autocomplete="new-password"
-                    minlength="6"
-                    required
-                >
+                <div
+                    id="dashboardTasks"
+                    class="task-list"
+                ></div>
 
             </div>
 
 
-            <button
-                class="submit-button"
-                id="signupButton"
-                type="submit"
-            >
-                Create account
-            </button>
+            <div class="card">
 
-        </form>
+                <h2>
+                    Quick Add
+                </h2>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="showPage('tasks')"
+                >
+                    + Add Task
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="showPage('tests')"
+                >
+                    + Add Test
+                </button>
+
+            </div>
+
+        </section>
 
 
-    </section>
+        <!-- =================================================
+             TASKS
+        ================================================= -->
+
+        <section
+            id="tasks"
+            class="page"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Add Task
+                </h2>
+
+                <form
+                    class="form-grid"
+                    onsubmit="addTask(event)"
+                >
+
+                    <div class="form-group">
+
+                        <label>Subject</label>
+
+                        <input
+                            id="taskSubject"
+                            placeholder="Math"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Task</label>
+
+                        <input
+                            id="taskTitle"
+                            placeholder="Algebra worksheet"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Deadline</label>
+
+                        <input
+                            id="taskDeadline"
+                            type="datetime-local"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Difficulty</label>
+
+                        <select id="taskDifficulty">
+
+                            <option>Easy</option>
+
+                            <option selected>
+                                Medium
+                            </option>
+
+                            <option>Hard</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Estimated minutes</label>
+
+                        <input
+                            id="taskMinutes"
+                            type="number"
+                            min="1"
+                            placeholder="40"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>&nbsp;</label>
+
+                        <button
+                            class="btn btn-primary"
+                        >
+                            Add Task
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Your Tasks
+                </h2>
+
+                <div
+                    id="taskList"
+                    class="task-list"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TESTS
+        ================================================= -->
+
+        <section
+            id="tests"
+            class="page"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Add Test
+                </h2>
+
+                <form
+                    class="form-grid"
+                    onsubmit="addTest(event)"
+                >
+
+                    <div class="form-group">
+
+                        <label>Subject</label>
+
+                        <input
+                            id="testSubject"
+                            placeholder="Science"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Test name</label>
+
+                        <input
+                            id="testTitle"
+                            placeholder="Biology Test"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Date</label>
+
+                        <input
+                            id="testDate"
+                            type="datetime-local"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Difficulty</label>
+
+                        <select id="testDifficulty">
+
+                            <option>Easy</option>
+
+                            <option selected>
+                                Medium
+                            </option>
+
+                            <option>Hard</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <button
+                            class="btn btn-primary"
+                        >
+                            Add Test
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Upcoming Tests
+                </h2>
+
+                <div id="testList"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SESSIONS
+        ================================================= -->
+
+        <section
+            id="sessions"
+            class="page"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Log Study Session
+                </h2>
+
+                <form
+                    class="form-grid"
+                    onsubmit="addSession(event)"
+                >
+
+                    <div class="form-group">
+
+                        <label>Task ID</label>
+
+                        <input
+                            id="sessionTaskID"
+                            placeholder="Optional task ID"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Minutes studied</label>
+
+                        <input
+                            id="sessionMinutes"
+                            type="number"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Started</label>
+
+                        <input
+                            id="sessionStarted"
+                            type="datetime-local"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Ended</label>
+
+                        <input
+                            id="sessionEnded"
+                            type="datetime-local"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <button
+                            class="btn btn-primary"
+                        >
+                            Save Session
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Study History
+                </h2>
+
+                <div id="sessionList"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI
+        ================================================= -->
+
+        <section
+            id="ai"
+            class="page"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Tempo AI Planner
+                </h2>
+
+                <div class="ai-box">
+
+                    <p style="margin-bottom:18px;color:#6b7280;">
+                        Let Tempo organize your unfinished work
+                        around your available study time.
+                    </p>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Date</label>
+
+                            <input
+                                id="aiDate"
+                                type="date"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Weekday</label>
+
+                            <input
+                                id="aiWeekday"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Available from</label>
+
+                            <input
+                                id="aiStart"
+                                type="time"
+                                value="17:00"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Available until</label>
+
+                            <input
+                                id="aiEnd"
+                                type="time"
+                                value="21:00"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Break length</label>
+
+                            <input
+                                id="aiBreak"
+                                type="number"
+                                value="10"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <br>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="generateAIPlan()"
+                    >
+                        Generate Study Plan
+                    </button>
+
+
+                    <div
+                        id="aiResult"
+                        class="ai-result"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Study Advice
+                </h2>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="getAIAdvice()"
+                >
+                    Get Advice for My Tasks
+                </button>
+
+                <div
+                    id="adviceResult"
+                    style="margin-top:15px;"
+                ></div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Motivation
+                </h2>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="getAIMotivation()"
+                >
+                    Motivate Me
+                </button>
+
+                <div
+                    id="motivationResult"
+                    style="margin-top:15px;"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SHARING
+        ================================================= -->
+
+        <section
+            id="sharing"
+            class="page"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Share a Task
+                </h2>
+
+                <form
+                    class="form-grid"
+                    onsubmit="shareTaskForm(event)"
+                >
+
+                    <div class="form-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <input
+                            id="shareUsername"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Task ID
+                        </label>
+
+                        <input
+                            id="shareTaskID"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <button
+                            class="btn btn-primary"
+                        >
+                            Share Task
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Shared Tasks
+                </h2>
+
+                <div id="shareList"></div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 
+<div id="toast"></div>
+
 
 <script>
 
-/* =========================================
-   TEMPO API
-========================================= */
+/* =====================================================
+   CONFIG
+===================================================== */
+
+/*
+   IMPORTANT:
+
+   Replace this with your Google Apps Script
+   Web App URL.
+
+   Example:
+
+   const API_URL =
+   "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+*/
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
+    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
 
-/* =========================================
-   DOM
-========================================= */
+/* =====================================================
+   STATE
+===================================================== */
 
-const loginForm =
-    document.getElementById("loginForm");
+let token =
+    localStorage.getItem("tempo_token") || "";
 
-const signupForm =
-    document.getElementById("signupForm");
+let currentUser =
+    JSON.parse(
+        localStorage.getItem("tempo_user") || "null"
+    );
 
-const loginTab =
-    document.getElementById("loginTab");
+let tasks = [];
 
-const signupTab =
-    document.getElementById("signupTab");
+let tests = [];
 
-const authTitle =
-    document.getElementById("authTitle");
+let sessions = [];
 
-const authSubtitle =
-    document.getElementById("authSubtitle");
-
-const message =
-    document.getElementById("message");
+let shares = [];
 
 
-/* =========================================
-   MESSAGE
-========================================= */
+/* =====================================================
+   API
+===================================================== */
 
-function showMessage(text, type) {
+async function api(action, data = {}) {
 
-    message.textContent = text;
-
-    message.className =
-        "message show " + type;
-
-}
-
-
-function hideMessage() {
-
-    message.textContent = "";
-
-    message.className = "message";
-
-}
-
-
-/* =========================================
-   TABS
-========================================= */
-
-function showLogin() {
-
-    hideMessage();
-
-    loginForm.classList.add("active");
-
-    signupForm.classList.remove("active");
-
-    loginTab.classList.add("active");
-
-    signupTab.classList.remove("active");
-
-    authTitle.textContent =
-        "Welcome back";
-
-    authSubtitle.textContent =
-        "Sign in to continue to your workspace.";
-
-}
-
-
-function showSignup() {
-
-    hideMessage();
-
-    signupForm.classList.add("active");
-
-    loginForm.classList.remove("active");
-
-    signupTab.classList.add("active");
-
-    loginTab.classList.remove("active");
-
-    authTitle.textContent =
-        "Create your Tempo";
-
-    authSubtitle.textContent =
-        "Set up your account and start organizing your time.";
-
-}
-
-
-/* =========================================
-   API REQUEST
-========================================= */
-
-async function apiRequest(payload) {
-
-    const response =
-        await fetch(
-            API_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify(payload)
-            }
-        );
-
-
-    if (!response.ok) {
+    if (
+        API_URL ===
+        "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
+    ) {
 
         throw new Error(
-            "The Tempo server returned an error."
+            "Please add your Google Apps Script Web App URL."
         );
 
     }
 
 
+    const response =
+        await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify({
+
+                action,
+
+                ...data
+
+            })
+
+        });
+
+
     const result =
         await response.json();
+
+
+    if (!result.success) {
+
+        throw new Error(
+            result.error || "Request failed."
+        );
+
+    }
 
 
     return result;
@@ -1122,466 +1567,1766 @@ async function apiRequest(payload) {
 }
 
 
-/* =========================================
+/* =====================================================
+   INIT
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const today =
+            new Date();
+
+        document.getElementById(
+            "aiDate"
+        ).value =
+            today.toISOString().split("T")[0];
+
+        updateWeekday();
+
+        if (
+            token &&
+            currentUser
+        ) {
+
+            showApp();
+
+        }
+        else {
+
+            showAuth("login");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   AUTH TABS
+===================================================== */
+
+function showAuth(type) {
+
+    const login =
+        document.getElementById(
+            "loginForm"
+        );
+
+    const signup =
+        document.getElementById(
+            "signupForm"
+        );
+
+    const loginTab =
+        document.getElementById(
+            "loginTab"
+        );
+
+    const signupTab =
+        document.getElementById(
+            "signupTab"
+        );
+
+
+    if (type === "login") {
+
+        login.style.display = "flex";
+
+        signup.style.display = "none";
+
+        loginTab.classList.add("active");
+
+        signupTab.classList.remove("active");
+
+    }
+    else {
+
+        login.style.display = "none";
+
+        signup.style.display = "flex";
+
+        loginTab.classList.remove("active");
+
+        signupTab.classList.add("active");
+
+    }
+
+}
+
+
+/* =====================================================
    LOGIN
-========================================= */
+===================================================== */
 
-async function handleLogin(event) {
+async function login(event) {
 
     event.preventDefault();
 
-    hideMessage();
 
-
-    const username =
-        document
-            .getElementById("loginUsername")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const password =
-        document
-            .getElementById("loginPassword")
-            .value;
-
-
-    const button =
+    const message =
         document.getElementById(
-            "loginButton"
+            "loginMessage"
         );
 
 
-    button.disabled = true;
+    message.textContent =
+        "Logging in...";
 
-    button.innerHTML = `
-        <span class="loading">
-            <span class="spinner"></span>
-            Logging in...
-        </span>
-    `;
+    message.className =
+        "auth-message";
 
 
     try {
 
         const result =
-            await apiRequest({
+            await api(
+                "login",
+                {
 
-                action: "login",
+                    username:
+                        document.getElementById(
+                            "loginUsername"
+                        ).value,
 
-                username: username,
+                    password:
+                        document.getElementById(
+                            "loginPassword"
+                        ).value
 
-                password: password
-
-            });
-
-
-        if (!result.success) {
-
-            if (
-                result.error ===
-                "INVALID_LOGIN"
-            ) {
-
-                showMessage(
-                    "Incorrect username or password.",
-                    "error"
-                );
-
-            }
-
-            else {
-
-                showMessage(
-                    "Login failed. Please try again.",
-                    "error"
-                );
-
-            }
-
-            return;
-
-        }
+                }
+            );
 
 
-        /*
-         * Store the logged-in user.
-         *
-         * study.html will use this
-         * information later.
-         */
+        token =
+            result.token;
+
+
+        currentUser = {
+
+            username:
+                result.username,
+
+            displayName:
+                result.displayName
+
+        };
+
 
         localStorage.setItem(
-            "tempoUser",
-            JSON.stringify({
-
-                username:
-                    result.username,
-
-                displayName:
-                    result.displayName
-
-            })
+            "tempo_token",
+            token
         );
 
 
         localStorage.setItem(
-            "tempoLoggedIn",
-            "true"
-        );
-
-
-        showMessage(
-            "Login successful. Opening Tempo...",
-            "success"
-        );
-
-
-        setTimeout(
-            function() {
-
-                window.location.href =
-                    "study.html";
-
-            },
-            500
-        );
-
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        showMessage(
-            "Could not connect to Tempo. Check your internet connection and try again.",
-            "error"
-        );
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            "Log in";
-
-    }
-
-}
-
-
-/* =========================================
-   SIGN UP
-========================================= */
-
-async function handleSignup(event) {
-
-    event.preventDefault();
-
-    hideMessage();
-
-
-    const username =
-        document
-            .getElementById("signupUsername")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const displayName =
-        document
-            .getElementById("signupDisplayName")
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById("signupPassword")
-            .value;
-
-
-    const confirmPassword =
-        document
-            .getElementById(
-                "signupPasswordConfirm"
+            "tempo_user",
+            JSON.stringify(
+                currentUser
             )
-            .value;
-
-
-    /* -------------------------------------
-       VALIDATION
-    ------------------------------------- */
-
-    if (username.length < 3) {
-
-        showMessage(
-            "Username must be at least 3 characters.",
-            "error"
         );
 
-        return;
+
+        showApp();
+
+        toast("Welcome back!");
 
     }
 
 
-    if (
-        !/^[a-zA-Z0-9_.-]+$/.test(username)
-    ) {
+    catch (error) {
 
-        showMessage(
-            "Username can only contain letters, numbers, dots, underscores, and hyphens.",
-            "error"
-        );
+        message.textContent =
+            error.message;
 
-        return;
+        message.className =
+            "auth-message error";
 
     }
 
-
-    if (displayName.length < 1) {
-
-        showMessage(
-            "Please enter a display name.",
-            "error"
-        );
-
-        return;
-
-    }
+}
 
 
-    if (password.length < 6) {
+/* =====================================================
+   SIGNUP
+===================================================== */
 
-        showMessage(
-            "Password must be at least 6 characters.",
-            "error"
-        );
+async function signup(event) {
 
-        return;
-
-    }
+    event.preventDefault();
 
 
-    if (password !== confirmPassword) {
-
-        showMessage(
-            "The passwords do not match.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const button =
+    const message =
         document.getElementById(
-            "signupButton"
+            "signupMessage"
         );
 
 
-    button.disabled = true;
+    message.textContent =
+        "Creating account...";
 
-    button.innerHTML = `
-        <span class="loading">
-            <span class="spinner"></span>
-            Creating account...
-        </span>
-    `;
+    message.className =
+        "auth-message";
 
 
     try {
 
         const result =
-            await apiRequest({
+            await api(
+                "createUser",
+                {
 
-                action:
-                    "createUser",
+                    username:
+                        document.getElementById(
+                            "signupUsername"
+                        ).value,
 
-                username:
-                    username,
+                    password:
+                        document.getElementById(
+                            "signupPassword"
+                        ).value,
 
-                password:
-                    password,
+                    displayName:
+                        document.getElementById(
+                            "signupDisplayName"
+                        ).value
 
-                displayName:
-                    displayName
+                }
+            );
+
+
+        token =
+            result.token;
+
+
+        currentUser = {
+
+            username:
+                result.username,
+
+            displayName:
+                result.displayName
+
+        };
+
+
+        localStorage.setItem(
+            "tempo_token",
+            token
+        );
+
+
+        localStorage.setItem(
+            "tempo_user",
+            JSON.stringify(
+                currentUser
+            )
+        );
+
+
+        showApp();
+
+        toast("Account created!");
+
+    }
+
+
+    catch (error) {
+
+        message.textContent =
+            error.message;
+
+        message.className =
+            "auth-message error";
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW APP
+===================================================== */
+
+async function showApp() {
+
+    document.getElementById(
+        "auth"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "block";
+
+
+    const name =
+        currentUser?.displayName ||
+        currentUser?.username ||
+        "Student";
+
+
+    document.getElementById(
+        "displayName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        name.charAt(0).toUpperCase();
+
+
+    await loadAll();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout() {
+
+    try {
+
+        if (token) {
+
+            await api(
+                "logout",
+                {
+                    token
+                }
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.log(error);
+
+    }
+
+
+    token = "";
+
+    currentUser = null;
+
+
+    localStorage.removeItem(
+        "tempo_token"
+    );
+
+    localStorage.removeItem(
+        "tempo_user"
+    );
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "auth"
+    ).style.display = "flex";
+
+
+    toast("Logged out.");
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(
+    page,
+    button = null
+) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(function(element) {
+
+            element.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const target =
+        document.getElementById(
+            page
+        );
+
+
+    if (target) {
+
+        target.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(function(element) {
+
+            element.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+    else {
+
+        const navButtons =
+            document.querySelectorAll(
+                ".nav button"
+            );
+
+        navButtons.forEach(
+            function(btn) {
+
+                if (
+                    btn.textContent
+                        .toLowerCase()
+                        .includes(page)
+                ) {
+
+                    btn.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    const titles = {
+
+        dashboard:
+            "Dashboard",
+
+        tasks:
+            "Tasks",
+
+        tests:
+            "Tests",
+
+        sessions:
+            "Study Sessions",
+
+        ai:
+            "AI Planner",
+
+        sharing:
+            "Sharing"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[page] || "Tempo";
+
+}
+
+
+/* =====================================================
+   LOAD EVERYTHING
+===================================================== */
+
+async function loadAll() {
+
+    try {
+
+        const [
+            taskResult,
+            testResult,
+            sessionResult,
+            shareResult
+        ] = await Promise.all([
+
+            api(
+                "getTasks",
+                {
+                    token
+                }
+            ),
+
+            api(
+                "getTests",
+                {
+                    token
+                }
+            ),
+
+            api(
+                "getSessions",
+                {
+                    token
+                }
+            ),
+
+            api(
+                "getShares",
+                {
+                    token
+                }
+            )
+
+        ]);
+
+
+        tasks =
+            taskResult.tasks || [];
+
+        tests =
+            testResult.tests || [];
+
+        sessions =
+            sessionResult.sessions || [];
+
+        shares =
+            shareResult.shares || [];
+
+
+        renderTasks();
+
+        renderTests();
+
+        renderSessions();
+
+        renderShares();
+
+        updateDashboard();
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        toast(
+            "Could not load your data: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+async function addTask(event) {
+
+    event.preventDefault();
+
+
+    try {
+
+        await api(
+            "createTask",
+            {
+
+                token,
+
+                subject:
+                    document.getElementById(
+                        "taskSubject"
+                    ).value,
+
+                title:
+                    document.getElementById(
+                        "taskTitle"
+                    ).value,
+
+                deadline:
+                    document.getElementById(
+                        "taskDeadline"
+                    ).value,
+
+                difficulty:
+                    document.getElementById(
+                        "taskDifficulty"
+                    ).value,
+
+                minutes:
+                    Number(
+                        document.getElementById(
+                            "taskMinutes"
+                        ).value
+                    )
+
+            }
+        );
+
+
+        event.target.reset();
+
+        toast("Task added.");
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER TASKS
+===================================================== */
+
+function renderTasks() {
+
+    const list =
+        document.getElementById(
+            "taskList"
+        );
+
+
+    const dashboard =
+        document.getElementById(
+            "dashboardTasks"
+        );
+
+
+    if (!tasks.length) {
+
+        list.innerHTML =
+            '<div class="empty">No tasks yet.</div>';
+
+        dashboard.innerHTML =
+            '<div class="empty">You are all caught up.</div>';
+
+        return;
+
+    }
+
+
+    const html =
+        tasks.map(function(task) {
+
+            return `
+
+                <div class="task">
+
+                    <input
+                        type="checkbox"
+                        class="task-checkbox"
+                        ${task.completed ? "checked" : ""}
+                        onchange="
+                            completeTask(
+                                '${escapeJS(task.taskID)}',
+                                this.checked
+                            )
+                        "
+                    >
+
+                    <div class="task-info">
+
+                        <div class="task-title">
+                            ${escapeHTML(task.title)}
+                        </div>
+
+                        <div class="task-meta">
+
+                            ${escapeHTML(task.subject)}
+                            ·
+                            ${escapeHTML(task.difficulty)}
+
+                            ${
+                                task.deadline
+                                ? " · " +
+                                  formatDate(task.deadline)
+                                : ""
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="task-time">
+                        ${task.minutes} min
+                    </div>
+
+                </div>
+
+            `;
+
+        })
+        .join("");
+
+
+    list.innerHTML =
+        html;
+
+
+    dashboard.innerHTML =
+        tasks
+            .filter(function(task) {
+
+                return !task.completed;
+
+            })
+            .slice(0, 5)
+            .map(function(task) {
+
+                return `
+
+                    <div class="task">
+
+                        <input
+                            type="checkbox"
+                            class="task-checkbox"
+                            onchange="
+                                completeTask(
+                                    '${escapeJS(task.taskID)}',
+                                    this.checked
+                                )
+                            "
+                        >
+
+                        <div class="task-info">
+
+                            <div class="task-title">
+                                ${escapeHTML(task.title)}
+                            </div>
+
+                            <div class="task-meta">
+                                ${escapeHTML(task.subject)}
+                            </div>
+
+                        </div>
+
+                        <div class="task-time">
+                            ${task.minutes} min
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("") ||
+        '<div class="empty">You are all caught up.</div>';
+
+}
+
+
+/* =====================================================
+   COMPLETE TASK
+===================================================== */
+
+async function completeTask(
+    taskID,
+    completed
+) {
+
+    try {
+
+        await api(
+            "completeTask",
+            {
+
+                token,
+
+                taskID,
+
+                completed
+
+            }
+        );
+
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   TESTS
+===================================================== */
+
+async function addTest(event) {
+
+    event.preventDefault();
+
+
+    try {
+
+        await api(
+            "createTest",
+            {
+
+                token,
+
+                subject:
+                    document.getElementById(
+                        "testSubject"
+                    ).value,
+
+                title:
+                    document.getElementById(
+                        "testTitle"
+                    ).value,
+
+                date:
+                    document.getElementById(
+                        "testDate"
+                    ).value,
+
+                difficulty:
+                    document.getElementById(
+                        "testDifficulty"
+                    ).value
+
+            }
+        );
+
+
+        event.target.reset();
+
+        toast("Test added.");
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER TESTS
+===================================================== */
+
+function renderTests() {
+
+    const list =
+        document.getElementById(
+            "testList"
+        );
+
+
+    if (!tests.length) {
+
+        list.innerHTML =
+            '<div class="empty">No tests added.</div>';
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        tests
+            .map(function(test) {
+
+                return `
+
+                    <div class="share-item">
+
+                        <strong>
+                            ${escapeHTML(test.title)}
+                        </strong>
+
+                        <div class="task-meta">
+
+                            ${escapeHTML(test.subject)}
+                            ·
+                            ${escapeHTML(test.difficulty)}
+
+                        </div>
+
+                        <div
+                            style="
+                                margin-top:8px;
+                                font-size:13px;
+                            "
+                        >
+
+                            ${formatDate(test.date)}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+}
+
+
+/* =====================================================
+   SESSIONS
+===================================================== */
+
+async function addSession(event) {
+
+    event.preventDefault();
+
+
+    try {
+
+        await api(
+            "createSession",
+            {
+
+                token,
+
+                taskID:
+                    document.getElementById(
+                        "sessionTaskID"
+                    ).value,
+
+                minutes:
+                    Number(
+                        document.getElementById(
+                            "sessionMinutes"
+                        ).value
+                    ),
+
+                startedAt:
+                    document.getElementById(
+                        "sessionStarted"
+                    ).value,
+
+                endedAt:
+                    document.getElementById(
+                        "sessionEnded"
+                    ).value
+
+            }
+        );
+
+
+        event.target.reset();
+
+        toast("Study session saved.");
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER SESSIONS
+===================================================== */
+
+function renderSessions() {
+
+    const list =
+        document.getElementById(
+            "sessionList"
+        );
+
+
+    if (!sessions.length) {
+
+        list.innerHTML =
+            '<div class="empty">No study sessions yet.</div>';
+
+        return;
+
+    }
+
+
+    const sorted =
+        [...sessions].reverse();
+
+
+    list.innerHTML =
+        sorted.map(function(session) {
+
+            return `
+
+                <div class="share-item">
+
+                    <strong>
+                        ${session.minutes} minutes
+                    </strong>
+
+                    <div class="task-meta">
+
+                        Task:
+                        ${escapeHTML(
+                            session.taskID || "General study"
+                        )}
+
+                    </div>
+
+                    <div
+                        style="
+                            margin-top:6px;
+                            font-size:13px;
+                        "
+                    >
+
+                        ${
+                            session.startedAt
+                            ? formatDate(session.startedAt)
+                            : "No start time"
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =====================================================
+   SHARING
+===================================================== */
+
+async function shareTaskForm(event) {
+
+    event.preventDefault();
+
+
+    try {
+
+        await api(
+            "shareTask",
+            {
+
+                token,
+
+                targetUsername:
+                    document.getElementById(
+                        "shareUsername"
+                    ).value,
+
+                taskID:
+                    document.getElementById(
+                        "shareTaskID"
+                    ).value
+
+            }
+        );
+
+
+        event.target.reset();
+
+        toast("Task shared.");
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER SHARES
+===================================================== */
+
+function renderShares() {
+
+    const list =
+        document.getElementById(
+            "shareList"
+        );
+
+
+    if (!shares.length) {
+
+        list.innerHTML =
+            '<div class="empty">No shared tasks.</div>';
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        shares
+            .map(function(share) {
+
+                const incoming =
+                    share.toUser ===
+                    currentUser.username;
+
+
+                return `
+
+                    <div class="share-item">
+
+                        <strong>
+
+                            ${
+                                incoming
+                                ? "From: " +
+                                  escapeHTML(
+                                      share.fromUser
+                                  )
+                                : "To: " +
+                                  escapeHTML(
+                                      share.toUser
+                                  )
+                            }
+
+                        </strong>
+
+                        <div class="task-meta">
+
+                            Task ID:
+                            ${escapeHTML(
+                                share.taskID
+                            )}
+
+                        </div>
+
+                        <div
+                            style="
+                                margin-top:7px;
+                            "
+                        >
+
+                            Status:
+                            ${escapeHTML(
+                                share.status
+                            )}
+
+                        </div>
+
+
+                        ${
+                            incoming &&
+                            share.status === "pending"
+
+                            ?
+
+                            `
+
+                            <button
+                                class="btn btn-primary btn-small"
+                                style="margin-top:10px"
+                                onclick="
+                                    acceptShare(
+                                        '${escapeJS(
+                                            share.shareID
+                                        )}'
+                                    )
+                                "
+                            >
+                                Accept
+                            </button>
+
+                            `
+
+                            :
+
+                            ""
+
+                        }
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+}
+
+
+/* =====================================================
+   ACCEPT SHARE
+===================================================== */
+
+async function acceptShare(
+    shareID
+) {
+
+    try {
+
+        await api(
+            "acceptShare",
+            {
+
+                token,
+
+                shareID
+
+            }
+        );
+
+
+        toast("Share accepted.");
+
+        await loadAll();
+
+    }
+
+
+    catch (error) {
+
+        toast(error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   AI SCHEDULER
+===================================================== */
+
+async function generateAIPlan() {
+
+    const resultBox =
+        document.getElementById(
+            "aiResult"
+        );
+
+
+    resultBox.innerHTML =
+        "<p>Tempo is thinking...</p>";
+
+
+    try {
+
+        const date =
+            document.getElementById(
+                "aiDate"
+            ).value;
+
+
+        const start =
+            document.getElementById(
+                "aiStart"
+            ).value;
+
+
+        const end =
+            document.getElementById(
+                "aiEnd"
+            ).value;
+
+
+        const breakMinutes =
+            Number(
+                document.getElementById(
+                    "aiBreak"
+                ).value
+            );
+
+
+        const weekday =
+            new Date(
+                date + "T12:00:00"
+            ).toLocaleDateString(
+                "en-US",
+                {
+                    weekday: "long"
+                }
+            );
+
+
+        const unfinishedTasks =
+            tasks.filter(function(task) {
+
+                return !task.completed;
 
             });
 
 
-        if (!result.success) {
+        const result =
+            await api(
+                "generateSchedule",
+                {
 
-            if (
-                result.error ===
-                "USERNAME_EXISTS"
-            ) {
+                    tasks: {
 
-                showMessage(
-                    "That username already exists. Please choose another one.",
-                    "error"
-                );
+                        date,
 
-            }
+                        weekday,
 
-            else {
+                        availableStart:
+                            start,
 
-                showMessage(
-                    "Could not create your account.",
-                    "error"
-                );
+                        availableEnd:
+                            end,
 
-            }
+                        breakMinutes,
+
+                        tasks:
+                            unfinishedTasks,
+
+                        tests
+
+                    }
+
+                }
+            );
+
+
+        const schedule =
+            result
+                ?.data
+                ?.schedule || [];
+
+
+        if (!schedule.length) {
+
+            resultBox.innerHTML =
+                '<div class="empty">No schedule was generated.</div>';
 
             return;
 
         }
 
 
-        /*
-         * Save the newly-created user.
-         */
+        resultBox.innerHTML =
+            schedule
+                .map(function(item) {
 
-        localStorage.setItem(
-            "tempoUser",
-            JSON.stringify({
+                    return `
 
-                username:
-                    result.username,
+                        <div class="schedule-item">
 
-                displayName:
-                    result.displayName
+                            <div class="schedule-time">
 
-            })
-        );
+                                ${escapeHTML(
+                                    item.start
+                                )}
+                                →
+                                ${escapeHTML(
+                                    item.end
+                                )}
 
+                            </div>
 
-        localStorage.setItem(
-            "tempoLoggedIn",
-            "true"
-        );
+                            <div class="schedule-task">
 
+                                ${escapeHTML(
+                                    item.task
+                                )}
 
-        showMessage(
-            "Account created! Opening your setup...",
-            "success"
-        );
+                            </div>
 
+                            <div class="task-meta">
 
-        /*
-         * New users go to study.html.
-         *
-         * study.html will detect that
-         * setup has not been completed
-         * and show Settings automatically.
-         */
+                                ${escapeHTML(
+                                    item.subject || ""
+                                )}
 
-        setTimeout(
-            function() {
+                                ·
 
-                window.location.href =
-                    "study.html?setup=true";
+                                ${item.minutes || 0}
+                                min
 
-            },
-            600
-        );
+                            </div>
 
+                        </div>
+
+                    `;
+
+                })
+                .join("");
 
     }
+
 
     catch (error) {
 
-        console.error(error);
-
-        showMessage(
-            "Could not connect to Tempo. Check your internet connection and try again.",
-            "error"
-        );
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            "Create account";
+        resultBox.innerHTML =
+            `<div class="error">
+                ${escapeHTML(error.message)}
+            </div>`;
 
     }
 
 }
 
 
-/* =========================================
-   CHECK EXISTING LOGIN
-========================================= */
+/* =====================================================
+   AI ADVICE
+===================================================== */
 
-function checkExistingLogin() {
+async function getAIAdvice() {
 
-    const loggedIn =
-        localStorage.getItem(
-            "tempoLoggedIn"
+    const box =
+        document.getElementById(
+            "adviceResult"
         );
 
 
-    const storedUser =
-        localStorage.getItem(
-            "tempoUser"
-        );
+    box.textContent =
+        "Thinking...";
 
 
-    /*
-     * If a valid session already exists,
-     * don't make the user log in again.
-     */
+    try {
 
-    if (
-        loggedIn === "true" &&
-        storedUser
-    ) {
+        const result =
+            await api(
+                "getStudyAdvice",
+                {
 
-        try {
+                    task:
+                        tasks.filter(
+                            function(task) {
 
-            JSON.parse(storedUser);
+                                return !task.completed;
 
-            /*
-             * Uncomment this if you want
-             * index.html to automatically
-             * redirect logged-in users.
-             */
+                            }
+                        )
 
-            // window.location.href = "study.html";
-
-        }
-
-        catch {
-
-            localStorage.removeItem(
-                "tempoUser"
+                }
             );
 
-            localStorage.removeItem(
-                "tempoLoggedIn"
-            );
 
-        }
+        box.textContent =
+            result.text || "No advice.";
+
+    }
+
+
+    catch (error) {
+
+        box.textContent =
+            error.message;
 
     }
 
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* =====================================================
+   AI MOTIVATION
+===================================================== */
 
-checkExistingLogin();
+async function getAIMotivation() {
+
+    const box =
+        document.getElementById(
+            "motivationResult"
+        );
+
+
+    box.textContent =
+        "Thinking...";
+
+
+    try {
+
+        const result =
+            await api(
+                "getMotivation",
+                {
+
+                    name:
+                        currentUser.displayName ||
+                        currentUser.username
+
+                }
+            );
+
+
+        box.textContent =
+            result.text || "";
+
+    }
+
+
+    catch (error) {
+
+        box.textContent =
+            error.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard() {
+
+    const completed =
+        tasks.filter(
+            function(task) {
+
+                return task.completed;
+
+            }
+        ).length;
+
+
+    const minutes =
+        sessions.reduce(
+            function(total, session) {
+
+                return total +
+                    Number(
+                        session.minutes || 0
+                    );
+
+            },
+            0
+        );
+
+
+    document.getElementById(
+        "statTasks"
+    ).textContent =
+        tasks.length;
+
+
+    document.getElementById(
+        "statCompleted"
+    ).textContent =
+        completed;
+
+
+    document.getElementById(
+        "statTests"
+    ).textContent =
+        tests.length;
+
+
+    document.getElementById(
+        "statMinutes"
+    ).textContent =
+        minutes;
+
+}
+
+
+/* =====================================================
+   AI WEEKDAY
+===================================================== */
+
+document.getElementById(
+    "aiDate"
+).addEventListener(
+    "change",
+    updateWeekday
+);
+
+
+function updateWeekday() {
+
+    const date =
+        document.getElementById(
+            "aiDate"
+        ).value;
+
+
+    if (!date) {
+
+        return;
+
+    }
+
+
+    const weekday =
+        new Date(
+            date + "T12:00:00"
+        ).toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long"
+            }
+        );
+
+
+    document.getElementById(
+        "aiWeekday"
+    ).value =
+        weekday;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function toast(message) {
+
+    const element =
+        document.getElementById(
+            "toast"
+        );
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            element.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    try {
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return value;
+
+        }
+
+
+        return date.toLocaleString(
+            "en-US",
+            {
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+    catch {
+
+        return value;
+
+    }
+
+}
+
+
+/* =====================================================
+   SECURITY HELPERS
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+function escapeJS(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replaceAll("\\", "\\\\")
+        .replaceAll("'", "\\'")
+        .replaceAll("\n", "\\n")
+        .replaceAll("\r", "\\r");
+
+}
 
 </script>
 
