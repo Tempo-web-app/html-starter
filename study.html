@@ -1,334 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tempo • Today's Plan</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Tempo · Focus</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+:root {
 
-body{
-background:#f6f7fc;
-color:#1b1b1b;
-}
+    --primary: #6657e8;
+    --primary-light: #efedff;
 
-header{
-background:white;
-padding:20px 30px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 10px rgba(0,0,0,.05);
-position:sticky;
-top:0;
-z-index:100;
-}
+    --background: #f7f8fc;
+    --surface: #ffffff;
 
-.logo{
-font-size:28px;
-font-weight:700;
-color:#6657e8;
-}
+    --text: #17191c;
+    --text-secondary: #737681;
+    --text-tertiary: #a2a4ad;
 
-.profile{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#6657e8;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-weight:bold;
-}
+    --border: #e8e8ee;
 
-.container{
-
-max-width:1200px;
-margin:auto;
-padding:40px;
+    --success: #28a866;
 
 }
 
-.hero{
 
-background:linear-gradient(135deg,#6657e8,#7b6df4);
+* {
 
-color:white;
+    box-sizing: border-box;
 
-padding:35px;
+    margin: 0;
 
-border-radius:25px;
-
-margin-bottom:35px;
+    padding: 0;
 
 }
 
-.hero h1{
 
-font-size:42px;
+body {
 
-margin-bottom:15px;
+    min-height: 100vh;
 
-}
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-.hero p{
+    background:
+        var(--background);
 
-opacity:.9;
-
-}
-
-.progress{
-
-margin-top:25px;
-
-}
-
-.progressBar{
-
-background:rgba(255,255,255,.25);
-
-height:15px;
-
-border-radius:20px;
-
-overflow:hidden;
-
-margin-top:10px;
+    color:
+        var(--text);
 
 }
 
-.progressFill{
 
-background:white;
+button,
+input,
+select {
 
-height:100%;
-
-width:60%;
-
-}
-
-.grid{
-
-display:grid;
-
-grid-template-columns:2fr 1fr;
-
-gap:30px;
+    font: inherit;
 
 }
 
-.card{
 
-background:white;
+button {
 
-padding:25px;
-
-border-radius:20px;
-
-box-shadow:0 5px 20px rgba(0,0,0,.06);
+    cursor: pointer;
 
 }
 
-.card h2{
 
-margin-bottom:20px;
+/* =====================================================
+   TOPBAR
+===================================================== */
 
-}
+.topbar {
 
-.task{
+    height: 72px;
 
-display:flex;
+    background:
+        rgba(255,255,255,.9);
 
-justify-content:space-between;
+    border-bottom:
+        1px solid var(--border);
 
-align-items:center;
+    display: flex;
 
-padding:18px;
+    align-items: center;
 
-border:1px solid #ececec;
+    justify-content: space-between;
 
-border-radius:15px;
-
-margin-bottom:15px;
-
-transition:.25s;
-
-}
-
-.task:hover{
-
-transform:translateY(-3px);
+    padding:
+        0 30px;
 
 }
 
-.subject{
 
-font-weight:bold;
+.logo {
 
-font-size:18px;
+    display: flex;
 
-}
+    align-items: center;
 
-.small{
+    gap: 10px;
 
-font-size:14px;
+    font-weight: 800;
 
-color:gray;
-
-margin-top:5px;
+    font-size: 20px;
 
 }
 
-button{
 
-border:none;
+.logo-mark {
 
-background:#6657e8;
+    width: 34px;
+    height: 34px;
 
-color:white;
+    border-radius: 10px;
 
-padding:12px 18px;
+    background:
+        var(--primary);
 
-border-radius:12px;
+    color:
+        white;
 
-cursor:pointer;
+    display: flex;
 
-font-weight:bold;
+    align-items: center;
 
-}
-
-button:hover{
-
-opacity:.9;
+    justify-content: center;
 
 }
 
-.timer{
 
-text-align:center;
+.back-button {
 
-}
+    border:
+        1px solid var(--border);
 
-.time{
+    background:
+        white;
 
-font-size:70px;
+    border-radius:
+        10px;
 
-font-weight:bold;
-
-margin:25px 0;
-
-color:#6657e8;
-
-}
-
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:15px;
-
-margin-top:20px;
+    padding:
+        9px 14px;
 
 }
 
-.stat{
 
-background:white;
+/* =====================================================
+   MAIN
+===================================================== */
 
-padding:20px;
+.container {
 
-border-radius:18px;
+    max-width:
+        760px;
 
-text-align:center;
+    margin:
+        0 auto;
 
-box-shadow:0 5px 15px rgba(0,0,0,.05);
-
-}
-
-.stat h3{
-
-font-size:34px;
-
-color:#6657e8;
+    padding:
+        60px 20px;
 
 }
 
-.energy{
 
-display:flex;
+.eyebrow {
 
-justify-content:space-between;
+    color:
+        var(--primary);
 
-margin-top:20px;
+    font-size:
+        12px;
 
-}
+    font-weight:
+        800;
 
-.energy button{
+    text-transform:
+        uppercase;
 
-background:#ececff;
+    letter-spacing:
+        .08em;
 
-color:black;
-
-flex:1;
-
-margin:5px;
-
-}
-
-.bottom{
-
-position:fixed;
-
-bottom:20px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-background:white;
-
-display:flex;
-
-padding:12px;
-
-border-radius:20px;
-
-box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-gap:10px;
+    text-align:
+        center;
 
 }
 
-.navBtn{
 
-padding:12px 18px;
+h1 {
 
-background:white;
+    text-align:
+        center;
 
-color:#555;
+    font-size:
+        34px;
 
-border-radius:12px;
+    margin-top:
+        8px;
 
-cursor:pointer;
+    letter-spacing:
+        -1px;
 
 }
 
-.navBtn.active{
 
-background:#6657e8;
+.subtitle {
 
-color:white;
+    text-align:
+        center;
+
+    color:
+        var(--text-secondary);
+
+    margin-top:
+        8px;
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+.timer-card {
+
+    background:
+        var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        24px;
+
+    padding:
+        50px 30px;
+
+    margin-top:
+        35px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20,20,40,.05);
+
+}
+
+
+.timer {
+
+    font-size:
+        clamp(64px, 14vw, 110px);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -4px;
+
+    font-variant-numeric:
+        tabular-nums;
+
+}
+
+
+.status {
+
+    color:
+        var(--text-secondary);
+
+    font-size:
+        14px;
+
+    margin-top:
+        12px;
+
+}
+
+
+.controls {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    margin-top:
+        35px;
+
+}
+
+
+.button {
+
+    border:
+        1px solid var(--border);
+
+    background:
+        white;
+
+    padding:
+        12px 20px;
+
+    border-radius:
+        11px;
+
+    font-weight:
+        700;
+
+}
+
+
+.button.primary {
+
+    background:
+        var(--primary);
+
+    border-color:
+        var(--primary);
+
+    color:
+        white;
+
+}
+
+
+.button.success {
+
+    background:
+        var(--success);
+
+    border-color:
+        var(--success);
+
+    color:
+        white;
+
+}
+
+
+.button:disabled {
+
+    opacity:
+        .45;
+
+    cursor:
+        not-allowed;
+
+}
+
+
+/* =====================================================
+   TASK
+===================================================== */
+
+.task-card {
+
+    margin-top:
+        20px;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        18px;
+
+    padding:
+        22px;
+
+}
+
+
+.task-label {
+
+    color:
+        var(--text-tertiary);
+
+    font-size:
+        11px;
+
+    text-transform:
+        uppercase;
+
+    font-weight:
+        800;
+
+}
+
+
+.task-title {
+
+    font-size:
+        19px;
+
+    font-weight:
+        750;
+
+    margin-top:
+        6px;
+
+}
+
+
+.task-select {
+
+    width: 100%;
+
+    margin-top:
+        12px;
+
+    padding:
+        11px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        10px;
+
+    background:
+        white;
+
+}
+
+
+/* =====================================================
+   COMPLETE
+===================================================== */
+
+.complete {
+
+    display:
+        none;
+
+    margin-top:
+        20px;
+
+    padding:
+        18px;
+
+    border-radius:
+        14px;
+
+    background:
+        #e9f8ef;
+
+    color:
+        var(--success);
+
+    font-weight:
+        700;
+
+}
+
+
+.complete.show {
+
+    display:
+        block;
+
+}
+
+
+@media(max-width:600px) {
+
+    .container {
+
+        padding:
+            40px 15px;
+
+    }
+
+    .timer-card {
+
+        padding:
+            40px 20px;
+
+    }
+
+    .controls {
+
+        flex-direction:
+            column;
+
+    }
+
+    .button {
+
+        width:
+            100%;
+
+    }
 
 }
 
@@ -336,237 +522,661 @@ color:white;
 
 </head>
 
+
 <body>
 
-<header>
 
-<div class="logo">Tempo</div>
+<header class="topbar">
 
-<div class="profile">A</div>
+
+<div class="logo">
+
+    <div class="logo-mark">
+        T
+    </div>
+
+    Tempo
+
+</div>
+
+
+<button
+    class="back-button"
+    onclick="goHome()"
+>
+    ← Dashboard
+</button>
+
 
 </header>
 
-<div class="container">
 
-<div class="hero">
+<main class="container">
 
-<h1>Today's Plan</h1>
 
-<p>You're on track. Keep going 🔥</p>
+<div class="eyebrow">
+    Focus Session
+</div>
 
-<div class="progress">
 
-Today's Progress
+<h1>
+    One task. One session.
+</h1>
 
-<div class="progressBar">
 
-<div class="progressFill"></div>
+<p class="subtitle">
+    Focus on the work. Tempo will handle the clock.
+</p>
+
+
+<div class="task-card">
+
+    <div class="task-label">
+        What are you working on?
+    </div>
+
+
+    <div
+        class="task-title"
+        id="selectedTaskTitle"
+    >
+        Free Study
+    </div>
+
+
+    <select
+        class="task-select"
+        id="taskSelect"
+        onchange="changeTask()"
+    >
+
+        <option value="">
+            Free Study
+        </option>
+
+    </select>
 
 </div>
 
-60% Completed
+
+<div class="timer-card">
+
+
+<div
+    class="timer"
+    id="timer"
+>
+    25:00
+</div>
+
+
+<div
+    class="status"
+    id="status"
+>
+    Ready to focus.
+</div>
+
+
+<div class="controls">
+
+
+<button
+    class="button primary"
+    id="startButton"
+    onclick="startTimer()"
+>
+    Start
+</button>
+
+
+<button
+    class="button"
+    id="pauseButton"
+    onclick="pauseTimer()"
+    disabled
+>
+    Pause
+</button>
+
+
+<button
+    class="button"
+    onclick="resetTimer()"
+>
+    Reset
+</button>
+
 
 </div>
 
+
+<div
+    class="complete"
+    id="completeMessage"
+>
+    Session completed ✓
 </div>
 
-<div class="grid">
-
-<div>
-
-<div class="card">
-
-<h2>Next Tasks</h2>
-
-<div class="task">
-
-<div>
-
-<div class="subject">📐 Mathematics</div>
-
-<div class="small">Test in 3 days • 40 min</div>
 
 </div>
 
-<button onclick="finishTask(this)">Start</button>
 
-</div>
+</main>
 
-<div class="task">
-
-<div>
-
-<div class="subject">🇬🇧 English Essay</div>
-
-<div class="small">Due Tomorrow • 30 min</div>
-
-</div>
-
-<button onclick="finishTask(this)">Start</button>
-
-</div>
-
-<div class="task">
-
-<div>
-
-<div class="subject">🧪 Science Review</div>
-
-<div class="small">25 min</div>
-
-</div>
-
-<button onclick="finishTask(this)">Start</button>
-
-</div>
-
-</div>
-
-<div class="card" style="margin-top:30px;">
-
-<h2>How are you feeling?</h2>
-
-<p>Tempo will adjust your workload.</p>
-
-<div class="energy">
-
-<button onclick="energy('Great')">😀</button>
-
-<button onclick="energy('Good')">🙂</button>
-
-<button onclick="energy('Okay')">😐</button>
-
-<button onclick="energy('Tired')">😴</button>
-
-<button onclick="energy('Dead')">💀</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="card timer">
-
-<h2>Focus Timer</h2>
-
-<div class="time" id="timer">
-
-25:00
-
-</div>
-
-<button onclick="startTimer()">Start Focus</button>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-
-<h3>12</h3>
-
-Tasks Done
-
-</div>
-
-<div class="stat">
-
-<h3>7</h3>
-
-Day Streak
-
-</div>
-
-<div class="stat">
-
-<h3>5h</h3>
-
-Time Saved
-
-</div>
-
-<div class="stat">
-
-<h3>91%</h3>
-
-Consistency
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="bottom">
-
-<div class="navBtn">🏠</div>
-
-<div class="navBtn">📅</div>
-
-<div class="navBtn active">📚</div>
-
-<div class="navBtn">🔥</div>
-
-<div class="navBtn">👤</div>
-
-</div>
 
 <script>
 
-let seconds=1500;
+/* =====================================================
+   CONFIG
+===================================================== */
 
-let running=false;
+const TEMPO_API =
+    "https://script.google.com/macros/s/AKfycbzHIO3PeuWZfLWxWBUIaoaTi3YRFH-3oDcjCT5l77TBiC0vT1e-WCTqxlcYzxYeJUdK/exec";
 
-function startTimer(){
 
-if(running)return;
+/* =====================================================
+   USER
+===================================================== */
 
-running=true;
+const tempoUser =
+    JSON.parse(
+        localStorage.getItem(
+            "tempoUser"
+        )
+    );
 
-let timer=document.getElementById("timer");
 
-setInterval(function(){
+/* =====================================================
+   TIMER
+===================================================== */
 
-if(seconds<=0)return;
+const SESSION_LENGTH =
+    25 * 60;
 
-seconds--;
 
-let m=Math.floor(seconds/60);
+let remainingSeconds =
+    SESSION_LENGTH;
 
-let s=seconds%60;
 
-timer.innerHTML=
+let timerInterval =
+    null;
 
-String(m).padStart(2,"0")+":"+
 
-String(s).padStart(2,"0");
+let isRunning =
+    false;
 
-},1000);
+
+let sessionStartedAt =
+    null;
+
+
+let selectedTaskId =
+    "";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const timerElement =
+    document.getElementById(
+        "timer"
+    );
+
+
+const statusElement =
+    document.getElementById(
+        "status"
+    );
+
+
+const startButton =
+    document.getElementById(
+        "startButton"
+    );
+
+
+const pauseButton =
+    document.getElementById(
+        "pauseButton"
+    );
+
+
+const taskSelect =
+    document.getElementById(
+        "taskSelect"
+    );
+
+
+const selectedTaskTitle =
+    document.getElementById(
+        "selectedTaskTitle"
+    );
+
+
+const completeMessage =
+    document.getElementById(
+        "completeMessage"
+    );
+
+
+/* =====================================================
+   FORMAT TIMER
+===================================================== */
+
+function formatTime(seconds) {
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    const secs =
+        seconds % 60;
+
+
+    return (
+        String(minutes)
+            .padStart(2, "0") +
+
+        ":" +
+
+        String(secs)
+            .padStart(2, "0")
+    );
 
 }
 
-function finishTask(btn){
 
-btn.innerHTML="✓ Completed";
+function updateTimer() {
 
-btn.style.background="#28a745";
+    timerElement.textContent =
+        formatTime(
+            remainingSeconds
+        );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+function startTimer() {
+
+    if (isRunning) return;
+
+
+    if (!sessionStartedAt) {
+
+        sessionStartedAt =
+            new Date()
+                .toISOString();
+
+    }
+
+
+    isRunning = true;
+
+
+    startButton.disabled =
+        true;
+
+
+    pauseButton.disabled =
+        false;
+
+
+    statusElement.textContent =
+        "Focus mode is running.";
+
+
+    timerInterval =
+        setInterval(
+            function() {
+
+                remainingSeconds--;
+
+                updateTimer();
+
+
+                if (
+                    remainingSeconds <= 0
+                ) {
+
+                    completeSession();
+
+                }
+
+            },
+            1000
+        );
 
 }
 
-function energy(level){
 
-alert("Energy Level: "+level+
+/* =====================================================
+   PAUSE
+===================================================== */
 
-"\nTempo will personalize today's study schedule.");
+function pauseTimer() {
+
+    if (!isRunning) return;
+
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+
+    isRunning =
+        false;
+
+
+    startButton.disabled =
+        false;
+
+
+    pauseButton.disabled =
+        true;
+
+
+    statusElement.textContent =
+        "Paused. Resume when ready.";
 
 }
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+
+    isRunning =
+        false;
+
+
+    remainingSeconds =
+        SESSION_LENGTH;
+
+
+    sessionStartedAt =
+        null;
+
+
+    startButton.disabled =
+        false;
+
+
+    pauseButton.disabled =
+        true;
+
+
+    statusElement.textContent =
+        "Ready to focus.";
+
+
+    completeMessage.classList
+        .remove("show");
+
+
+    updateTimer();
+
+}
+
+
+/* =====================================================
+   COMPLETE
+===================================================== */
+
+async function completeSession() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+
+    isRunning =
+        false;
+
+
+    startButton.disabled =
+        true;
+
+
+    pauseButton.disabled =
+        true;
+
+
+    remainingSeconds =
+        0;
+
+
+    updateTimer();
+
+
+    statusElement.textContent =
+        "Session complete.";
+
+
+    completeMessage.classList
+        .add("show");
+
+
+    if (!tempoUser) {
+
+        console.warn(
+            "No Tempo user found."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        await fetch(
+            TEMPO_API,
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        action:
+                            "createSession",
+
+                        userId:
+                            tempoUser.user_id,
+
+                        taskId:
+                            selectedTaskId,
+
+                        durationMinutes:
+                            25,
+
+                        startedAt:
+                            sessionStartedAt,
+
+                        completed:
+                            true
+
+                    })
+
+            }
+        );
+
+
+        statusElement.textContent =
+            "Session saved to Tempo ✓";
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        statusElement.textContent =
+            "Session finished, but could not sync.";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD TASKS
+===================================================== */
+
+async function loadTasks() {
+
+    if (!tempoUser) return;
+
+
+    try {
+
+        const url =
+            TEMPO_API +
+            "?action=getTasks" +
+            "&userId=" +
+            encodeURIComponent(
+                tempoUser.user_id
+            );
+
+
+        const response =
+            await fetch(url);
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.error
+            );
+
+        }
+
+
+        const tasks =
+            result.data.tasks || [];
+
+
+        tasks.forEach(
+            function(task) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    task.task_id;
+
+
+                option.textContent =
+                    task.title;
+
+
+                taskSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not load tasks:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHANGE TASK
+===================================================== */
+
+function changeTask() {
+
+    selectedTaskId =
+        taskSelect.value;
+
+
+    const option =
+        taskSelect.options[
+            taskSelect.selectedIndex
+        ];
+
+
+    selectedTaskTitle.textContent =
+        option
+            ? option.textContent
+            : "Free Study";
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goHome() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateTimer();
+
+loadTasks();
 
 </script>
 
